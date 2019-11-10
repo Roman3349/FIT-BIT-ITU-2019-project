@@ -1,0 +1,46 @@
+{
+  "name": "itu",
+  "version": "0.0.1",
+  "description": "Půjčovna sportovního vybavení",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "admin-lte": "^3.0",
+    "bootstrap": "^4.3",
+    "jquery": "^3.4.1",
+    "nette-forms": "^3.0.3",
+    "nette.ajax.js": "^2.3.0",
+    "popper": "^1.0.1",
+    "ublaboo-datagrid": "^6.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6",
+    "@babel/preset-env": "^7.6",
+    "babel-eslint": "^10.0",
+    "babel-loader": "^8.0",
+    "css-loader": "^3.2",
+    "eslint": "^6.6",
+    "eslint-loader": "^2.2",
+    "eslint-plugin-jquery": "^1.5",
+    "file-loader": "^4.2",
+    "mini-css-extract-plugin": "^0.8",
+    "optimize-css-assets-webpack-plugin": "^5.0",
+    "uglifyjs-webpack-plugin": "^2.2",
+    "webpack": "^4.41",
+    "webpack-cli": "^3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/Roman3349/itu.git"
+  },
+  "keywords": [],
+  "author": "Roman Ondráček <xondra58@stud.fit.vutbr.cz>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://gitlab.com/Roman3349/itu/issues"
+  },
+  "homepage": "https://gitlab.com/Roman3349/itu"
+}

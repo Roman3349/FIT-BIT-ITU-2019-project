@@ -1,0 +1,4 @@
+services:
+    - App\CoreModule\Models\Authenticator
+    - App\CoreModule\Models\CompanyManager
+    - App\CoreModule\Models\UserManager

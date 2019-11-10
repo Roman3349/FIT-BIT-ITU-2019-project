@@ -21,14 +21,7 @@ extensions:
     translation: Contributte\Translation\DI\TranslationExtension
 
 services:
-	router: App\Router\RouterFactory::createRouter
-	- App\Forms\FormFactory
-	- App\Forms\ProductFilterFormFactory
-	- App\Forms\SignInFormFactory
-	- App\Forms\SignUpFormFactory
-	- App\Models\Authenticator
-	- App\Models\CompanyManager
-	- App\Models\UserManager
+	router: App\CoreModule\Router\RouterFactory::createRouter
 	nette.latteFactory:
 		setup:
 			- addFilter('json', MapyCZ\Helpers\Filters::json)

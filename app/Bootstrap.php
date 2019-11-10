@@ -22,11 +22,18 @@ declare(strict_types = 1);
 namespace App;
 
 use Nette\Configurator;
+use Nette\Utils\Finder;
+use SplFileInfo;
 
 /**
  * Bootstrap
  */
 class Bootstrap {
+
+	/**
+	 * Config directory
+	 */
+	private const CONFIG_DIR = __DIR__ . '/config/';
 
 	/**
 	 * Boots the web app
@@ -45,8 +52,18 @@ class Bootstrap {
 			->addDirectory(__DIR__)
 			->register();
 
-		$configurator->addConfig(__DIR__ . '/config/common.neon');
-		$configurator->addConfig(__DIR__ . '/config/local.neon');
+		$configurator->addConfig(self::CONFIG_DIR . 'common.neon');
+
+		if (file_exists(self::CONFIG_DIR . 'local.neon')) {
+			$configurator->addConfig(self::CONFIG_DIR . 'local.neon');
+		}
+
+		/**
+		 * @var SplFileInfo $file File info object
+		 */
+		foreach (Finder::findFiles('*Module/config/config.neon')->from(__DIR__) as $file) {
+			$configurator->addConfig($file->getRealPath());
+		}
 
 		return $configurator;
 	}

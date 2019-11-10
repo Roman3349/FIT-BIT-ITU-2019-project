@@ -1,0 +1,5 @@
+services:
+    - App\CoreModule\Forms\FormFactory
+    - App\CoreModule\Forms\ProductFilterFormFactory
+    - App\CoreModule\Forms\SignInFormFactory
+    - App\CoreModule\Forms\SignUpFormFactory
