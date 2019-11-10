@@ -1,6 +1,4 @@
-<?php
-
-/*
+{*
  * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,28 +13,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ *}
 
-declare(strict_types = 1);
+{block title}{_core.sign.in.title}{/block}
 
-namespace App\Router;
+{block content}
 
-use Nette;
-use Nette\Application\Routers\RouteList;
-
-/**
- * Router
- */
-final class RouterFactory {
-	use Nette\StaticClass;
-
-	/**
-	 * Creates router
-	 * @return RouteList
-	 */
-	public static function createRouter(): RouteList {
-		$router = new RouteList;
-		$router->addRoute('[<locale [a-z]{2}>/]<presenter>/<action>[/<id>]', 'Product:default');
-		return $router;
-	}
-}
+{control signInForm}

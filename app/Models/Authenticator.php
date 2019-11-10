@@ -19,36 +19,41 @@
 
 declare(strict_types = 1);
 
-namespace App\Presenters;
+namespace App\Models;
 
-use Nette;
-use Nette\Application\BadRequestException;
-use Nette\Application\Request;
+use Nette\Security\AuthenticationException;
+use Nette\Security\IAuthenticator;
+use Nette\Security\IIdentity;
+use Nette\SmartObject;
 
 /**
- * Error 4xx presenter
+ * Authenticator
  */
-final class Error4xxPresenter extends Nette\Application\UI\Presenter {
+final class Authenticator implements IAuthenticator {
+
+	use SmartObject;
 
 	/**
-	 * Starts up presenter
-	 * @throws BadRequestException
+	 * @var UserManager User manager
 	 */
-	public function startup(): void {
-		parent::startup();
-		if (!$this->getRequest()->isMethod(Request::FORWARD)) {
-			$this->error();
-		}
+	private $userManager;
+
+	/**
+	 * Constructor
+	 * @param UserManager $userManager User manager
+	 */
+	public function __construct(UserManager $userManager) {
+		$this->userManager = $userManager;
 	}
 
 	/**
-	 * Renders 4xx error page
-	 * @param BadRequestException $exception Bad HTTP(S) request exception
+	 * Performs an authentication
+	 * @param string[] $credentials Authentication credentials
+	 * @return IIdentity Nette Identity
+	 * @throws AuthenticationException
 	 */
-	public function renderDefault(BadRequestException $exception): void {
-		// load template 403.latte or 404.latte or ... 4xx.latte
-		$file = __DIR__ . "/templates/Error/{$exception->getCode()}.latte";
-		$this->template->setFile(is_file($file) ? $file : __DIR__ . '/templates/Error/4xx.latte');
+	function authenticate(array $credentials): IIdentity {
+		[$email, $password] = $credentials;
+		return $this->userManager->login($email, $password);
 	}
-
 }

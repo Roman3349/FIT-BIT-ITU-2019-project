@@ -1,0 +1,74 @@
+{*
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *}
+
+{block title}{_core.products.title}{/block}
+
+{block content}
+<div class="px-3 pb-md-4 mx-auto">
+	<form>
+		<div class="form-row">
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault01">Od:</label>
+				<input type="text" class="form-control" id="validationDefault01" value="1. 6. 2020" required>
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault02">Do:</label>
+				<input type="text" class="form-control" id="validationDefault02" value="2. 6. 2020" required>
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault03">Vaše výška:</label>
+				<input type="text" class="form-control" id="validationDefault03" value="170 cm">
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault03">Velikost kol:</label>
+				<input type="text" class="form-control" id="validationDefault03" value='27,5"'>
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault04">Velikost řámu:</label>
+				<input type="text" class="form-control" id="validationDefault04">
+			</div>
+			<div class="col-md-2 mb-3">
+				<label for="validationDefault05">Typ užití:</label>
+				<input type="text" class="form-control" id="validationDefault05">
+			</div>
+		</div>
+		<button class="btn btn-primary col-md-12" type="submit">Vyhledat kola</button>
+	</form>
+</div>
+
+<div class="card-deck mb-3 text-center">
+	<div n:foreach='$products as $product' class="card">
+		<a n:href=':Product:show $product["id"]'>
+			<img src='{$product["img"]}' class="card-img-top" alt='{$product["name"]}'>
+		</a>
+		<div class="card-body">
+			<a n:href=':Product:show $product["id"]'>
+				<h5 class="card-title">
+					{$product['name']}
+				</h5>
+			</a>
+			<p class="card-text">
+				<strong>{_core.product.usageType}:</strong> {$product['usage']}<br>
+				<strong>{_core.product.wheelSize}:</strong> {$product['wheelSize']}<br>
+				<strong>{_core.product.frameSize}:</strong> {$product['size']}<br>
+				<strong>{_core.product.travel}:</strong> {$product['forkTravel'] ?? '-'}/{$product['schockTravel'] ?? '-'} mm<br>
+				<strong>{_core.product.speeds}:</strong> {$product['speeds']}<br>
+			</p>
+			<a href="#" class="btn btn-primary">{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+		</div>
+	</div>
+</div>

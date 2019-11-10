@@ -15,7 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block content}
-<h1 n:block=title>Oops...</h1>
+{block title}{$product['name']}{/block}
 
-<p>Your browser sent a request that this server could not understand or process.</p>
+{block content}
+
+<div class='row'>
+	<div class='col'>
+		<img src='{$product["img"]}' class='img-fluid' alt='{$product["name"]}'>
+	</div>
+	<div class='col'>
+			<strong>{_core.product.usageType}:</strong> {$product['usage']}<br>
+			<strong>{_core.product.wheelSize}:</strong> {$product['wheelSize']}<br>
+			<strong>{_core.product.frameSize}:</strong> {$product['size']}<br>
+			<strong>{_core.product.travel}:</strong> {$product['forkTravel'] ?? '-'}/{$product['schockTravel'] ?? '-'} mm<br>
+			<strong>{_core.product.speeds}:</strong> {$product['speeds']}<br>
+		<a href='#' class='btn btn-primary'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+	</div>
+</div>
+

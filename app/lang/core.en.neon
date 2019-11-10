@@ -1,0 +1,52 @@
+cart:
+	title: Cart
+
+contact:
+	title: Contact
+	menu: Contact
+
+products:
+	title: Products
+
+product:
+    usageType: Type of usage
+    wheelSize: Wheel size
+    frameSize: Frame size
+    travel: Travel
+    speeds: Speeds
+    rent: Rent
+    priceUnit: CZK/day
+
+sign:
+	in:
+		title: Sign in
+		form:
+			email: E-mail
+			password: Password
+			remember: Keep me signed in
+			send: Sign in
+			messages:
+				email: Please enter your e-mail.
+				password: Please enter your password.
+				success: You have been signed in successfully.
+				failure: The username or password you entered is incorrect.
+	out:
+	    title: SIgn out
+	up:
+		title: Sign up
+		form:
+		    firstName: First name
+		    lastName: Last name
+		    email: E-mail
+		    password: Password
+		    termsAgreement: I agree to our Terms of Service
+		    send: Sign up
+		    messages:
+		        firstName: Please enter your first name.
+		        lastName: Please enter your last name.
+		        email: Please enter your e-mail.
+		        password: Please enter your password.
+		        success: Byl jste úspěšně zaregistrován.
+
+terms:
+	title: Terms of Service

@@ -5,7 +5,10 @@
 	"type": "project",
 	"license": "GPL-3.0",
 	"require": {
-		"php": ">= 7.1",
+		"php": ">= 7.2",
+		"contributte/forms": "^0.4",
+		"contributte/translation": "^0.4",
+		"latte/latte": "^2.5",
 		"nette/application": "^3.0",
 		"nette/bootstrap": "^3.0",
 		"nette/caching": "^3.0",
@@ -18,8 +21,10 @@
 		"nette/robot-loader": "^3.0",
 		"nette/security": "^3.0",
 		"nette/utils": "^3.0",
-		"latte/latte": "^2.5",
-		"tracy/tracy": "^2.7"
+		"occ2/nette-mapy-cz": "^1.1",
+		"tracy/tracy": "^2.7",
+		"ublaboo/datagrid": "^6.2",
+		"contributte/image-storage": "^2.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3"
@@ -30,7 +35,7 @@
 	"minimum-stability": "stable",
 	"config": {
 		"platform": {
-			"php": "7.1"
+			"php": "7.2"
 		}
 	}
 }

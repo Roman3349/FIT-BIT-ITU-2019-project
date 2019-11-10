@@ -21,34 +21,53 @@ declare(strict_types = 1);
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application\BadRequestException;
-use Nette\Application\Request;
+use App\Models\CompanyManager;
+use Contributte\Translation\LocalesResolvers\Session;
+use Nette\Application\UI\Presenter;
+use Nette\Localization\ITranslator;
 
 /**
- * Error 4xx presenter
+ * Base presenter
  */
-final class Error4xxPresenter extends Nette\Application\UI\Presenter {
+abstract class BasePresenter extends Presenter {
 
 	/**
-	 * Starts up presenter
-	 * @throws BadRequestException
+	 * @var string Locale
+	 * @persistent
 	 */
-	public function startup(): void {
-		parent::startup();
-		if (!$this->getRequest()->isMethod(Request::FORWARD)) {
-			$this->error();
-		}
+	public $locale;
+
+	/**
+	 * @var CompanyManager Company manager
+	 */
+	protected $companyManager;
+
+	/**
+	 * @var ITranslator
+	 * @inject
+	 */
+	public $translator;
+
+	/**
+	 * @var Session
+	 * @inject
+	 */
+	public $translatorSessionResolver;
+
+	/**
+	 * Constructor
+	 * @param CompanyManager $companyManager Company manager
+	 */
+	public function __construct(CompanyManager $companyManager) {
+		$this->companyManager = $companyManager;
 	}
 
 	/**
-	 * Renders 4xx error page
-	 * @param BadRequestException $exception Bad HTTP(S) request exception
+	 * Before render
 	 */
-	public function renderDefault(BadRequestException $exception): void {
-		// load template 403.latte or 404.latte or ... 4xx.latte
-		$file = __DIR__ . "/templates/Error/{$exception->getCode()}.latte";
-		$this->template->setFile(is_file($file) ? $file : __DIR__ . '/templates/Error/4xx.latte');
+	protected function beforeRender() {
+		$this->template->company = $this->companyManager;
+		parent::beforeRender();
 	}
 
 }

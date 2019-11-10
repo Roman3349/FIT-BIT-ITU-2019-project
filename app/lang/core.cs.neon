@@ -1,0 +1,55 @@
+cart:
+	title: Košík
+
+contact:
+	title: Kontakt
+	menu: Kontakt
+
+products:
+	title: Přehled zboží
+
+product:
+	fromDate: Od
+	toDate: Do
+	usageType: Typ užití
+	wheelSize: Velikost kol
+	frameSize: Velikost rámu
+	travel: Zdvih
+	speeds: Počet rychlostí
+	rent: Vypůjčit
+	filter: Vyhledat
+	priceUnit: Kč/den
+
+sign:
+	in:
+		title: Přihlášení
+		form:
+			email: E-mail
+			password: Heslo
+			remember: Zůstat přihlášen
+			send: Přihlásit se
+			messages:
+				email: Prosím zadejte Vaše e-mail.
+				password: Prosím zadejte Vaše heslo.
+				success: Byl jste úspěšně přihlášen.
+				failure: Zadané jméno nebo heslo je nesprávné.
+	out:
+		title: Odhlásit se
+	up:
+		title: Registrace
+		form:
+			firstName: Jméno
+			lastName: Příjmení
+			email: E-mail
+			password: Heslo
+			termsAgreement: Souhlasím s obchodními podmínkami
+			send: Zaregistrovat se
+			messages:
+				firstName: Prosím zadejte Vaše jméno.
+				lastName: Prosím zadejte Vaše příjmení.
+				email: Prosím zadejte Váš email.
+				password: Prosím zadejte Vaše heslo.
+				success: Byl jste úspěšně zaregistrován.
+terms:
+	title: Obchodní podmínky
+
