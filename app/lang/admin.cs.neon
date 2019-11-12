@@ -1,4 +1,22 @@
 title: Administrace
 
+actions:
+	add: Přidat
+	delete: Odstranit
+	edit: Upravit
+
+bike:
+	title: Správa kol
+
 dashboard:
     title: Přehled
+
+user:
+	title: Správa uživatelů
+	id: ID uživatele
+	firstName: Křestní jméno
+	lastName: Příjmení
+	email: E-mail
+	messages:
+		confirmDelete: Opravdu chcete smazat uživatele %s?
+		successDelete: Uživatel %email% byl úspěšně odstraněn.

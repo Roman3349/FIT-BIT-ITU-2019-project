@@ -22,6 +22,8 @@ declare(strict_types = 1);
 namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Forms\ProductFilterFormFactory;
+use App\CoreModule\Models\BikeManager;
+use App\CoreModule\Models\CompanyManager;
 use Nette\Application\UI\Form;
 
 /**
@@ -36,65 +38,24 @@ final class ProductPresenter extends BasePresenter {
 	public $filterFactory;
 
 	/**
-	 * @var mixed[] Products
+	 * @var BikeManager Bike manager
 	 */
-	private $products = [
-		[
-			'id' => 0,
-			'name' => 'Ghost Kato 4.7',
-			'img' => 'https://img.bike-pro.cz/images/SCH/MY18_KATO_4-7_AL_U_LOWBUDGED_ELECTRICBLUE_NIGHTBLACK_NEONYELLOW_18KA2029.png?vid=1&tid=30&r=A',
-			'usage' => 'XC',
-			'wheelSize' => '27,5"',
-			'size' => '17"',
-			'forkTravel' => 100,
-			'shockTravel' => null,
-			'speeds' => '3x9',
-			'price' => 500
-		],
-		[
-			'id' => 1,
-			'name' => 'Maxbike Kyoga 27.5"',
-			'img' => 'https://img.bike-pro.cz/images/MB/2132.jpg?vid=1&tid=30&r=A',
-			'usage' => 'XC/Trail',
-			'wheelSize' => '27,5"',
-			'size' => '17"',
-			'forkTravel' => 120,
-			'shockTravel' => null,
-			'speeds' => '2x10',
-			'price' => 600
-		],
-		[
-			'id' => 2,
-			'name' => 'Ghost Kato FS 3 27,5"',
-			'img' => 'https://img.bike-pro.cz/images/SCH/17AM1010_MY17_KATO_FS_3_AL_27-5_U_NIGHTBLACK_RIOTGREEN_NEONRED.jpg?vid=1&tid=30&r=A',
-			'usage' => 'Trail',
-			'wheelSize' => '27,5"',
-			'size' => 'M',
-			'forkTravel' => 130,
-			'shockTravel' => 130,
-			'speeds' => '3x10',
-			'price' => 750
-		],
-		[
-			'id' => 3,
-			'name' => 'Cannondale Jekyll 3',
-			'img' => 'https://singlekras.rezervator.cz/files/items/images/img_7530d4192b569ab8664a114ce4049265.jpg?1552051310',
-			'usage' => 'Trail/Enduro',
-			'wheelSize' => '27,5"',
-			'size' => 'M',
-			'forkTravel' => 150,
-			'shockTravel' => 150,
-			'speeds' => '1x12',
-			'price' => 900
-		],
-	];
+	private $manager;
+
+	/**
+	 * Constructor
+	 * @param BikeManager $manager Bike manager
+	 */
+	public function __construct(BikeManager $manager) {
+		$this->manager = $manager;
+	}
 
 	public function renderDefault(): void {
-		$this->template->products = $this->products;
+		$this->template->products = $this->manager->list();
 	}
 
 	public function renderShow(int $id): void {
-		$this->template->product = $this->products[$id];
+		$this->template->product = $this->manager->get($id);
 	}
 
 	/**

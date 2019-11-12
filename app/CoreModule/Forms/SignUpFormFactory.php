@@ -85,7 +85,7 @@ final class SignUpFormFactory {
 	 */
 	public function signUp(Form $form): void {
 		$values = $form->getValues();
-		$this->userManager->register($values->firstName, $values->lastName, $values->email, $values->password, 0);
+		$this->userManager->add($values->firstName, $values->lastName, $values->email, $values->password, 0);
 		$this->presenter->flashSuccess('core.sign.up.messages.success');
 		$this->presenter->redirect(':Homepage:default');
 	}

@@ -1,0 +1,4 @@
+action: Akce
+all: Všechny
+no_item_found: Nebyl nalezen žádný záznam.
+reset_filter: Resetovat filtry

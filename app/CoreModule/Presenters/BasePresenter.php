@@ -55,10 +55,10 @@ abstract class BasePresenter extends Presenter {
 	public $translatorSessionResolver;
 
 	/**
-	 * Constructor
+	 * Injects Company manager
 	 * @param CompanyManager $companyManager Company manager
 	 */
-	public function __construct(CompanyManager $companyManager) {
+	public function injectCompanyManager(CompanyManager $companyManager) {
 		$this->companyManager = $companyManager;
 	}
 

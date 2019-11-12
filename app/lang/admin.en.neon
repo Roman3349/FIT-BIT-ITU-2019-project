@@ -1,4 +1,22 @@
 title: Administration
 
+actions:
+	add: Add
+	delete: Delete
+	edit: Edit
+
+bike:
+	title: Bike manager
+
 dashboard:
     title: Dashboard
+
+user:
+	title: User manager
+	id: User ID
+	firstName: First name
+	lastName: Last name
+	email: E-mail
+	messages:
+		confirmDelete: Do you really want to delete user %s?
+		successDelete: User %email% has beed deleted.
