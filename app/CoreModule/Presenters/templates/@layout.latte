@@ -19,7 +19,8 @@
 <html>
 <head>
 	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+	<meta name='viewport'
+	      content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 	<link n:nonce rel='stylesheet' href='/dist/core.bundle.css'>
 	<title>{ifset title}{include title|stripHtml} | {/ifset}{$company->getName()}</title>
     {block scripts}
@@ -27,15 +28,16 @@
     {/block}
 </head>
 <body>
-<nav class='navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm flex-column flex-md-row'>
+<nav class='navbar navbar-expand-lg navbar-light bg-white'>
 	<a class='navbar-brand' n:href=':Core:Product:default'>{$company->getLogo()}</a>
-	<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
-	        aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+	<button class='navbar-toggler' type='button' data-toggle='collapse'
+	        data-target='#navbar' aria-controls='navbar' aria-expanded='false'
+	        aria-label='Toggle navigation'>
 		<span class='navbar-toggler-icon'></span>
 	</button>
 
-	<div class='collapse navbar-collapse'>
-		<ul class='navbar-nav flex-row ml-md-auto d-none d-md-flex'>
+	<div class='collapse navbar-collapse' id='navbar'>
+		<ul class='navbar-nav ml-auto mt-2 mt-lg-0 my-2 my-lg-0'>
 			<li class='nav-item'>
 				<a class='nav-link' n:href=':Core:Product:default'>{_core.products.title}</a>
 			</li>
@@ -53,13 +55,16 @@
 				<a class='btn btn-outline-success' n:href=':Core:Sign:up'>{_core.sign.up.title}</a>
 			</li>
 			<li n:if='$user->loggedIn' class='nav-item btn-group' role='group'>
-				<button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type='button'
+				        class='btn btn-outline-success dropdown-toggle'
+				        data-toggle='dropdown' aria-haspopup='true'
+				        aria-expanded='false'>
                     {$user->identity->name}
 				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" n:href=":Admin:Homepage:default">{_admin.title}</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" n:href=":Core:Sign:out">{_core.sign.out.title}</a>
+				<div class='dropdown-menu'>
+					<a class='dropdown-item' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+					<div class='dropdown-divider'></div>
+					<a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
 				</div>
 			</li>
 		</ul>
@@ -68,7 +73,8 @@
 
 <div class='container'>
     {snippet flashes}
-		<div n:foreach='$flashes as $flash' class='alert alert-{$flash->type}' role='alert'>
+		<div n:foreach='$flashes as $flash' class='alert alert-{$flash->type}'
+		                                    role='alert'>
 			<button type='button' class='close' data-dismiss='alert'>
 				<span>&times;</span>
 			</button>

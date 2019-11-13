@@ -33,9 +33,6 @@ module.exports = {
 							'targets': '> 0.25%, not dead',
 							}
 						]
-					],
-					'plugins': [
-						'@babel/plugin-proposal-class-properties',
 					]
 				},
 			},
@@ -67,6 +64,7 @@ module.exports = {
 			$: 'jquery',
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
+			Popper: 'popper.js',
 			Nette: 'nette-forms',
 			'window.Nette': 'nette-forms',
 		}),

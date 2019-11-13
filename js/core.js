@@ -17,8 +17,9 @@
 
 'use strict';
 
+import 'jquery/dist/jquery.slim.min.js';
+import 'popper.js/dist/umd/popper.js';
 import 'bootstrap';
-import 'jquery';
 import 'nette.ajax.js';
 import 'ublaboo-datagrid';
 import Nette from 'nette-forms';
