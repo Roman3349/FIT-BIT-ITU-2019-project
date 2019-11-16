@@ -15,17 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{$product['name']}{/block}
+{var $name = $product["manufacturer"]["name"] . ' ' . $product['name']}
+{block title}{$name}{/block}
 
 {block content}
 
 <div class='row'>
 	<div class='col'>
-		<img src='{$product["img"]}' class='img-fluid' alt='{$product["name"]}'>
+		<img src='{$product["img"]}' class='img-fluid' alt='{$name}'>
 	</div>
 	<div class='col'>
 		{include parameters.latte}
-		<a href='#' class='btn btn-primary'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+		<a href='#' class='btn btn-primary'>
+			{_core.product.rent} ({$product['price']} {_core.product.priceUnit})
+		</a>
 	</div>
 </div>
 
