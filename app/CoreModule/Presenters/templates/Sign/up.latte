@@ -17,6 +17,36 @@
 
 {block title}{_core.sign.up.title}{/block}
 
+{block sideBarf}
+{/block}
+
 {block content}
 
-{control signUpForm}
+
+<div class="row">
+  <div class="col-2"></div>
+    <div class="col-8 ">
+      <header class='py-5 text-center'>
+        <h1>{_core.sign.up.title}</h1>
+      </header>
+      <div class="jumbotron p-5">
+        <div class='row'>
+          <div class="col w-50 pr-5">
+            {control signUpForm}
+          </div>
+          <div class="col w-50 text-left" style="border-left: 1px solid #333">
+            <p>
+              <br>
+              <br>
+              <br>
+              Ut maximus, nisl sed dapibus congue, purus leo accumsan felis,<br>
+              vitae hendrerit ligula lectus nec ex. Donec mattis a ex a porttitor.<br>
+              Aliquam erat volutpat. Pellentesque mollis congue nulla a vehicula.<br>
+               In maximus eros non tellus auctor ultrices quis facilisis dui.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-2"></div>
+</div>

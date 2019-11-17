@@ -26,14 +26,27 @@
 
 {block content}
 
-<div class='row'>
-	<div class='col'>
-        {control map}
-	</div>
-	<div class='col'>
-        {$company->getName()}<br>
-        {$company->getAddress()|breaklines}<br>
-		tel.: {$company->getTelephone()}<br>
-		e-mail: {$company->getEmail()}
-	</div>
+<div class="row">
+  <div class="col-2"></div>
+    <div class="col-8 ">
+      <header class='py-5 text-center'>
+        <h1>{_core.terms.title}</h1>
+      </header>
+      <div class="jumbotron p-5">
+        <div class='row'>
+	        <div class='col'>
+            {control map}
+	        </div>
+	        <div class='col'>
+            {$company->getName()}<br>
+            {$company->getAddress()|breaklines}<br>
+		        tel.: {$company->getTelephone()}<br>
+		        e-mail: {$company->getEmail()}
+	        </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-2"></div>
 </div>
+{/block}
+{block sideBarf}
