@@ -52,6 +52,7 @@ final class ProductPresenter extends BasePresenter {
 
 	public function renderDefault(): void {
 		$this->template->products = $this->manager->list();
+		\Tracy\Debugger::barDump($this->template->products);
 	}
 
 	public function renderShow(int $id): void {

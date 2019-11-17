@@ -37,11 +37,14 @@
 	        <div class='col'>
             {control map}
 	        </div>
-	        <div class='col'>
+	        <div class='col text-center pt-5'  style="border-left: 1px solid #333">
+            <br>
+            <br>
+            <br>
             {$company->getName()}<br>
             {$company->getAddress()|breaklines}<br>
 		        tel.: {$company->getTelephone()}<br>
-		        e-mail: {$company->getEmail()}
+		        e-mail: <a href="mailto:{$company->getEmail()}" target="_blank">{$company->getEmail()}</a>
 	        </div>
         </div>
       </div>
