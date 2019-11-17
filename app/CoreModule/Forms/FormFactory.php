@@ -22,7 +22,7 @@ declare(strict_types = 1);
 namespace App\CoreModule\Forms;
 
 use Contributte\Forms\IApplicationFormFactory;
-use Contributte\Forms\Rendering\Bootstrap4HorizontalRenderer;
+use Contributte\Forms\Rendering\Bootstrap4VerticalRenderer;
 use Nette\Application\UI\Form;
 use Nette\Localization\ITranslator;
 use Nette\SmartObject;
@@ -58,7 +58,7 @@ class FormFactory implements IApplicationFormFactory {
 	 */
 	public function create(): Form {
 		$form = new Form();
-		$renderer = new Bootstrap4HorizontalRenderer();
+		$renderer = new Bootstrap4VerticalRenderer();
 		if ($this->translationPrefix === null) {
 			$form->setTranslator($this->translator);
 		} else {
