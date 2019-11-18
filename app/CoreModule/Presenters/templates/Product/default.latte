@@ -18,7 +18,58 @@
 {block title}<!--{_core.products.title}-->{/block}
 
 {block content}
-<div class="container-fluid">
+<div class="row">
+  <div class="col-2 jumbotron">
+        <div class='px-3 pb-md-4 mx-auto mt-sm-5'>
+          <form>
+                <label for='validationDefault01'>Od:</label>
+                <input type='text' class='form-control' id='validationDefault01' value='1. 6. 2020' required>
+                
+                <label for='validationDefault02'>Do:</label>
+                <input type='text' class='form-control' id='validationDefault02' value='2. 6. 2020' required>
+                
+                <label for='validationDefault03'>Vaše výška:</label>
+                <input type='text' class='form-control' id='validationDefault03' value='170 cm'>
+                
+                <label for='validationDefault03'>Velikost kol:</label>
+                <input type='text' class='form-control' id='validationDefault03' value='27,5'>
+                
+                <label for='validationDefault04'>Velikost řámu:</label>
+                <input type='text' class='form-control' id='validationDefault04'>
+                
+                <label for='validationDefault05'>Typ užití:</label>
+                <input type='text' class='form-control' id='validationDefault05'>
+            <button class='btn btn-primary col-md-12 mt-sm-5 p-4 ' type='submit'>Vyhledat</button>
+          </form>
+        </div>
+  </div>
+  <div class="col-8 ">
+    <div class="jumbotron">
+          <div class='card-deck-fluid mb-3 text-center row'>
+	          <div n:foreach='$products as $product' class='card col-3'>
+              <div class="h-50">
+                <a class="align-middle" n:href=':Core:Product:show $product["id"]'>
+                  <img src='{$product["img"]}' class='card-img-top' alt='{$product["name"]}'>
+                </a>
+              </div>
+		          <div class='card-body'>
+			          <a n:href=':Core:Product:show $product["id"]'>
+				        <h5 class='card-title'>
+					        {$product['name']}
+				        </h5>
+		  	      </a>
+              <p class='card-text'>
+                {include parameters.latte product => $product}
+              </p>
+			        <a href='#' class='btn btn-primary p-3'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+		        </div>
+	        </div>
+    </div>
+  </div>
+  <div class="col-2"></div>
+</div>
+
+<!--<div class="container-fluid">
     <div class="row content">
       <div class="col-sm-2 jumbotron">
         <div class='px-3 pb-md-4 mx-auto mt-sm-5'>
@@ -68,7 +119,7 @@
       </div>
     </div>
   </div>
-
+-->
 {/block}
 
 {block sideBarf}

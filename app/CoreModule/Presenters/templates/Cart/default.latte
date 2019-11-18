@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{_core.contact.title}{/block}
+{block title}{_core.cart.title}{/block}
 
 {block scripts}
 	{include parent}
@@ -30,23 +30,12 @@
   <div class="col-2"></div>
     <div class="col-8 bg-secondary">
       <header class='py-5 text-center'>
-        <h1>{_core.contact.title}</h1>
+        <h1>{_core.cart.title}</h1>
       </header>
       <div class="p-5">
-        <div class='row'>
-	        <div class='col'>
-            {control map}
-	        </div>
-	        <div class='col text-center pt-5'  style="border-left: 1px solid #333">
-            <br>
-            <br>
-            <br>
-            {$company->getName()}<br>
-            {$company->getAddress()|breaklines}<br>
-		        tel.: {$company->getTelephone()}<br>
-		        e-mail: <a href="mailto:{$company->getEmail()}" target="_blank">{$company->getEmail()}</a>
-	        </div>
-        </div>
+        <form action="">
+
+        </form>
       </div>
     </div>
   <div class="col-2"></div>

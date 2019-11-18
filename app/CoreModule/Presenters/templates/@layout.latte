@@ -22,95 +22,94 @@
 	<meta name='viewport'
 	      content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 	<link n:nonce rel='stylesheet' href='/dist/core.bundle.css'>
+  <link n:nonce rel='stylesheet' href='/dist/cart.css'>
 	<title>{ifset title}{include title|stripHtml} | {/ifset}{$company->getName()}</title>
     {block scripts}
 		<script n:nonce src='/dist/core.bundle.js'></script>
+    <script n:nonce src='/js/cart.js'></script>
     {/block}
 </head>
 <body>
-  <nav class='navbar navbar-expand-lg navbar-light bg-primary'>
-	        <a class='navbar-brand' n:href=':Core:Product:default'>{$company->getLogo()}</a>
-	        <button class='navbar-toggler' type='button' data-toggle='collapse'
-	          data-target='#navbar' aria-controls='navbar' aria-expanded='false'
-	          aria-label='Toggle navigation'>
-		        <span class='navbar-toggler-icon'></span>
-	        </button>
-            <div class='collapse navbar-collapse' id='navbar'>
-              <ul class='navbar-nav ml-auto mt-2 mt-lg-0 my-2 my-lg-0'>
-                <li class='nav-item'>
-                  <a class='nav-link' n:href=':Core:Product:default'>{_core.products.title}</a>
-                </li>
-                <li class='nav-item'>
-                  <a class='nav-link' n:href=':Core:Terms:default'>{_core.terms.title}</a>
-                </li>
-                <li class='nav-item'>
-                  <a class='nav-link' n:href=':Core:Contact:default'>{_core.contact.title}</a>
-                </li>
-                <li class='nav-item'>
-                  <a class='nav-link' href='#'>{_core.cart.title}</a>
-                </li>
-                <li n:if='!$user->loggedIn' class='nav-item btn-group' role='group'>
-                  <a class='btn btn-outline-success' n:href=':Core:Sign:in'>{_core.sign.in.title}</a>
-                  <!--<a class='btn btn-outline-success' n:href=':Core:Sign:up'>{_core.sign.up.title}</a>-->
-                </li>
-                <li n:if='$user->loggedIn' class='nav-item btn-group' role='group'>
-                  <button type='button'
-                          class='btn btn-outline-success dropdown-toggle'
-                          data-toggle='dropdown' aria-haspopup='true'
-                          aria-expanded='false'>
-                              {$user->identity->name}
-                  </button>
-                  <div class='dropdown-menu'>
-                    <a class='dropdown-item' n:href=':Admin:Homepage:default'>{_admin.title}</a>
-                    <div class='dropdown-divider'></div>
-                    <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </nav>
-      <div n:foreach='$flashes as $flash' class='alert alert-{$flash->type}'
-                                          role='alert'>
+  <nav class='navbar navbar-expand-lg navbar-light'>
+	  <a class='navbar-brand' n:href=':Core:Product:default'><img src="/img/logo.svg" alt="Logo" style="width: 25%; height: auto;"></a>
+	  <button class='navbar-toggler' type='button' data-toggle='collapse'
+	    data-target='#navbar' aria-controls='navbar' aria-expanded='false'
+      aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+	  </button>
+    <div class='collapse navbar-collapse' id='navbar'>
+      <ul class='navbar-nav ml-auto mt-2 mt-lg-0 my-2 my-lg-0'>
+        <li class='nav-item'>
+          <a class='nav-link' n:href=':Core:Product:default'>{_core.products.title}</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' n:href=':Core:Terms:default'>{_core.terms.title}</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' n:href=':Core:Contact:default'>{_core.contact.title}</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' id="cartBtn" href='javascript:showCart()'>{_core.cart.title}</a>
+        </li>
+        <li n:if='!$user->loggedIn' class='nav-item btn-group' role='group'>
+          <a class='btn btn-outline-success' n:href=':Core:Sign:in'>{_core.sign.in.title}</a>
+          <!--<a class='btn btn-outline-success' n:href=':Core:Sign:up'>{_core.sign.up.title}</a>-->
+        </li>
+        <li n:if='$user->loggedIn' class='nav-item btn-group' role='group'>
+        <button type='button'
+          class='btn btn-outline-success dropdown-toggle'
+          data-toggle='dropdown' aria-haspopup='true'
+          aria-expanded='false'>
+          {$user->identity->name}
+        </button>
+        <div class='dropdown-menu'>
+          <a class='dropdown-item' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+            <div class='dropdown-divider'></div>
+            <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class='container-fluid'>
+    {snippet flashes}
+      <div n:foreach='$flashes as $flash' class='alert alert-{$flash->type}' role='alert'>
         <button type='button' class='close' data-dismiss='alert'>
           <span>&times;</span>
         </button>
-              {_$flash->message}
+        {_$flash->message}
       </div>
-      {snippet flashes}
-      {/snippet}
-
-  <div class="">
-    <!--<header class='py-5 text-center'>
-      <h1>{include title}</h1>
-    </header>-->
+    {/snippet}
     {include content}
   </div>
-  <!--
-	<header class='py-5 text-center'>
-		<h1>{include title}</h1>
-	</header>
+   <!-- Modal -->
+<div id="myModal" class="modal">
 
-    {include content}
--->
-  <!-- zahlavi -->
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form>
+      <a class='nav-link' n:href=':Core:Cart:default'>Prejit k rezervaci</a>
+    </form>
+  </div>
+
+</div>
 	<footer class='pt-4 my-md-5 pt-md-5 border-top container-fluid'>
 		<div class='row w-100'>
-      <div class='w-25'>
-      </div>
+      <div class='w-25'></div>
 			<div class='col-4 col-md'>
-				<h5>{$company->getLogo()}</h5>
+				<h5><img src="/img/logo.svg" alt="Logo" style="width: 40%; height: auto;"></h5>
 				<small class='d-block mb-3 text-muted'>&copy; 2019</small>
 			</div>
 			<div class='col-4 col-md'>
 				<h5>{_core.contact.title}</h5>
 				<p class='text-muted'>
-                    {$company->getName()}<br>
-                    {$company->getAddress()|breaklines}<br>
+          {$company->getName()}<br>
+          {$company->getAddress()|breaklines}<br>
 					tel.: {$company->getTelephone()}<br>
 					e-mail: {$company->getEmail()}
 				</p>
 			</div>
-      </div>
 		</div>
 	</footer>
 </body>
