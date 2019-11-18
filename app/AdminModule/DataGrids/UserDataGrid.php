@@ -23,7 +23,7 @@ namespace App\AdminModule\DataGrids;
 
 use App\AdminModule\Presenters\UserPresenter;
 use App\CoreModule\Datagrids\DataGridFactory;
-use App\CoreModule\Models\UserManager;
+use App\Models\Database\EntityManager;
 use Nette\SmartObject;
 use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 use Ublaboo\DataGrid\DataGrid;
@@ -43,7 +43,7 @@ final class UserDataGrid {
 	private $dataGridFactory;
 
 	/**
-	 * @var UserManager User manager
+	 * @var EntityManager Entity manager
 	 */
 	private $manager;
 
@@ -55,9 +55,9 @@ final class UserDataGrid {
 	/**
 	 * Constructor
 	 * @param DataGridFactory $dataGridFactory Generic data grid factory
-	 * @param UserManager $manager User manager
+	 * @param EntityManager $manager Entity manager
 	 */
-	public function __construct(DataGridFactory $dataGridFactory, UserManager $manager) {
+	public function __construct(DataGridFactory $dataGridFactory, EntityManager $manager) {
 		$this->dataGridFactory = $dataGridFactory;
 		$this->manager = $manager;
 	}
@@ -73,11 +73,11 @@ final class UserDataGrid {
 	public function create(UserPresenter $presenter, string $name): DataGrid {
 		$this->presenter = $presenter;
 		$grid = $this->dataGridFactory->create($presenter, $name);
-		$grid->setDataSource($this->manager->list());
+		$grid->setDataSource($this->manager->getUserRepository()->findAll());
 		$grid->addColumnNumber('id', 'admin.user.id')
 			->setAlign('left');
-		$grid->addColumnText('firstName', 'admin.user.firstName');
-		$grid->addColumnText('lastName', 'admin.user.lastName');
+		$grid->addColumnText('first_name', 'admin.user.firstName');
+		$grid->addColumnText('last_name', 'admin.user.lastName');
 		$grid->addColumnText('email', 'admin.user.email');
 		$grid->addAction('edit', 'admin.actions.edit')
 			->setIcon('user-edit')

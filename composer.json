@@ -6,7 +6,9 @@
 	"license": "GPL-3.0",
 	"require": {
 		"php": ">= 7.2",
+		"contributte/console": "^0.7",
 		"contributte/forms": "^0.4",
+		"contributte/image-storage": "^2.0",
 		"contributte/translation": "^0.4",
 		"latte/latte": "^2.5",
 		"nette/application": "^3.0",
@@ -21,10 +23,13 @@
 		"nette/robot-loader": "^3.0",
 		"nette/security": "^3.0",
 		"nette/utils": "^3.0",
+		"nettrine/dbal": "^0.5",
+		"nettrine/fixtures": "^0.5",
+		"nettrine/migrations": "^0.6",
+		"nettrine/orm": "^0.4",
 		"occ2/nette-mapy-cz": "^1.1",
 		"tracy/tracy": "^2.7",
-		"ublaboo/datagrid": "^6.2",
-		"contributte/image-storage": "^2.0"
+		"ublaboo/datagrid": "^6.2"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3"

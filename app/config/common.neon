@@ -1,5 +1,9 @@
 parameters:
-
+	database:
+		host: romanondracek.cz
+		dbname: itu
+		user: itu
+		password: Z8GGtgyK3CKsrJyh8sCt
 
 application:
 	errorPresenter: Error
@@ -7,9 +11,9 @@ application:
 		*: App\*Module\Presenters\*Presenter
 
 database:
-	dsn: 'mysql:host=romanondracek.cz;dbname=itu'
-	user: itu
-	password: Z8GGtgyK3CKsrJyh8sCt
+	dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
+	user: %database.user%
+	password: %database.password%
 	options:
 		lazy: yes
 
@@ -17,8 +21,17 @@ session:
 	expiration: 14 days
 
 extensions:
-    forms.application: Contributte\Forms\DI\ApplicationFormFactoryExtension
-    translation: Contributte\Translation\DI\TranslationExtension
+	forms.application: Contributte\Forms\DI\ApplicationFormFactoryExtension
+	translation: Contributte\Translation\DI\TranslationExtension
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+console:
+	name: ITU
+	version: '1.0'
+	catchExceptions: true
+	autoExit: true
+	url: https://itu.romanondracek.cz
+	lazy: true
 
 services:
 	router: App\CoreModule\Router\RouterFactory::createRouter
@@ -28,9 +41,11 @@ services:
 	- MapyCZ\Factories\IMapControlFactory
 
 translation:
-    locales:
-        whitelist: [en, cs]
-        default: en
-    dirs:
-        - %appDir%/lang
+	locales:
+		whitelist: [en, cs]
+		default: en
+	dirs:
+		- %appDir%/lang
 
+includes:
+	- doctrine.neon

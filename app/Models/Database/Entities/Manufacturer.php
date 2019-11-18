@@ -19,32 +19,45 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Entities;
 
-use App\Models\Database\EntityManager;
+use App\Models\Database\Attributes\TCreatedAt;
+use App\Models\Database\Attributes\TId;
+use App\Models\Database\Attributes\TUpdatedAt;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Homepage presenter
+ * Manufacturer entity
+ * @ORM\Entity(repositoryClass="App\Models\Database\Repositories\ManufacturerRepository")
+ * @ORM\Table(name="`manufacturers`")
+ * @ORM\HasLifecycleCallbacks()
  */
-final class HomepagePresenter extends BasePresenter {
+class Manufacturer {
+
+	use TId;
+	use TCreatedAt;
+	use TUpdatedAt;
 
 	/**
-	 * @var EntityManager Entity manager
+	 * @var string Manufacturer name
+	 * @ORM\Column(type="string", length=255, nullable=FALSE, unique=TRUE)
 	 */
-	private $entityManager;
+	private $name;
 
 	/**
 	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
+	 * @param string $name Manufacturer name
 	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
+	public function __construct(string $name) {
+		$this->name = $name;
 	}
 
 	/**
-	 * Renders dashboard
+	 * Returns the manufacturer name
+	 * @return string Manufacturer name
 	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
+	public function getName(): string {
+		return $this->name;
 	}
+
 }

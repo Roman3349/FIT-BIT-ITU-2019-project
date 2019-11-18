@@ -19,32 +19,13 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Repositories;
 
-use App\Models\Database\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Homepage presenter
+ * Manufacturer repository
  */
-final class HomepagePresenter extends BasePresenter {
+class ManufacturerRepository extends EntityRepository {
 
-	/**
-	 * @var EntityManager Entity manager
-	 */
-	private $entityManager;
-
-	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
-	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
-	}
-
-	/**
-	 * Renders dashboard
-	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
-	}
 }

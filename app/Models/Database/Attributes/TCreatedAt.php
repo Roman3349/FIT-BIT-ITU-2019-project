@@ -19,32 +19,34 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Attributes;
 
-use App\Models\Database\EntityManager;
+use Doctrine\ORM\Mapping as ORM;
+use Nette\Utils\DateTime;
 
-/**
- * Homepage presenter
- */
-final class HomepagePresenter extends BasePresenter {
+trait TCreatedAt {
 
 	/**
-	 * @var EntityManager Entity manager
+	 * @var DateTime
+	 * @ORM\Column(type="datetime", nullable=FALSE)
 	 */
-	private $entityManager;
+	protected $createdAt;
 
 	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
+	 * Returns created at time
+	 * @return DateTime Created at time
 	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
+	public function getCreatedAt(): DateTime {
+		return $this->createdAt;
 	}
 
 	/**
-	 * Renders dashboard
+	 * Sets created at time
+	 * @ORM\PrePersist()
+	 * @internal
 	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
+	public function setCreatedAt(): void {
+		$this->createdAt = new DateTime();
 	}
+
 }
