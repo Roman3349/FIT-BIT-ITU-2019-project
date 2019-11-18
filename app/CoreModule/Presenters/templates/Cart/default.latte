@@ -17,26 +17,12 @@
 
 {block title}{_core.cart.title}{/block}
 
-{block scripts}
-	{include parent}
-	<script src='https://api.mapy.cz/loader.js'></script>
-	<script>Loader.load()</script>
-	<script src='/js/mapycz.js'></script>
-{/block}
-
 {block content}
 
 <div class="row">
-  <div class="col-2"></div>
-    <div class="col-8 bg-secondary">
-      <header class='py-5 text-center'>
-        <h1>{_core.cart.title}</h1>
-      </header>
-      <div class="p-5">
-        <form action="">
-
-        </form>
-      </div>
-    </div>
-  <div class="col-2"></div>
+	<header class='py-5 text-center'>
+		<h1>{include title}</h1>
+	</header>
+	<div class="p-5">
+	</div>
 </div>
