@@ -19,32 +19,12 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Attributes;
 
-use App\Models\Database\EntityManager;
+use Nettrine\ORM\Entity\Attributes\Id;
 
-/**
- * Homepage presenter
- */
-final class HomepagePresenter extends BasePresenter {
+trait TId {
 
-	/**
-	 * @var EntityManager Entity manager
-	 */
-	private $entityManager;
+	use Id;
 
-	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
-	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
-	}
-
-	/**
-	 * Renders dashboard
-	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
-	}
 }

@@ -21,9 +21,11 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Forms;
 
-use App\CoreModule\Models\UserManager;
 use App\CoreModule\Presenters\SignPresenter;
+use App\Models\Database\Entities\User;
+use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
+use Nette\Security\Passwords;
 use Nette\SmartObject;
 
 /**
@@ -34,9 +36,19 @@ final class SignUpFormFactory {
 	use SmartObject;
 
 	/**
+	 * @var EntityManager Entity manager
+	 */
+	private $entityManager;
+
+	/**
 	 * @var FormFactory Generic form factory
 	 */
 	private $factory;
+
+	/**
+	 * @var Passwords Password manager
+	 */
+	private $passwordManager;
 
 	/**
 	 * @var SignPresenter Sign (in|out|up) presenter
@@ -44,18 +56,15 @@ final class SignUpFormFactory {
 	private $presenter;
 
 	/**
-	 * @var UserManager User manager
-	 */
-	private $userManager;
-
-	/**
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
-	 * @param UserManager $userManager User manager
+	 * @param EntityManager $entityManager Entity manager
+	 * @param Passwords $passwordManager Password manager
 	 */
-	public function __construct(FormFactory $factory, UserManager $userManager) {
+	public function __construct(FormFactory $factory, EntityManager $entityManager, Passwords $passwordManager) {
 		$this->factory = $factory;
-		$this->userManager = $userManager;
+		$this->entityManager = $entityManager;
+		$this->passwordManager = $passwordManager;
 	}
 
 	/**
@@ -85,9 +94,12 @@ final class SignUpFormFactory {
 	 */
 	public function signUp(Form $form): void {
 		$values = $form->getValues();
-		$this->userManager->add($values->firstName, $values->lastName, $values->email, $values->password, 0);
+		$hash = $this->passwordManager->hash($values->password);
+		$user = new User($values->firstName, $values->lastName, $values->email, $hash);
+		$this->entityManager->persist($user);
+		$this->entityManager->flush();
 		$this->presenter->flashSuccess('core.sign.up.messages.success');
-		$this->presenter->redirect(':Homepage:default');
+		$this->presenter->redirect(':Core:Product:default');
 	}
 
 }

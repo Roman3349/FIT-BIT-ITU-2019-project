@@ -1,0 +1,35 @@
+extensions:
+	dbal: Nettrine\DBAL\DI\DbalExtension
+	dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
+	orm: Nettrine\ORM\DI\OrmExtension
+	orm.cache: Nettrine\ORM\DI\OrmCacheExtension
+	orm.console: Nettrine\ORM\DI\OrmConsoleExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+	migrations: Nettrine\Migrations\DI\MigrationsExtension
+	fixtures: Nettrine\Fixtures\DI\FixturesExtension
+
+dbal:
+	connection:
+		driver: pdo_mysql
+		host: %database.host%
+		user: %database.user%
+		password: %database.password%
+		dbname: %database.dbname%
+
+orm:
+	entityManagerDecoratorClass: App\Models\Database\EntityManager
+
+orm.annotations:
+	paths:
+		- %appDir%/Models/Database/Entities
+
+migrations:
+	table: doctrine_migrations
+	column: version
+	directory: %appDir%/../db/Migrations
+	namespace: Database\Migrations
+	versionsOrganization: null
+
+fixtures:
+	paths:
+		- %appDir%/../db/Fixtures

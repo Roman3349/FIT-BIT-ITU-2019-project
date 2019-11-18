@@ -21,9 +21,11 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Models;
 
+use App\Models\Database\EntityManager;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
+use Nette\Security\Passwords;
 use Nette\SmartObject;
 
 /**
@@ -34,16 +36,23 @@ final class Authenticator implements IAuthenticator {
 	use SmartObject;
 
 	/**
-	 * @var UserManager User manager
+	 * @var EntityManager Entity manager
 	 */
-	private $userManager;
+	private $entityManager;
+
+	/**
+	 * @var Passwords Password manager
+	 */
+	private $passwordManager;
 
 	/**
 	 * Constructor
-	 * @param UserManager $userManager User manager
+	 * @param EntityManager $manager Entity manager
+	 * @param Passwords $passwords Password manager
 	 */
-	public function __construct(UserManager $userManager) {
-		$this->userManager = $userManager;
+	public function __construct(EntityManager $manager, Passwords $passwords) {
+		$this->entityManager = $manager;
+		$this->passwordManager = $passwords;
 	}
 
 	/**
@@ -54,6 +63,14 @@ final class Authenticator implements IAuthenticator {
 	 */
 	function authenticate(array $credentials): IIdentity {
 		[$email, $password] = $credentials;
-		return $this->userManager->login($email, $password);
+
+		$user = $this->entityManager->getUserRepository()->findOneByEmail($email);
+		if ($user === null) {
+			throw new AuthenticationException('The email is incorrect.');
+		} elseif (!$this->passwordManager->verify($password, $user->getHash())) {
+			throw new AuthenticationException('The password is incorrect.');
+		}
+		$this->entityManager->flush();
+		return $user->toIdentity();
 	}
 }

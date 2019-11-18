@@ -19,32 +19,34 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Attributes;
 
-use App\Models\Database\EntityManager;
+use Doctrine\ORM\Mapping as ORM;
+use Nette\Utils\DateTime;
 
-/**
- * Homepage presenter
- */
-final class HomepagePresenter extends BasePresenter {
+trait TUpdatedAt {
 
 	/**
-	 * @var EntityManager Entity manager
+	 * @var DateTime
+	 * @ORM\Column(type="datetime", nullable=TRUE)
 	 */
-	private $entityManager;
+	protected $updatedAt;
 
 	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
+	 * Returns updated at time
+	 * @return DateTime Updated at time
 	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
+	public function getUpdatedAt(): DateTime {
+		return $this->updatedAt;
 	}
 
 	/**
-	 * Renders dashboard
+	 * Sets updated at time
+	 * @ORM\PreUpdate()
+	 * @internal
 	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
+	public function setUpdatedAt(): void {
+		$this->updatedAt = new DateTime();
 	}
+
 }

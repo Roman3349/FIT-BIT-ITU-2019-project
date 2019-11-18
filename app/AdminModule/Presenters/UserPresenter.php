@@ -22,8 +22,7 @@ declare(strict_types = 1);
 namespace App\AdminModule\Presenters;
 
 use App\AdminModule\DataGrids\UserDataGrid;
-use App\CoreModule\Models\UserManager;
-use Contributte\Translation\Wrappers\Message;
+use App\Models\Database\EntityManager;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
 use Ublaboo\DataGrid\Exception\DataGridException;
@@ -40,15 +39,15 @@ final class UserPresenter extends BasePresenter {
 	public $dataGrid;
 
 	/**
-	 * @var UserManager User manager
+	 * @var EntityManager Entity manager
 	 */
 	private $manager;
 
 	/**
 	 * Constructor
-	 * @param UserManager $manager User manager
+	 * @param EntityManager $manager Entity manager
 	 */
-	public function __construct(UserManager $manager) {
+	public function __construct(EntityManager $manager) {
 		$this->manager = $manager;
 	}
 
@@ -57,8 +56,12 @@ final class UserPresenter extends BasePresenter {
 	 * @param int $id User ID
 	 */
 	public function actionDelete(int $id): void {
-		$user = $this->manager->get($id);
-		$this->manager->delete($id);
+		$user = $this->manager->getUserRepository()->find($id);
+		if ($user === null) {
+			return;
+		}
+		$this->manager->remove($user);
+		$this->manager->flush();
 		if ($this->user->id === $id) {
 			$this->user->logout(true);
 		}

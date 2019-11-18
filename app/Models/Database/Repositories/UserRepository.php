@@ -19,32 +19,18 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database\Repositories;
 
-use App\Models\Database\EntityManager;
+use App\Models\Database\Entities\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Homepage presenter
+ * User repository
  */
-final class HomepagePresenter extends BasePresenter {
+class UserRepository extends EntityRepository {
 
-	/**
-	 * @var EntityManager Entity manager
-	 */
-	private $entityManager;
-
-	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
-	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
+	public function findOneByEmail(string $email): ?User {
+		return $this->findOneBy(['email' => $email]);
 	}
 
-	/**
-	 * Renders dashboard
-	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
-	}
 }

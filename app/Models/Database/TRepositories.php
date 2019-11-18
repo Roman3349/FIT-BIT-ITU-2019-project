@@ -19,32 +19,32 @@
 
 declare(strict_types = 1);
 
-namespace App\AdminModule\Presenters;
+namespace App\Models\Database;
 
-use App\Models\Database\EntityManager;
+use App\Models\Database\Entities\Manufacturer;
+use App\Models\Database\Entities\User;
+use App\Models\Database\Repositories\ManufacturerRepository;
+use App\Models\Database\Repositories\UserRepository;
 
 /**
- * Homepage presenter
+ * @mixin EntityManager
  */
-final class HomepagePresenter extends BasePresenter {
+trait TRepositories {
 
 	/**
-	 * @var EntityManager Entity manager
+	 * Returns the manufacturer repository
+	 * @return ManufacturerRepository Manufacturer repository
 	 */
-	private $entityManager;
-
-	/**
-	 * Constructor
-	 * @param EntityManager $entityManager Entity manager
-	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityManager = $entityManager;
+	public function getManufacturerRepository(): ManufacturerRepository {
+		return $this->getRepository(Manufacturer::class);
 	}
 
 	/**
-	 * Renders dashboard
+	 * Returns the user repository
+	 * @return UserRepository User repository
 	 */
-	public function renderDefault(): void {
-		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
+	public function getUserRepository(): UserRepository {
+		return $this->getRepository(User::class);
 	}
+
 }
