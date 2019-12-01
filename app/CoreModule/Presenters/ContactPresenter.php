@@ -49,9 +49,9 @@ final class ContactPresenter extends BasePresenter {
 		$longitude = $this->companyManager->getLongitude();
 		$map->settings = [
 			'mapId' => 'map',
-			'width' => 32,
-			'height' => 32,
-			'units' => 'rem',
+			'width' => 100,
+			'height' => 100,
+			'units' => '%',
 			'mapType' => 1,
 			'center' => [
 				'latitude' => $latitude,

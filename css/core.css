@@ -18,3 +18,7 @@
 @import url('~bootstrap/dist/css/bootstrap.min.css');
 @import url('~ublaboo-datagrid/assets/datagrid.css');
 @import url('~ublaboo-datagrid/assets/datagrid-spinners.css');
+
+#map {
+	padding-top: 100%;
+}
