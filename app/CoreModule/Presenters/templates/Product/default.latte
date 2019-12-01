@@ -62,7 +62,8 @@
               <p class='card-text'>
                 {include parameters.latte product => $product}
               </p>
-			        <a href='#' class='btn btn-primary p-3'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+              <a n:href=':Core:Product:show $product["id"]' class='btn btn-primary btn-lg btn-block p-3'>Zobrazit detail</a>
+			        <a href='#' class='btn btn-outline-secondary mt-2 p-1'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
 		        </div>
 	        </div>
     </div>
