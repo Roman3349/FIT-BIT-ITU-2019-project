@@ -20,33 +20,27 @@
 {block content}
 
 
-<div class="row">
-  <div class="col-2"></div>
-    <div class="col-8 ">
-      <header class='py-5 text-center'>
-        <h1>{include title}</h1>
-      </header>
-      <div class="jumbotron p-5">
-        <div class='row'>
-          <div class='col'>
-            <img src='{$product["img"]}' class='img-fluid' alt='{$product["name"]}'>
-          </div>
-          <div class='col'>
-            <div class="h-50 row m-0">
-              Ut maximus, nisl sed dapibus congue, purus leo accumsan felis, vitae hendrerit ligula lectus nec ex. Donec mattis a ex a porttitor.<br>
-              Aliquam erat volutpat. Pellentesque mollis congue nulla a vehicula. In maximus eros non tellus auctor ultrices quis facilisis dui.<br>
-            </div>
-            <div class="row m-1">
-              <div class="text-center col">
-                {include parameters.latte}
-              </div>
-              <div class="col">
-                <a href='#' style="margin:auto;display:block;" class='btn btn-primary'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
-              </div>
-            </div>
-          </div>
+<div class='container'>
+  <header class='py-5 text-center'>
+    <h1>{include title}</h1>
+  </header>
+  <div class='row m-5'>
+    <div class='col-md-12 col-lg-6 mb-3'>
+      <img src='{$product["img"]}' class='img-fluid' alt='{$product["name"]}'>
+    </div>
+    <div class='col-md-12 col-lg-6'>
+      <div class="h-50 row m-0">
+        Ut maximus, nisl sed dapibus congue, purus leo accumsan felis, vitae hendrerit ligula lectus nec ex. Donec mattis a ex a porttitor.<br>
+        Aliquam erat volutpat. Pellentesque mollis congue nulla a vehicula. In maximus eros non tellus auctor ultrices quis facilisis dui.<br>
+      </div>
+      <div class="row">
+        <div class="text-center col-sm-12">
+          {include parameters.latte}
+        </div>
+        <div class="col-sm-12 p-3">
+          <a href='#' style="margin:auto;display:block;" class='btn btn-primary'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
         </div>
       </div>
     </div>
-  <div class="col-2"></div>
+  </div>
 </div>

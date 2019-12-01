@@ -26,15 +26,15 @@
 
 {block content}
 
-<div class="container">
+<div class="container text-center">
 	<header class='py-5 text-center'>
 		<h1>{include title}</h1>
 	</header>
-	<div class='p-5 row'>
-		<div class='col'>
+	<div class='row'>
+		<div class='col-md-12 col-lg-6'>
             {control map}
 		</div>
-		<div class='col text-center pt-5' style="border-left: 1px solid #333; display: inline-block; vertical-align: middle;">
+		<div class='col-md-12 col-lg-6 text-center pt-5'>
             {$company->getName()}<br>
             {$company->getAddress()|breaklines}<br>
 			tel.: {$company->getTelephone()}<br>
