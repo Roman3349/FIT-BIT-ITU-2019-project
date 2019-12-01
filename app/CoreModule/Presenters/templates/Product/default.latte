@@ -18,7 +18,6 @@
 {block title}{_core.products.title}{/block}
 
 {block content}
-<!-- d-none d-lg-block hide on screens smaller than lg-->
 <div class="row">
   <div class="col-lg-3 col-sm-12 col-xl-2">
         <div class='px-xl-0 px-lg-3 px-sm-5 pb-md-4 mx-auto mt-sm-5'>
@@ -35,7 +34,7 @@
                 <label for='validationDefault03'>Velikost kol:</label>
                 <input type='text' class='form-control' id='validationDefault03' value='27,5'>
                 
-                <label for='validationDefault04'>Velikost řámu:</label>
+                <label for='validationDefault04'>Velikost rámu:</label>
                 <input type='text' class='form-control' id='validationDefault04'>
                 
                 <label for='validationDefault05'>Typ užití:</label>
@@ -49,21 +48,21 @@
           <div class='card-deck-fluid mb-3 text-center row'>
 	          <div n:foreach='$products as $product' class='card col-xl-3 col-lg-4 col-sm-6'>
               <div class="h-50">
-                <a class="align-middle" n:href=':Core:Product:show $product["id"]'>
-                  <img src='{$product["img"]}' class='card-img-top' alt='{$product["name"]}'>
+                <a class="align-middle" n:href=':Core:Product:show $product->getId()'>
+                  <img src='{$product->getPicture()}' class='card-img-top' alt='{$product->getFullName()}'>
                 </a>
               </div>
 		          <div class='card-body'>
-			          <a n:href=':Core:Product:show $product["id"]'>
+			          <a n:href=':Core:Product:show $product->getId()'>
 				        <h5 class='card-title'>
-					        {$product['name']}
+					        {$product->getFullName()}
 				        </h5>
 		  	      </a>
               <p class='card-text'>
                 {include parameters.latte product => $product}
               </p>
-              <a n:href=':Core:Product:show $product["id"]' class='btn btn-primary btn-lg btn-block p-3'>Zobrazit detail</a>
-			        <a href='#' class='btn btn-outline-secondary mt-2 p-1'>{_core.product.rent} ({$product['price']} {_core.product.priceUnit})</a>
+              <a n:href=':Core:Product:show $product->getId()' class='btn btn-primary btn-lg btn-block p-3'>Zobrazit detail</a>
+			        <a href='#' class='btn btn-outline-secondary mt-2 p-1'>{_core.product.rent} ({$product->getPrice()} {_core.product.priceUnit})</a>
 		        </div>
 	        </div>
     </div>

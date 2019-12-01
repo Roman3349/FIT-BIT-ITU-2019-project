@@ -24,6 +24,7 @@ namespace App\CoreModule\Presenters;
 use App\CoreModule\Forms\ProductFilterFormFactory;
 use App\CoreModule\Models\BikeManager;
 use App\CoreModule\Models\CompanyManager;
+use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
 
 /**
@@ -38,25 +39,24 @@ final class ProductPresenter extends BasePresenter {
 	public $filterFactory;
 
 	/**
-	 * @var BikeManager Bike manager
+	 * @var EntityManager Entity manager
 	 */
 	private $manager;
 
 	/**
 	 * Constructor
-	 * @param BikeManager $manager Bike manager
+	 * @param EntityManager $manager Entity manager
 	 */
-	public function __construct(BikeManager $manager) {
+	public function __construct(EntityManager $manager) {
 		$this->manager = $manager;
 	}
 
 	public function renderDefault(): void {
-		$this->template->products = $this->manager->list();
-		\Tracy\Debugger::barDump($this->template->products);
+		$this->template->products = $this->manager->getBikeRepository()->findAll();
 	}
 
 	public function renderShow(int $id): void {
-		$this->template->product = $this->manager->get($id);
+		$this->template->product = $this->manager->getBikeRepository()->find($id);
 	}
 
 	/**

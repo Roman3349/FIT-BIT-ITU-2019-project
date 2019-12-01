@@ -17,6 +17,18 @@ user:
 	firstName: First name
 	lastName: Last name
 	email: E-mail
+	role: Role
+	roles:
+	    admin: Administrator
+	    employee: Employee
+	    customer: Customer
+	state: State
+	states:
+	    activated: Activated
+	    blocked: Blocked
+	    fresh: Fresh
 	messages:
 		confirmDelete: Do you really want to delete user %s?
 		successDelete: User %email% has beed deleted.
+		successChangeRole: Role has been succesfully changed.
+		successChangeState: State has been successfully changed.

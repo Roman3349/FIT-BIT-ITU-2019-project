@@ -40,7 +40,14 @@ class User {
 	use TUpdatedAt;
 
 	public const ROLE_ADMIN = 'admin';
-	public const ROLE_USER = 'user';
+	public const ROLE_EMPLOYEE = 'employee';
+	public const ROLE_CUSTOMER = 'customer';
+
+	public const ROLES = [
+		self::ROLE_ADMIN,
+		self::ROLE_EMPLOYEE,
+		self::ROLE_CUSTOMER,
+	];
 
 	public const STATE_ACTIVATED = 1;
 	public const STATE_BLOCKED = 2;
@@ -100,7 +107,7 @@ class User {
 		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->hash = $hash;
-		$this->role = self::ROLE_USER;
+		$this->role = self::ROLE_CUSTOMER;
 		$this->state = self::STATE_FRESH;
 	}
 
@@ -156,6 +163,38 @@ class User {
 	 */
 	public function getHash(): string {
 		return $this->hash;
+	}
+
+	/**
+	 * Returns the user's role
+	 * @return string User role
+	 */
+	public function getRole(): string {
+		return $this->role;
+	}
+
+	/**
+	 * Returns the user's account state
+	 * @return int User's account state
+	 */
+	public function getState(): int {
+		return $this->state;
+	}
+
+	/**
+	 * Sets the user's role
+	 * @param string $role User's role
+	 */
+	public function setRole(string $role): void {
+		$this->role = $role;
+	}
+
+	/**
+	 * Sets the user's state
+	 * @param int $state User's state
+	 */
+	public function setState(int $state): void {
+		$this->state = $state;
 	}
 
 	/**

@@ -15,10 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{$product['name']}{/block}
+{block title}{$product->getFullName()}{/block}
 
 {block content}
-
 
 <div class='container'>
   <header class='py-5 text-center'>
@@ -26,7 +25,7 @@
   </header>
   <div class='row m-5'>
     <div class='col-md-12 col-lg-6 mb-3'>
-      <img src='{$product["img"]}' class='img-fluid' alt='{$product["name"]}'>
+      <img src='{$product->getPicture()}' class='img-fluid' alt='{$product->getFullName()}'>
     </div>
     <div class='col-md-12 col-lg-6'>
       <div class="row m-0">
@@ -38,7 +37,7 @@
           {include parameters.latte}
         </div>
         <div class="col-sm-12 col-lg-6 p-3">
-          <a href='#' style="margin:auto;display:block;" class='btn btn-primary btn-lg btn-block'>{_core.product.rent}<br> ({$product['price']} {_core.product.priceUnit})</a>
+          <a href='#' style="margin:auto;display:block;" class='btn btn-primary btn-lg btn-block'>{_core.product.rent}<br> ({$product->getPrice()} {_core.product.priceUnit})</a>
         </div>
       </div>
     </div>

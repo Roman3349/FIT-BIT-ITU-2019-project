@@ -17,6 +17,18 @@ user:
 	firstName: Křestní jméno
 	lastName: Příjmení
 	email: E-mail
+	role: Role
+	roles:
+	    admin: Administrátor
+	    employee: Zaměstanec
+	    customer: Zákazník
+	state: Stav
+	states:
+	    activated: Aktivní
+	    blocked: Zablokován
+	    fresh: Nový
 	messages:
 		confirmDelete: Opravdu chcete smazat uživatele %s?
 		successDelete: Uživatel %email% byl úspěšně odstraněn.
+		successChangeRole: Role byla úspěšně změněna.
+		successChangeState: Stav účtu byl úspěšně změněn.
