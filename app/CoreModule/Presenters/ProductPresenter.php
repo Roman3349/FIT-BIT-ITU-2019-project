@@ -22,8 +22,6 @@ declare(strict_types = 1);
 namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Forms\ProductFilterFormFactory;
-use App\CoreModule\Models\BikeManager;
-use App\CoreModule\Models\CompanyManager;
 use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
 
