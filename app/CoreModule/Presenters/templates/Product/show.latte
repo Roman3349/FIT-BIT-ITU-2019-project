@@ -15,19 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{var $name = $product["manufacturer"]["name"] . ' ' . $product['name']}
+{var $name = $product->getFullName()}
 {block title}{$name}{/block}
 
 {block content}
 
 <div class='row'>
 	<div class='col'>
-		<img src='{$product["img"]}' class='img-fluid' alt='{$name}'>
+		<img src='{$product->getPicture()}' class='img-fluid' alt='{$name}'>
 	</div>
 	<div class='col'>
 		{include parameters.latte}
 		<a href='#' class='btn btn-primary'>
-			{_core.product.rent} ({$product['price']} {_core.product.priceUnit})
+			{_core.product.rent} ({$product->getPrice()} {_core.product.priceUnit})
 		</a>
 	</div>
 </div>

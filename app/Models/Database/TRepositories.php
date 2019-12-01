@@ -21,8 +21,12 @@ declare(strict_types = 1);
 
 namespace App\Models\Database;
 
+use App\Models\Database\Entities\Bike;
+use App\Models\Database\Entities\BikeUsage;
 use App\Models\Database\Entities\Manufacturer;
 use App\Models\Database\Entities\User;
+use App\Models\Database\Repositories\BikeRepository;
+use App\Models\Database\Repositories\BikeUsageRepository;
 use App\Models\Database\Repositories\ManufacturerRepository;
 use App\Models\Database\Repositories\UserRepository;
 
@@ -30,6 +34,22 @@ use App\Models\Database\Repositories\UserRepository;
  * @mixin EntityManager
  */
 trait TRepositories {
+
+	/**
+	 * Returns the bike repository
+	 * @return BikeRepository Bike repository
+	 */
+	public function getBikeRepository(): BikeRepository {
+		return $this->getRepository(Bike::class);
+	}
+
+	/**
+	 * Returns the bike usage repository
+	 * @return BikeUsageRepository Bike usage repository
+	 */
+	public function getBikeUsageRepository(): BikeUsageRepository {
+		return $this->getRepository(BikeUsage::class);
+	}
 
 	/**
 	 * Returns the manufacturer repository

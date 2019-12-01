@@ -27,12 +27,12 @@ use App\Models\Database\Attributes\TUpdatedAt;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Manufacturer entity
- * @ORM\Entity(repositoryClass="App\Models\Database\Repositories\ManufacturerRepository")
- * @ORM\Table(name="`manufacturers`")
+ * Bike usage entity
+ * @ORM\Entity(repositoryClass="App\Models\Database\Repositories\BikeUsageRepository")
+ * @ORM\Table(name="`bikeUsages`")
  * @ORM\HasLifecycleCallbacks()
  */
-class Manufacturer {
+class BikeUsage {
 
 	use TId;
 	use TCreatedAt;

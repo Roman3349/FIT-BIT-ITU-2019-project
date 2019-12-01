@@ -52,6 +52,13 @@ class Bike {
 	private $name;
 
 	/**
+	 * @var BikeUsage Bike usage
+	 * @ORM\ManyToOne(targetEntity="BikeUsage")
+	 * @ORM\JoinColumn(name="usage", referencedColumnName="id")
+	 */
+	private $usage;
+
+	/**
 	 * @var string Bike picture
 	 * @ORM\Column(type="string", length=255, nullable=FALSE, unique=FALSE)
 	 */
@@ -103,6 +110,7 @@ class Bike {
 	 * Constructor
 	 * @param Manufacturer $manufacturer Manufacturer
 	 * @param string $name Model name
+	 * @param BikeUsage $usage Bike usage
 	 * @param string $picture Picture
 	 * @param string $frameMaterial Frame material
 	 * @param string $frameSize Frame size
@@ -112,9 +120,10 @@ class Bike {
 	 * @param string $speeds Speeds
 	 * @param int $price Bike rent price
 	 */
-	public function __construct(Manufacturer $manufacturer, string $name, string $picture, string $frameMaterial, string $frameSize, string $wheelSize, int $forkTravel, int $shockTravel, string $speeds, int $price) {
+	public function __construct(Manufacturer $manufacturer, string $name, BikeUsage $usage, string $picture, string $frameMaterial, string $frameSize, string $wheelSize, int $forkTravel, int $shockTravel, string $speeds, int $price) {
 		$this->manufacturer = $manufacturer;
 		$this->name = $name;
+		$this->usage = $usage;
 		$this->picture = $picture;
 		$this->frameMaterial = $frameMaterial;
 		$this->frameSize = $frameSize;
@@ -123,6 +132,102 @@ class Bike {
 		$this->shockTravel = $shockTravel;
 		$this->speeds = $speeds;
 		$this->price = $price;
+	}
+
+	/**
+	 * Returns the bike manufacturer name
+	 * @return string Bike manufacturer name
+	 */
+	public function getManufacturerName(): string {
+		return $this->manufacturer->getName();
+	}
+
+	/**
+	 * Returns the bike name
+	 * @return string Bike name
+	 */
+	public function getName(): string {
+		return $this->name;
+	}
+
+	/**
+	 * Returns the full bike name
+	 * @return string Full bike name
+	 */
+	public function getFullName(): string {
+		return $this->getManufacturerName() . ' ' . $this->getName();
+	}
+
+	/**
+	 * Returns the bike usage
+	 * @return string BIke usage
+	 */
+	public function getUsage(): string {
+		return $this->usage->getName();
+	}
+
+	/**
+	 * Returns the bike picture
+	 * @return string Bike picture
+	 */
+	public function getPicture(): string {
+		return $this->picture;
+	}
+
+	/**
+	 * Returns the bike frame material
+	 * @return string Bike frame material
+	 */
+	public function getFrameMaterial(): string {
+		return $this->frameMaterial;
+	}
+
+	/**
+	 * Returns the bike frame size
+	 * @return string Bike frame size
+	 */
+	public function getFrameSize(): string {
+		return $this->frameSize;
+	}
+
+	/**
+	 * Returns the bike wheel size
+	 * @return string Bike wheel size
+	 */
+	public function getWheelSize(): string {
+		return $this->wheelSize;
+	}
+
+	/**
+	 * Returns the bike fork travel
+	 * @return string Bike fork travel
+	 */
+	public function getForkTravel(): string {
+		return strval($this->forkTravel) ?? '-';
+	}
+
+	/**
+	 * Returns the bike rear shock travel
+	 * @return string Bike rear shock travel
+	 */
+	public function getShockTravel(): string {
+		return strval($this->shockTravel) ?? '-';
+	}
+
+	/**
+	 * Return the bike speeds
+	 * @return string Bike speeds
+	 */
+	public function getSpeeds(): string {
+		return $this->speeds;
+	}
+
+	/**
+	 * Returns the bike rental price
+	 * @return int Bike rental price
+	 */
+	public function getPrice(): int {
+		return $this->price;
 	}
 
 }

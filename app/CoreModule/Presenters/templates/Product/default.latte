@@ -52,12 +52,12 @@
 
 <div class='card-deck mb-3 text-center'>
 	<div n:foreach='$products as $product' class='card'>
-		{var $name = $product["manufacturer"]["name"] . ' ' . $product['name']}
-		<a n:href=':Core:Product:show $product["id"]'>
-			<img src='{$product["img"]}' class='card-img-top' alt='{$name}'>
+		{var $name = $product->getFullName()}
+		<a n:href=':Core:Product:show $product->getId()'>
+			<img src='{$product->getPicture()}' class='card-img-top' alt='{$name}'>
 		</a>
 		<div class='card-body'>
-			<a n:href=':Core:Product:show $product["id"]'>
+			<a n:href=':Core:Product:show $product->getId()'>
 				<h5 class='card-title'>
 					{$name}
 				</h5>
@@ -66,7 +66,7 @@
 				{include parameters.latte product => $product}
 			</p>
 			<a href='#' class='btn btn-primary'>
-				{_core.product.rent} ({$product['price']} {_core.product.priceUnit})
+				{_core.product.rent} ({$product->getPrice()} {_core.product.priceUnit})
 			</a>
 		</div>
 	</div>

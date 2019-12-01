@@ -1,4 +1,6 @@
-{*
+<?php
+
+/*
  * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -13,10 +15,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *}
+ */
 
-<strong>{_core.product.usageType}:</strong> {$product->getUsage()}<br>
-<strong>{_core.product.wheelSize}:</strong> {$product->getWheelSize()}<br>
-<strong>{_core.product.frameSize}:</strong> {$product->getFrameSize()}<br>
-<strong>{_core.product.travel}:</strong> {$product->getForkTravel()}/{$product->getShockTravel()} mm<br>
-<strong>{_core.product.speeds}:</strong> {$product->getSpeeds()}<br>
+declare(strict_types = 1);
+
+namespace App\Models\Database\Repositories;
+
+use Doctrine\ORM\EntityRepository;
+
+/**
+ * Bike usage repository
+ */
+class BikeUsageRepository extends EntityRepository {
+
+}
