@@ -25,6 +25,17 @@ gallery:
 
 manufacturer:
 	title: Správa výrobců
+	addTitle: Přidání výrobce
+	editTitle: Úprava výrobce
+	id: ID
+	name: Jméno výrobce
+	add: Přidat
+	save: Uložit
+	messages:
+		confirmDelete: Opravdu chcete smazat výrobce %s?
+		successDelete: Výrobce %name% vyl úspěšně odstraněn.
+		successEdit: Výrobce %name% byl úspěšně uložen.
+		failureDuplicate: Výrobce %name% již existuje.
 
 reservation:
 	title: Správa rezervací

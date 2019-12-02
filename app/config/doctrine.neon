@@ -15,6 +15,8 @@ dbal:
 		user: %database.user%
 		password: %database.password%
 		dbname: %database.dbname%
+	debug:
+		panel: %debugMode%
 
 orm:
 	entityManagerDecoratorClass: App\Models\Database\EntityManager

@@ -15,7 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{_admin.manufacturer.title}{/block}
+{block title}{_admin.manufacturer.editTitle}{/block}
 
 {block content}
-{control manufacturerGrid}
+<div class='card'>
+	<div class='card-body'>
+		{control manufacturerForm}
+	</div>
+</div>

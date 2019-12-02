@@ -21,12 +21,29 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenters;
 
+use App\AdminModule\DataGrids\ManufacturerDataGrid;
+use App\AdminModule\Forms\ManufacturerFormFactory;
 use App\Models\Database\EntityManager;
+use Nette\Application\UI\Form;
+use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\DataGrid\Exception\DataGridException;
 
 /**
  * Manufacturer presenter
  */
 final class ManufacturerPresenter extends BasePresenter {
+
+	/**
+	 * @var ManufacturerDataGrid Manufacturer data grid factory
+	 * @inject
+	 */
+	public $dataGrid;
+
+	/**
+	 * @var ManufacturerFormFactory Manufacturer form factory
+	 * @inject
+	 */
+	public $formFactory;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -39,6 +56,28 @@ final class ManufacturerPresenter extends BasePresenter {
 	 */
 	public function __construct(EntityManager $manager) {
 		$this->manager = $manager;
+	}
+
+	public function renderEdit(int $id) {
+		$this->template->id = $id;
+	}
+
+	/**
+	 * Creates a new manufacturer data grid
+	 * @param string $name Component name
+	 * @return DataGrid Manufacturer data grid
+	 * @throws DataGridException
+	 */
+	protected function createComponentManufacturerGrid(string $name): DataGrid {
+		return $this->dataGrid->create($this, $name);
+	}
+
+	/**
+	 * Creates a new manufacturer form
+	 * @return Form Manufacturer form
+	 */
+	protected function createComponentManufacturerForm(): Form {
+		return $this->formFactory->create($this);
 	}
 
 }
