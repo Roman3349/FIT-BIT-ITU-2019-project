@@ -7,6 +7,15 @@ actions:
 
 bike:
 	title: Správa kol
+	id: ID
+	manufacturer: Výrobce
+	name: Jméno
+	wheelSize: Velikost kol
+	frameSize: Velikost rámu
+	price: Cena
+	messages:
+		confirmDelete: Opravdu chcete smazat kolo %s?
+		successDelete: Kolo %fullName% bylo úspěšně odstraněno.
 
 dashboard:
     title: Přehled
