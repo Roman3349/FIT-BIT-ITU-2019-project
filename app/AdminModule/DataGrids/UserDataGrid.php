@@ -74,12 +74,19 @@ final class UserDataGrid {
 	public function create(UserPresenter $presenter, string $name): DataGrid {
 		$this->presenter = $presenter;
 		$grid = $this->dataGridFactory->create($presenter, $name);
-		$grid->setDataSource($this->manager->getUserRepository()->findAll());
+		$grid->setDataSource($this->manager->getUserRepository()->createQueryBuilder('u'));
 		$grid->addColumnNumber('id', 'admin.user.id')
-			->setAlign('left');
-		$grid->addColumnText('first_name', 'admin.user.firstName');
-		$grid->addColumnText('last_name', 'admin.user.lastName');
-		$grid->addColumnText('email', 'admin.user.email');
+			->setAlign('left')
+			->setSortable();
+		$grid->addColumnText('first_name', 'admin.user.firstName')
+			->setSortable()
+			->setFilterText();
+		$grid->addColumnText('last_name', 'admin.user.lastName')
+			->setSortable()
+			->setFilterText();
+		$grid->addColumnText('email', 'admin.user.email')
+			->setSortable()
+			->setFilterText();
 		$grid->addColumnStatus('role', 'admin.user.role')
 			->addOption('admin', 'admin.user.roles.admin')
 			->endOption()
@@ -87,7 +94,9 @@ final class UserDataGrid {
 			->endOption()
 			->addOption('customer', 'admin.user.roles.customer')
 			->endOption()
+			->setSortable()
 			->onChange[] = [$this, 'changeRole'];
+		$grid->addFilterMultiSelect('role', 'admin.user.role', $this->getRoles());
 		$grid->addColumnStatus('state', 'admin.user.state')
 			->addOption(User::STATE_ACTIVATED, 'admin.user.states.activated')
 			->setClass('btn-success')
@@ -98,7 +107,9 @@ final class UserDataGrid {
 			->addOption(User::STATE_FRESH, 'admin.user.states.fresh')
 			->setClass('btn-primary')
 			->endOption()
+			->setSortable()
 			->onChange[] = [$this, 'changeState'];
+		$grid->addFilterMultiSelect('state', 'admin.user.state', $this->getStates());
 		$grid->addAction('edit', 'admin.actions.edit')
 			->setIcon('user-edit')
 			->setClass('btn btn-xs btn-info');
@@ -109,6 +120,37 @@ final class UserDataGrid {
 		$grid->addToolbarButton('add', 'admin.actions.add')
 			->setClass('btn btn-xs btn-success');
 		return $grid;
+	}
+
+	/**
+	 * Returns all available roles
+	 * @return string[] Roles
+	 */
+	private function getRoles(): array {
+		$roles = [
+			'admin',
+			'employee',
+			'customer',
+		];
+		return array_map(function (string $role): string {
+			$prefix = 'admin.user.roles.';
+			return $this->presenter->translator->translate($prefix . $role);
+		}, $roles);
+	}
+
+	/**
+	 * Returns all available states
+	 * @return string[] States
+	 */
+	private function getStates(): array {
+		$states = [
+			User::STATE_ACTIVATED => 'admin.user.states.activated',
+			User::STATE_BLOCKED => 'admin.user.states.blocked',
+			User::STATE_FRESH => 'admin.user.states.fresh'
+		];
+		return array_map(function (string $state): string {
+			return $this->presenter->translator->translate($state);
+		}, $states);
 	}
 
 	/**
