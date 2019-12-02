@@ -75,12 +75,11 @@ final class BikeDataGrid {
 		$grid->addColumnNumber('id', 'admin.bike.id')
 			->setAlign('left')
 			->setSortable();
-		$grid->addColumnText('manufacturerName', 'admin.bike.manufacturer')
-			->setSortable();
+		$grid->addColumnText('manufacturerName', 'admin.bike.manufacturer');
 		$grid->addColumnText('name', 'admin.bike.name')
 			->setSortable()
 			->setFilterText();
-		$grid->addColumnText('wheelSize', 'admin.bike.wheelSize')
+		$grid->addColumnText('wheelSize',  'admin.bike.wheelSize')
 			->setSortable()
 			->setFilterText();
 		$grid->addColumnText('frameSize', 'admin.bike.frameSize')

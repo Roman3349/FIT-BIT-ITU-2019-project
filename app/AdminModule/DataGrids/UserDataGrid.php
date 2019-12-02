@@ -78,10 +78,10 @@ final class UserDataGrid {
 		$grid->addColumnNumber('id', 'admin.user.id')
 			->setAlign('left')
 			->setSortable();
-		$grid->addColumnText('first_name', 'admin.user.firstName')
+		$grid->addColumnText('first_name', 'admin.user.firstName', 'firstName')
 			->setSortable()
 			->setFilterText();
-		$grid->addColumnText('last_name', 'admin.user.lastName')
+		$grid->addColumnText('last_name', 'admin.user.lastName', 'lastName')
 			->setSortable()
 			->setFilterText();
 		$grid->addColumnText('email', 'admin.user.email')
