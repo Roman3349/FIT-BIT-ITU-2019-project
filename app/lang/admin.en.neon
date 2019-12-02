@@ -20,6 +20,15 @@ bike:
 dashboard:
     title: Dashboard
 
+gallery:
+	title: Gellery manager
+
+manufacturer:
+	title: Manufacturer manager
+
+reservation:
+	title: Reservation mananger
+
 user:
 	title: User manager
 	id: User ID

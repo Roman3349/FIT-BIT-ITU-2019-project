@@ -18,7 +18,16 @@ bike:
 		successDelete: Kolo %fullName% bylo úspěšně odstraněno.
 
 dashboard:
-    title: Přehled
+	title: Přehled
+
+gallery:
+	title: Správa galerií
+
+manufacturer:
+	title: Správa výrobců
+
+reservation:
+	title: Správa rezervací
 
 user:
 	title: Správa uživatelů
@@ -28,14 +37,14 @@ user:
 	email: E-mail
 	role: Role
 	roles:
-	    admin: Administrátor
-	    employee: Zaměstanec
-	    customer: Zákazník
+		admin: Administrátor
+		employee: Zaměstanec
+		customer: Zákazník
 	state: Stav
 	states:
-	    activated: Aktivní
-	    blocked: Zablokován
-	    fresh: Nový
+		activated: Aktivní
+		blocked: Zablokován
+		fresh: Nový
 	messages:
 		confirmDelete: Opravdu chcete smazat uživatele %s?
 		successDelete: Uživatel %email% byl úspěšně odstraněn.
