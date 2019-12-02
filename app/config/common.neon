@@ -6,7 +6,7 @@ parameters:
 		password: Z8GGtgyK3CKsrJyh8sCt
 
 application:
-	errorPresenter: Error
+	errorPresenter: Core:Error
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
