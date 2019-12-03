@@ -62,7 +62,10 @@
           <div class='row'>
           <h5 class='w-50 p-2 '><b class='text-primary text-center'>{$product->getPrice()} {_core.product.priceUnit}</b></h5>
           <div class='text-center w-50'>
-            <a href='#' class='btn btn-primary btn-lg btn-block'>{_core.product.rent}</a>
+            <form action="" method="post">
+                <input type="hidden" id="productID" value='{$product->getId()}'>
+                <button type="submit" class='btn btn-primary btn-lg btn-block'>{_core.product.rent}</button>
+            </form>
           </div>
         </div>
 	    </div>

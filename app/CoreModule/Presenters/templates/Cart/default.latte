@@ -19,10 +19,38 @@
 
 {block content}
 
-<div class="row">
+<div class="container">
 	<header class='py-5 text-center'>
 		<h1>{include title}</h1>
 	</header>
 	<div class="p-5">
+	    <form>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Název produktu</td>
+                        <th scope="col">Datum vypůjčení</th>
+                        <th scope="col">Cena</th>
+                        <th scope="col">Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src='https://singlekras.rezervator.cz/files/items/images/img_7530d4192b569ab8664a114ce4049265.jpg' hspace="5" style="width: 20%; height: auto;" class="img-responsive img-thumbnail" alt='Kolo XYZ'>Kolo XYZ</td>
+                        <td>11.12.2019 - 12.12.2019</td>
+                        <td>1200 Kč</td>
+                        <td>Upravit Zrušit</td>
+                    </tr>
+                    <tr>
+                        <td><img src='https://singlekras.rezervator.cz/files/items/images/img_7530d4192b569ab8664a114ce4049265.jpg' hspace="5" style="width: 20%; height: auto;" class="img-responsive img-thumbnail" alt='Kolo XYZ'>Kolo XYZ2</td>
+                        <td>11.12.2019 - 12.12.2019</td>
+                        <td>1200 Kč</td>
+                        <td>Upravit Zrušit</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- TODO: Přihlášení/Registrace, redirect? -->
+            <button class="btn btn-primary" type="submit">Objednat</button>
+        </form>
 	</div>
 </div>
