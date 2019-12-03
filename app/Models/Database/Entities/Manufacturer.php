@@ -60,4 +60,12 @@ class Manufacturer {
 		return $this->name;
 	}
 
+	/**
+	 * Sets the manufacturer name
+	 * @param string $name Manufacturer name
+	 */
+	public function setName(string $name): void {
+		$this->name = $name;
+	}
+
 }

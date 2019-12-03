@@ -1,4 +1,3 @@
 services:
     - App\CoreModule\Models\Authenticator
-    - App\CoreModule\Models\BikeManager
     - App\CoreModule\Models\CompanyManager

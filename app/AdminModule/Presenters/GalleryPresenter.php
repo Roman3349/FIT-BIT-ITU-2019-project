@@ -19,22 +19,14 @@
 
 declare(strict_types = 1);
 
-namespace App\CoreModule\Presenters;
+namespace App\AdminModule\Presenters;
 
-use App\CoreModule\Forms\ProductFilterFormFactory;
 use App\Models\Database\EntityManager;
-use Nette\Application\UI\Form;
 
 /**
- * Product presenter
+ * Gallery presenter
  */
-final class ProductPresenter extends BasePresenter {
-
-	/**
-	 * @var ProductFilterFormFactory Product filter form factory
-	 * @inject
-	 */
-	public $filterFactory;
+final class GalleryPresenter extends BasePresenter {
 
 	/**
 	 * @var EntityManager Entity manager
@@ -49,19 +41,4 @@ final class ProductPresenter extends BasePresenter {
 		$this->manager = $manager;
 	}
 
-	public function renderDefault(): void {
-		$this->template->products = $this->manager->getBikeRepository()->findAll();
-	}
-
-	public function renderShow(int $id): void {
-		$this->template->product = $this->manager->getBikeRepository()->find($id);
-	}
-
-	/**
-	 * Creates the filter form
-	 * @return Form Filter form
-	 */
-	protected function createComponentFilterForm(): Form {
-		return $this->filterFactory->create($this);
-	}
 }

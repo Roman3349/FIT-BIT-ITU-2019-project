@@ -1,2 +1,3 @@
 includes:
 	- datagrid.neon
+	- forms.neon

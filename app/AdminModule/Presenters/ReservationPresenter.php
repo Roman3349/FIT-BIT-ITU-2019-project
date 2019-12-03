@@ -19,52 +19,26 @@
 
 declare(strict_types = 1);
 
-namespace App\CoreModule\Models;
+namespace App\AdminModule\Presenters;
 
-use Nette\Database\Context;
+use App\Models\Database\EntityManager;
 
 /**
- * Bike manager
+ * Reservation presenter
  */
-final class BikeManager {
+final class ReservationPresenter extends BasePresenter {
 
 	/**
-	 * Database name table
+	 * @var EntityManager Entity manager
 	 */
-	private const TABLE = 'bikes';
-
-	/**
-	 * @var Context Database context
-	 */
-	private $database;
+	private $manager;
 
 	/**
 	 * Constructor
-	 * @param Context $database Database context
+	 * @param EntityManager $manager Entity manager
 	 */
-	public function __construct(Context $database) {
-		$this->database = $database;
-	}
-
-	/**
-	 * Lists all bikes
-	 * @return mixed[] Bikes
-	 */
-	public function list(): array {
-		return $this->database->table(self::TABLE)
-			->fetchAll();
-	}
-
-	/**
-	 * Returns a bike
-	 * @param int $id Bike ID
-	 * @return mixed[] Bike
-	 */
-	public function get(int $id): array {
-		return $this->database->table(self::TABLE)
-			->where('id', $id)
-			->fetch()
-			->toArray();
+	public function __construct(EntityManager $manager) {
+		$this->manager = $manager;
 	}
 
 }

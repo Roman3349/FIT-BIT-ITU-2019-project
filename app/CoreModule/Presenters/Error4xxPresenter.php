@@ -28,7 +28,7 @@ use Nette\Application\Request;
 /**
  * Error 4xx presenter
  */
-final class Error4xxPresenter extends Nette\Application\UI\Presenter {
+final class Error4xxPresenter extends BasePresenter {
 
 	/**
 	 * Starts up presenter

@@ -26,6 +26,7 @@ use App\Models\Database\Attributes\TId;
 use App\Models\Database\Attributes\TUpdatedAt;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Security\Identity;
+use stdClass;
 
 /**
  * User entity
@@ -101,14 +102,16 @@ class User {
 	 * @param string $lastName Last name
 	 * @param string $email E-mail
 	 * @param string $hash Password hash
+	 * @param string|null $role Role
+	 * @param int|null $state Account state
 	 */
-	public function __construct(string $firstName, string $lastName, string $email, string $hash) {
+	public function __construct(string $firstName, string $lastName, string $email, string $hash, ?string $role = null, ?int $state = null) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->hash = $hash;
-		$this->role = self::ROLE_CUSTOMER;
-		$this->state = self::STATE_FRESH;
+		$this->role = $role ?? self::ROLE_CUSTOMER;
+		$this->state = $state ?? self::STATE_FRESH;
 	}
 
 	/**
@@ -179,6 +182,38 @@ class User {
 	 */
 	public function getState(): int {
 		return $this->state;
+	}
+
+	/**
+	 * Sets the email
+	 * @param string $email E-mail
+	 */
+	public function setEmail(string $email) {
+		$this->email = $email;
+	}
+
+	/**
+	 * Sets the first name
+	 * @param string $firstName First name
+	 */
+	public function setFirstName(string $firstName): void {
+		$this->firstName = $firstName;
+	}
+
+	/**
+	 * Sets the last name
+	 * @param string $lastName Last name
+	 */
+	public function setLastName(string $lastName): void {
+		$this->lastName = $lastName;
+	}
+
+	/**
+	 * Sets the password hash
+	 * @param string $hash Password hash
+	 */
+	public function setHash(string $hash): void {
+		$this->hash = $hash;
 	}
 
 	/**

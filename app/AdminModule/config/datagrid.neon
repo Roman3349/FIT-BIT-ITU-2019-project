@@ -1,2 +1,4 @@
 services:
+	- App\AdminModule\DataGrids\BikeDataGrid
+	- App\AdminModule\DataGrids\ManufacturerDataGrid
 	- App\AdminModule\DataGrids\UserDataGrid

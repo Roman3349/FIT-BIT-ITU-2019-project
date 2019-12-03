@@ -1,0 +1,4 @@
+services:
+	- App\AdminModule\Forms\BikeFormFactory
+	- App\AdminModule\Forms\ManufacturerFormFactory
+	- App\AdminModule\Forms\UserFormFactory

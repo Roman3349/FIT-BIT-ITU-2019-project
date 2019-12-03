@@ -7,9 +7,27 @@ actions:
 
 bike:
 	title: Bike manager
+	id: ID
+	manufacturer: Manufacturer
+	name: Name
+	wheelSize: Wheel size
+	frameSize: Frame size
+	price: Price
+	messages:
+		confirmDelete: Do you really want to delete bike %s?
+		successDelete: Bike %fullName% has beed deleted.
 
 dashboard:
     title: Dashboard
+
+gallery:
+	title: Gellery manager
+
+manufacturer:
+	title: Manufacturer manager
+
+reservation:
+	title: Reservation mananger
 
 user:
 	title: User manager

@@ -21,30 +21,29 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenters;
 
-use App\AdminModule\DataGrids\UserDataGrid;
-use App\AdminModule\Forms\UserFormFactory;
+use App\AdminModule\DataGrids\ManufacturerDataGrid;
+use App\AdminModule\Forms\ManufacturerFormFactory;
 use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
 use Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
 use Ublaboo\DataGrid\Exception\DataGridException;
 
 /**
- * User manager presenter
+ * Manufacturer presenter
  */
-final class UserPresenter extends BasePresenter {
+final class ManufacturerPresenter extends BasePresenter {
 
 	/**
-	 * @var UserFormFactory User manager form factory
-	 * @inject
-	 */
-	public $formFactory;
-
-	/**
-	 * @var UserDataGrid User data grid factory
+	 * @var ManufacturerDataGrid Manufacturer data grid factory
 	 * @inject
 	 */
 	public $dataGrid;
+
+	/**
+	 * @var ManufacturerFormFactory Manufacturer form factory
+	 * @inject
+	 */
+	public $formFactory;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -60,50 +59,46 @@ final class UserPresenter extends BasePresenter {
 	}
 
 	/**
-	 * Deletes an user
-	 * @param int $id User ID
+	 * Deletes a manufacturer
+	 * @param int $id Manufacturer ID
 	 */
 	public function actionDelete(int $id): void {
-		$user = $this->manager->getUserRepository()->find($id);
-		if ($user === null) {
+		$manufacturer = $this->manager->getManufacturerRepository()->find($id);
+		if ($manufacturer === null) {
 			return;
 		}
-		$this->manager->remove($user);
+		$this->manager->remove($manufacturer);
 		$this->manager->flush();
-		if ($this->user->id === $id) {
-			$this->user->logout(true);
-		}
-		$message = $this->translator->translate('admin.user.messages.successDelete', ['email' => $user->getEmail()]);
+		$message = $this->translator->translate('admin.manufacturer.messages.successDelete', ['name' => $manufacturer->getName()]);
 		$this->flashSuccess($message);
-		$this->redirect('User:default');
+		$this->redirect('Manufacturer:default');
 		$this->setView('default');
 	}
 
 	/**
-	 * Renders user editor
-	 * @param int $id User ID
+	 * Renders the manufacturer edit form
+	 * @param int $id Manufacturer ID
 	 */
-	public function renderEdit(int $id): void {
+	public function renderEdit(int $id) {
 		$this->template->id = $id;
 	}
 
 	/**
-	 * Creates a new user manager form
-	 * @return Form User manager form
+	 * Creates a new manufacturer data grid
+	 * @param string $name Component name
+	 * @return DataGrid Manufacturer data grid
+	 * @throws DataGridException
 	 */
-	protected function createComponentUserForm(): Form {
-		return $this->formFactory->create($this);
+	protected function createComponentManufacturerGrid(string $name): DataGrid {
+		return $this->dataGrid->create($this, $name);
 	}
 
 	/**
-	 * Creates the data grid
-	 * @param string $name Component name
-	 * @return DataGrid Datagrid with users
-	 * @throws DataGridColumnStatusException
-	 * @throws DataGridException
+	 * Creates a new manufacturer form
+	 * @return Form Manufacturer form
 	 */
-	protected function createComponentUserGrid(string $name): DataGrid {
-		return $this->dataGrid->create($this, $name);
+	protected function createComponentManufacturerForm(): Form {
+		return $this->formFactory->create($this);
 	}
 
 }

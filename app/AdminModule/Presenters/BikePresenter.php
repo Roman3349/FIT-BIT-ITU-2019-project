@@ -19,22 +19,32 @@
 
 declare(strict_types = 1);
 
-namespace App\CoreModule\Presenters;
+namespace App\AdminModule\Presenters;
 
-use App\CoreModule\Forms\ProductFilterFormFactory;
+use App\AdminModule\DataGrids\BikeDataGrid;
+use App\AdminModule\Forms\BikeFormFactory;
 use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
+use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
+use Ublaboo\DataGrid\Exception\DataGridException;
 
 /**
- * Product presenter
+ * Bike manager presenter
  */
-final class ProductPresenter extends BasePresenter {
+final class BikePresenter extends BasePresenter {
 
 	/**
-	 * @var ProductFilterFormFactory Product filter form factory
+	 * @var BikeFormFactory Bike manager form factory
 	 * @inject
 	 */
-	public $filterFactory;
+	public $formFactory;
+
+	/**
+	 * @var BikeDataGrid Bike data grid factory
+	 * @inject
+	 */
+	public $dataGrid;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -49,19 +59,30 @@ final class ProductPresenter extends BasePresenter {
 		$this->manager = $manager;
 	}
 
-	public function renderDefault(): void {
-		$this->template->products = $this->manager->getBikeRepository()->findAll();
-	}
-
-	public function renderShow(int $id): void {
-		$this->template->product = $this->manager->getBikeRepository()->find($id);
+	/**
+	 * Renders bike editor page
+	 * @param int $id Bike ID
+	 */
+	public function renderEdit(int $id): void {
 	}
 
 	/**
-	 * Creates the filter form
-	 * @return Form Filter form
+	 * Creates a new bike editor form
+	 * @return Form Bike editor form
 	 */
-	protected function createComponentFilterForm(): Form {
-		return $this->filterFactory->create($this);
+	protected function createComponentBikeForm(): Form {
+		return $this->formFactory->create($this);
 	}
+
+	/**
+	 * Creates a new bike data grid
+	 * @param string $name Component name
+	 * @return DataGrid Bike data grid
+	 * @throws DataGridColumnStatusException
+	 * @throws DataGridException
+	 */
+	protected function createComponentBikeGrid(string $name): DataGrid {
+		return $this->dataGrid->create($this, $name);
+	}
+
 }
