@@ -58,6 +58,27 @@ final class ManufacturerPresenter extends BasePresenter {
 		$this->manager = $manager;
 	}
 
+	/**
+	 * Deletes a manufacturer
+	 * @param int $id Manufacturer ID
+	 */
+	public function actionDelete(int $id): void {
+		$manufacturer = $this->manager->getManufacturerRepository()->find($id);
+		if ($manufacturer === null) {
+			return;
+		}
+		$this->manager->remove($manufacturer);
+		$this->manager->flush();
+		$message = $this->translator->translate('admin.manufacturer.messages.successDelete', ['name' => $manufacturer->getName()]);
+		$this->flashSuccess($message);
+		$this->redirect('Manufacturer:default');
+		$this->setView('default');
+	}
+
+	/**
+	 * Renders the manufacturer edit form
+	 * @param int $id Manufacturer ID
+	 */
 	public function renderEdit(int $id) {
 		$this->template->id = $id;
 	}
