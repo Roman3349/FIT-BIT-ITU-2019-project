@@ -22,7 +22,9 @@ declare(strict_types = 1);
 namespace App\AdminModule\Presenters;
 
 use App\AdminModule\DataGrids\BikeDataGrid;
+use App\AdminModule\Forms\BikeFormFactory;
 use App\Models\Database\EntityManager;
+use Nette\Application\UI\Form;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
 use Ublaboo\DataGrid\Exception\DataGridException;
@@ -33,7 +35,13 @@ use Ublaboo\DataGrid\Exception\DataGridException;
 final class BikePresenter extends BasePresenter {
 
 	/**
-	 * @var BikeDataGrid User data grid factory
+	 * @var BikeFormFactory Bike manager form factory
+	 * @inject
+	 */
+	public $formFactory;
+
+	/**
+	 * @var BikeDataGrid Bike data grid factory
 	 * @inject
 	 */
 	public $dataGrid;
@@ -52,9 +60,24 @@ final class BikePresenter extends BasePresenter {
 	}
 
 	/**
-	 * Creates the data grid
+	 * Renders bike editor page
+	 * @param int $id Bike ID
+	 */
+	public function renderEdit(int $id): void {
+	}
+
+	/**
+	 * Creates a new bike editor form
+	 * @return Form Bike editor form
+	 */
+	protected function createComponentBikeForm(): Form {
+		return $this->formFactory->create($this);
+	}
+
+	/**
+	 * Creates a new bike data grid
 	 * @param string $name Component name
-	 * @return DataGrid Datagrid with users
+	 * @return DataGrid Bike data grid
 	 * @throws DataGridColumnStatusException
 	 * @throws DataGridException
 	 */

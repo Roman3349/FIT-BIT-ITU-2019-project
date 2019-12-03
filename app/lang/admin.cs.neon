@@ -7,15 +7,38 @@ actions:
 
 bike:
 	title: Správa kol
+	addTitle: Přidání kola
+	editTitle: Úprava kola
 	id: ID
 	manufacturer: Výrobce
 	name: Jméno
+	usage: Použití
+	picture: Obrázek
+	frameMaterial: Materiál rámu
+	frameMaterials:
+		Al: Hliník
+		Carbon: Karbon
 	wheelSize: Velikost kol
 	frameSize: Velikost rámu
+	forkTravel: Zdvih vidlice
+	shockTravel: Zdvih tlumiče
+	speeds: Počet rychlostí
 	price: Cena
+	add: Přidat
+	save: Uložit
 	messages:
+		manufacturer: Prosím vyberte výrobce kola.
+		name: Prosím zadejte jméno kola.
+		usage: Prosím vyberte použití kola.
+		picture: Prosím vyberte obrázek kola za galerie.
+		frameMaterial: Prosím vyberte materiál rámu.
+		frameSize: Prosím zadajte velikost rámu.
+		wheelSize: Prosím zadejte velikost kol.
+		speeds: Prosím zdadejte počet rychlostí.
+		price: Prosím zadejte cenu.
 		confirmDelete: Opravdu chcete smazat kolo %s?
 		successDelete: Kolo %fullName% bylo úspěšně odstraněno.
+		successEdit: Kolo %name% bylo úspěšně uloženo.
 
 dashboard:
 	title: Přehled
@@ -33,7 +56,7 @@ manufacturer:
 	save: Uložit
 	messages:
 		confirmDelete: Opravdu chcete smazat výrobce %s?
-		successDelete: Výrobce %name% vyl úspěšně odstraněn.
+		successDelete: Výrobce %name% byl úspěšně odstraněn.
 		successEdit: Výrobce %name% byl úspěšně uložen.
 		failureDuplicate: Výrobce %name% již existuje.
 
@@ -42,22 +65,35 @@ reservation:
 
 user:
 	title: Správa uživatelů
+	addTitle: Přidání uživatele
+	editTitle: Úprava uživatele
 	id: ID uživatele
 	firstName: Křestní jméno
 	lastName: Příjmení
 	email: E-mail
+	password: Heslo
 	role: Role
 	roles:
 		admin: Administrátor
-		employee: Zaměstanec
+		employee: Zaměstnanec
 		customer: Zákazník
 	state: Stav
 	states:
 		activated: Aktivní
 		blocked: Zablokován
 		fresh: Nový
+	add: Přidat
+	save: Uložit
 	messages:
+		firstName: Prosím zadejte křestní jméno uživatele.
+		lastName: Prosím zadejte příjmení uživatele.
+		email: Prosím zadejte email uživatele.
+		password: Prosím zadejte heslo uživatele.
+		role: Prosím vyberte roli uživatele.
+		state: Prosím vyberte stav uživatelského účtu.
 		confirmDelete: Opravdu chcete smazat uživatele %s?
 		successDelete: Uživatel %email% byl úspěšně odstraněn.
+		successEdit: Uživatel %email% byl úspěšně uložen.
 		successChangeRole: Role byla úspěšně změněna.
 		successChangeState: Stav účtu byl úspěšně změněn.
+		failureDuplicate: Uživatel %email% již existuje.

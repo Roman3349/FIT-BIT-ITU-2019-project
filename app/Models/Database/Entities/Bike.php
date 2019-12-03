@@ -25,6 +25,7 @@ use App\Models\Database\Attributes\TCreatedAt;
 use App\Models\Database\Attributes\TId;
 use App\Models\Database\Attributes\TUpdatedAt;
 use Doctrine\ORM\Mapping as ORM;
+use stdClass;
 
 /**
  * Bike entity
@@ -54,7 +55,7 @@ class Bike {
 	/**
 	 * @var BikeUsage Bike usage
 	 * @ORM\ManyToOne(targetEntity="BikeUsage")
-	 * @ORM\JoinColumn(name="usage", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="usage_id", referencedColumnName="id")
 	 */
 	private $usage;
 
@@ -135,6 +136,14 @@ class Bike {
 	}
 
 	/**
+	 * Returns the bike manufacturer
+	 * @return Manufacturer Bike manufacturer
+	 */
+	public function getManufacturer(): Manufacturer {
+		return $this->manufacturer;
+	}
+
+	/**
 	 * Returns the bike manufacturer name
 	 * @return string Bike manufacturer name
 	 */
@@ -160,9 +169,17 @@ class Bike {
 
 	/**
 	 * Returns the bike usage
-	 * @return string BIke usage
+	 * @return BikeUsage Bike usage
 	 */
-	public function getUsage(): string {
+	public function getUsage(): BikeUsage {
+		return $this->usage;
+	}
+
+	/**
+	 * Returns the bike usage
+	 * @return string Bike usage
+	 */
+	public function getUsageName(): string {
 		return $this->usage->getName();
 	}
 
@@ -228,6 +245,94 @@ class Bike {
 	 */
 	public function getPrice(): int {
 		return $this->price;
+	}
+
+	/**
+	 * Sets the bike manufacturer
+	 * @param Manufacturer $manufacturer Bike manufacturer
+	 */
+	public function setManufacturer(Manufacturer $manufacturer): void {
+		$this->manufacturer = $manufacturer;
+	}
+
+	/**
+	 * Sets the bike name
+	 * @param string $name Bike name
+	 */
+	public function setName(string $name): void {
+		$this->name = $name;
+	}
+
+	/**
+	 * Sets the bike usage
+	 * @param BikeUsage $usage Bike usage
+	 */
+	public function setUsage(BikeUsage $usage): void {
+		$this->usage = $usage;
+	}
+
+	/**
+	 * Sets the bike picture
+	 * @param string $picture Bike picture
+	 */
+	public function setPicture(string $picture): void {
+		$this->picture = $picture;
+	}
+
+	/**
+	 * Sets the bike frame material
+	 * @param string $material Bike frame material
+	 */
+	public function setFrameMaterial(string $material): void {
+		$this->frameMaterial = $material;
+	}
+
+	/**
+	 * Sets the bike frame size
+	 * @param string $size Bike frame size
+	 */
+	public function setFrameSize(string $size): void {
+		$this->frameSize = $size;
+	}
+
+	/**
+	 * Sets the bike wheel size
+	 * @param string $size Bike wheel size
+	 */
+	public function setWheelSize(string $size): void {
+		$this->wheelSize = $size;
+	}
+
+	/**
+	 * Sets the bike fork travel
+	 * @param int|null $travel Bike fork travel
+	 */
+	public function setForkTravel(?int $travel): void {
+		$this->shockTravel = $travel;
+	}
+
+	/**
+	 * Sets the bike rear shock travel
+	 * @param int|null $travel Bike rear shock travel
+	 */
+	public function setShockTravel(?int $travel): void {
+
+	}
+
+	/**
+	 * Sets the bike speeds
+	 * @param string $speeds Bike speeds
+	 */
+	public function setSpeeds(string $speeds): void {
+		$this->speeds = $speeds;
+	}
+
+	/**
+	 * Sets the bike rental price
+	 * @param int $price Bike rental price
+	 */
+	public function setPrice(int $price): void {
+		$this->price = $price;
 	}
 
 }

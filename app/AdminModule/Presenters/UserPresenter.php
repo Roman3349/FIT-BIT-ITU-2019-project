@@ -22,7 +22,9 @@ declare(strict_types = 1);
 namespace App\AdminModule\Presenters;
 
 use App\AdminModule\DataGrids\UserDataGrid;
+use App\AdminModule\Forms\UserFormFactory;
 use App\Models\Database\EntityManager;
+use Nette\Application\UI\Form;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
 use Ublaboo\DataGrid\Exception\DataGridException;
@@ -31,6 +33,12 @@ use Ublaboo\DataGrid\Exception\DataGridException;
  * User manager presenter
  */
 final class UserPresenter extends BasePresenter {
+
+	/**
+	 * @var UserFormFactory User manager form factory
+	 * @inject
+	 */
+	public $formFactory;
 
 	/**
 	 * @var UserDataGrid User data grid factory
@@ -65,10 +73,26 @@ final class UserPresenter extends BasePresenter {
 		if ($this->user->id === $id) {
 			$this->user->logout(true);
 		}
-		$message = $this->translator->translate('admin.user.messages.successDelete', ['email' => $user['email']]);
+		$message = $this->translator->translate('admin.user.messages.successDelete', ['email' => $user->getEmail()]);
 		$this->flashSuccess($message);
 		$this->redirect('User:default');
 		$this->setView('default');
+	}
+
+	/**
+	 * Renders user editor
+	 * @param int $id User ID
+	 */
+	public function renderEdit(int $id): void {
+		$this->template->id = $id;
+	}
+
+	/**
+	 * Creates a new user manager form
+	 * @return Form User manager form
+	 */
+	protected function createComponentUserForm(): Form {
+		return $this->formFactory->create($this);
 	}
 
 	/**

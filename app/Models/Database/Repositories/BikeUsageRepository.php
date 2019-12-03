@@ -21,11 +21,21 @@ declare(strict_types = 1);
 
 namespace App\Models\Database\Repositories;
 
+use App\Models\Database\Entities\BikeUsage;
 use Doctrine\ORM\EntityRepository;
 
 /**
  * Bike usage repository
  */
 class BikeUsageRepository extends EntityRepository {
+
+	/**
+	 * Finds a bike usage by name
+	 * @param string $name Bike usage name
+	 * @return BikeUsage|null Bike usage
+	 */
+	public function findOneByName(string $name): ?BikeUsage {
+		return $this->findOneBy(['name' => $name]);
+	}
 
 }

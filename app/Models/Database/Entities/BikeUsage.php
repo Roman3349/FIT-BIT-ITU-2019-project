@@ -39,25 +39,33 @@ class BikeUsage {
 	use TUpdatedAt;
 
 	/**
-	 * @var string Manufacturer name
+	 * @var string Bike usage name
 	 * @ORM\Column(type="string", length=255, nullable=FALSE, unique=TRUE)
 	 */
 	private $name;
 
 	/**
 	 * Constructor
-	 * @param string $name Manufacturer name
+	 * @param string $name Bike usage name
 	 */
 	public function __construct(string $name) {
 		$this->name = $name;
 	}
 
 	/**
-	 * Returns the manufacturer name
-	 * @return string Manufacturer name
+	 * Returns the bike usage name
+	 * @return string Bike usage name
 	 */
 	public function getName(): string {
 		return $this->name;
+	}
+
+	/**
+	 * Sets the bike usage name
+	 * @param string $name Bike usage name
+	 */
+	public function setName(string $name): void {
+		$this->name = $name;
 	}
 
 }

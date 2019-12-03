@@ -25,8 +25,6 @@ use App\AdminModule\Presenters\ManufacturerPresenter;
 use App\CoreModule\Forms\FormFactory;
 use App\Models\Database\Entities\Manufacturer;
 use App\Models\Database\EntityManager;
-use App\Models\Database\Repositories\ManufacturerRepository;
-use Contributte\Translation\Wrappers\Message;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
 
@@ -53,11 +51,6 @@ final class ManufacturerFormFactory {
 	private $presenter;
 
 	/**
-	 * @var ManufacturerRepository Manufacturer repository
-	 */
-	private $repository;
-
-	/**
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
 	 * @param EntityManager $manager Entity manager
@@ -65,7 +58,6 @@ final class ManufacturerFormFactory {
 	public function __construct(FormFactory $factory, EntityManager $manager) {
 		$this->factory = $factory;
 		$this->manager = $manager;
-		$this->repository = $manager->getManufacturerRepository();
 	}
 
 	/**
@@ -102,18 +94,22 @@ final class ManufacturerFormFactory {
 	public function save(Form $form): void {
 		$values = $form->getValues();
 		$id = $this->presenter->getParameter('id');
-		$manufacturer = $this->repository->find(intval($id));
+		$repository = $this->manager->getManufacturerRepository();
+		$manufacturer = $repository->find(intval($id));
+		$translator = $this->presenter->translator;
 		if ($manufacturer == null) {
-			if ($this->repository->findOneBy(['name' => $values->name]) !== null) {
-				$message = new Message('messages.failureDuplicate', ['name' => $values->name]);
+			if ($repository->findOneBy(['name' => $values->name]) !== null) {
+				$message = $translator->translate('messages.failureDuplicate', ['name' => $values->name]);
 				$form['name']->addError($message);
 				return;
 			}
 			$manufacturer = new Manufacturer($values->name);
+		} else {
+			$manufacturer->setName($values->name);
 		}
 		$this->manager->persist($manufacturer);
 		$this->manager->flush();
-		$message = $this->presenter->translator->translate('admin.manufacturer.messages.successEdit', ['name' => $values->name]);
+		$message = $translator->translate('admin.manufacturer.messages.successEdit', ['name' => $values->name]);
 		$this->presenter->flashSuccess($message);
 		$this->presenter->redirect('Manufacturer:default');
 	}
