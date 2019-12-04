@@ -15,7 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{_admin.reservation.title}{/block}
+{block title}{_admin.reservation.addTitle}{/block}
 
 {block content}
-{control reservationGrid}
+<div class='card'>
+	<div class='card-body'>
+		{control reservationForm}
+	</div>
+</div>

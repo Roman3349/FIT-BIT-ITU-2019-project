@@ -24,10 +24,12 @@ namespace App\Models\Database;
 use App\Models\Database\Entities\Bike;
 use App\Models\Database\Entities\BikeUsage;
 use App\Models\Database\Entities\Manufacturer;
+use App\Models\Database\Entities\Reservation;
 use App\Models\Database\Entities\User;
 use App\Models\Database\Repositories\BikeRepository;
 use App\Models\Database\Repositories\BikeUsageRepository;
 use App\Models\Database\Repositories\ManufacturerRepository;
+use App\Models\Database\Repositories\ReservationRepository;
 use App\Models\Database\Repositories\UserRepository;
 
 /**
@@ -57,6 +59,14 @@ trait TRepositories {
 	 */
 	public function getManufacturerRepository(): ManufacturerRepository {
 		return $this->getRepository(Manufacturer::class);
+	}
+
+	/**
+	 * Returns the reservation repository
+	 * @return ReservationRepository Reservation repository
+	 */
+	public function getReservationRepository(): ReservationRepository {
+		return $this->getRepository(Reservation::class);
 	}
 
 	/**

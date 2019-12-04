@@ -62,6 +62,35 @@ manufacturer:
 
 reservation:
 	title: Správa rezervací
+	addTitle: Přidání rezervace
+	editTitle: Editace rezervace
+	id: ID
+	customer: Zákazník
+	fromDate: Od
+	toDate: Do
+	bikes:
+		title: Rezervovaná kola
+		bike: Kolo
+		add: Přidat kolo
+		remove: Odebrat kolo
+	price: Cena
+	state: Stav
+	states:
+		reservation: Rezervace
+		cancelled: Zrušená
+		ongoing: Probíhající
+		returned: Vrácená
+		delayed: Zpožděná
+	messages:
+		customer: Prosím vyberte zákazníka.
+		fromDate: Prosím zadejte počáteční datum rezervace.
+		toDate: Prosím zadejte koncové datum rezervace.
+		confirmDelete: Opravdu chcete smazat rezervaci %s?
+		successDelete: Rezervace %id% byla úspěšně odstraněna.
+		successEdit: Rezervace %id% byla úspěšně uložena.
+		successChangeState: Stav rezervace byl úspěšně změměn.
+	add: Přidat rezervaci
+	edit: Uložit rezervaci
 
 user:
 	title: Správa uživatelů

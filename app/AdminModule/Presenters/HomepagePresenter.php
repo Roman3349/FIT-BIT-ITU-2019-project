@@ -45,6 +45,7 @@ final class HomepagePresenter extends BasePresenter {
 	 * Renders dashboard
 	 */
 	public function renderDefault(): void {
+		$this->template->reservationCount = $this->entityManager->getReservationRepository()->count([]);
 		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
 	}
 }
