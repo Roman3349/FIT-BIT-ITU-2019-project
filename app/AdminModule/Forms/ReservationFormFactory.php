@@ -231,6 +231,12 @@ final class ReservationFormFactory {
 			$reservation->setToDate($toDate);
 			$reservation->setBikes($bikes);
 			$reservation->setState($values->state);
+			$price = 0;
+			foreach ($bikes as $bike) {
+				$price += $bike->getPrice();
+			}
+			$price *= $fromDate->diff($toDate)->d;
+			$reservation->setPrice($price);
 		}
 		$this->manager->persist($reservation);
 		$this->manager->flush();
