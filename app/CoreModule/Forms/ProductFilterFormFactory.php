@@ -73,9 +73,9 @@ final class ProductFilterFormFactory {
 			->setHtmlType('date');
 		$form->addText('toDate', 'toDate')
 			->setHtmlType('date');
-		$form->addMultiSelect('usageType', 'usageType', $this->listUsages());
+		$form->addCheckboxList('usageType', 'usageType', $this->listUsages());
 		$form->addCheckboxList('wheelSize', 'wheelSize', $this->listWheelSizes());
-		$form->addMultiSelect('frameSize', 'frameSize', $this->listFrameSizes());
+		$form->addCheckboxList('frameSize', 'frameSize', $this->listFrameSizes());
 		$form->addSubmit('filter', 'filter')
 			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4');
 		return $form;
