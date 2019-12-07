@@ -40,6 +40,20 @@ bike:
 		successDelete: Kolo %fullName% bylo úspěšně odstraněno.
 		successEdit: Kolo %name% bylo úspěšně uloženo.
 
+company:
+    title: Správa půjčovny
+    name: Jméno půjčovny
+    address:
+        title: Adresa
+        street: Ulice
+        zip: PSČ
+        city: Město
+    gps: Mapa
+    contacts: Kontakty
+    email: Email
+    telephone: Telefonní číslo
+    save: Uložit
+
 dashboard:
 	title: Přehled
 
