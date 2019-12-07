@@ -21,6 +21,7 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\Forms\CartAddFormFactory;
 use App\CoreModule\Forms\ProductFilterFormFactory;
 use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
@@ -29,6 +30,12 @@ use Nette\Application\UI\Form;
  * Product presenter
  */
 final class ProductPresenter extends BasePresenter {
+
+	/**
+	 * @var CartAddFormFactory Add to cart form factory
+	 * @inject
+	 */
+	public $cartFormFactory;
 
 	/**
 	 * @var ProductFilterFormFactory Product filter form factory
@@ -55,6 +62,14 @@ final class ProductPresenter extends BasePresenter {
 
 	public function renderShow(int $id): void {
 		$this->template->product = $this->manager->getBikeRepository()->find($id);
+	}
+
+	/**
+	 * Creates a new add to cart form
+	 * @return Form Add to cart form
+	 */
+	protected function createComponentCartAddForm(): Form {
+		return $this->cartFormFactory->create($this);
 	}
 
 	/**

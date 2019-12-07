@@ -21,6 +21,7 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\Traits\TPresenterFlashMessage;
 use App\Models\CartManager;
 use App\Models\CompanyManager;
 use Contributte\Translation\LocalesResolvers\Session;
@@ -31,6 +32,8 @@ use Nette\Localization\ITranslator;
  * Core base presenter
  */
 abstract class BasePresenter extends Presenter {
+
+	use TPresenterFlashMessage;
 
 	/**
 	 * @var string Locale

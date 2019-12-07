@@ -60,7 +60,8 @@ final class CartManager {
 		$this->manager = $manager;
 	}
 
-	public function add(Bike $bike): void {
+	public function add(int $id): void {
+		$bike = $this->manager->getBikeRepository()->find($id);;
 		$this->cart->offsetSet(strval($bike->getId()), $bike->getPrice());
 	}
 

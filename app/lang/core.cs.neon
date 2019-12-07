@@ -4,6 +4,11 @@ cart:
 	toDate: Do
 	delete: Odstranit
 	reserve: Rezervovat
+	firstName: Jméno
+	lastName: Příjmení
+	email: E-mail
+	messages:
+	    add: Kolo %name% bylo úspěšně přidáno do košíku.
 
 contact:
 	title: Kontakt
