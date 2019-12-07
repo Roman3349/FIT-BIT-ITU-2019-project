@@ -21,6 +21,7 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenters;
 
+use App\Models\Database\Entities\Reservation;
 use App\Models\Database\EntityManager;
 
 /**
@@ -45,7 +46,22 @@ final class HomepagePresenter extends BasePresenter {
 	 * Renders dashboard
 	 */
 	public function renderDefault(): void {
-		$this->template->reservationCount = $this->entityManager->getReservationRepository()->count([]);
+		$today = (new \DateTime())->setTime(0,0,0,0);
+		$reservationRepository = $this->entityManager->getReservationRepository();
+		$this->template->totalCount = $reservationRepository->count([]);
+		$this->template->delayedCount = $reservationRepository->createQueryBuilder('r')->select('count(r.id)')
+			->where('r.state = :state')->andWhere('r.toDate < :today')
+			->setParameters(['state' => Reservation::STATE_ONGOING, 'today' => $today])
+			->getQuery()->getSingleScalarResult();
+		$this->template->reservationCount = $reservationRepository->count(
+			['state' => Reservation::STATE_RESERVATION]
+		);
+		$this->template->pickupCount = $reservationRepository->count(
+			['fromDate' => $today, 'state' => Reservation::STATE_RESERVATION]
+		);
+		$this->template->returnCount = $reservationRepository->count(
+			['toDate' => $today, 'state' => Reservation::STATE_ONGOING]
+		);
 		$this->template->userCount = $this->entityManager->getUserRepository()->count([]);
 	}
 }

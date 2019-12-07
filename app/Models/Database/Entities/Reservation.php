@@ -127,15 +127,15 @@ class Reservation {
 	 * @param User $createdBy Created by
 	 * @param DateTime $fromDate From date
 	 * @param DateTime $toDate To date
-	 * @param Bike[] $bikes Bikes
+	 * @param Collection $bikes Bikes
 	 * @param int $state State
 	 */
-	public function __construct(User $user, User $createdBy, DateTime $fromDate, DateTime $toDate, array $bikes, int $state) {
+	public function __construct(User $user, User $createdBy, DateTime $fromDate, DateTime $toDate, Collection $bikes, int $state) {
 		$this->customer = $user;
 		$this->createdBy = $createdBy;
 		$this->fromDate = $fromDate;
 		$this->toDate = $toDate;
-		$this->bikes = new ArrayCollection($bikes);
+		$this->bikes = $bikes;
 		$this->state = $state;
 		$this->price = 0;
 		foreach ($bikes as $bike) {
@@ -190,7 +190,7 @@ class Reservation {
 	 */
 	public function getState(): int {
 		if ($this->state == self::STATE_ONGOING &&
-			$this->fromDate->diff(new DateTime(), true)->s <= 0) {
+			$this->toDate->diff(new DateTime(), true)->d > 0) {
 			return self::STATE_DELAYED;
 		}
 		return $this->state;
