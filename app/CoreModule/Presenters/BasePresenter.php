@@ -21,7 +21,9 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Presenters;
 
-use App\CoreModule\Models\CompanyManager;
+use App\CoreModule\Traits\TPresenterFlashMessage;
+use App\Models\CartManager;
+use App\Models\CompanyManager;
 use Contributte\Translation\LocalesResolvers\Session;
 use Nette\Application\UI\Presenter;
 use Nette\Localization\ITranslator;
@@ -31,11 +33,18 @@ use Nette\Localization\ITranslator;
  */
 abstract class BasePresenter extends Presenter {
 
+	use TPresenterFlashMessage;
+
 	/**
 	 * @var string Locale
 	 * @persistent
 	 */
 	public $locale;
+
+	/**
+	 * @var CartManager Cart manager
+	 */
+	protected $cartManager;
 
 	/**
 	 * @var CompanyManager Company manager
@@ -53,6 +62,14 @@ abstract class BasePresenter extends Presenter {
 	 * @inject
 	 */
 	public $translatorSessionResolver;
+
+	/**
+	 * Injects Cart manager
+	 * @param CartManager $cartManager Cart manager
+	 */
+	public function injectCartManager(CartManager $cartManager) {
+		$this->cartManager = $cartManager;
+	}
 
 	/**
 	 * Injects Company manager

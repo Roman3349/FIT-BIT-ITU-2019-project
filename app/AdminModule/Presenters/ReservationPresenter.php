@@ -21,12 +21,28 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenters;
 
+use App\AdminModule\DataGrids\ReservationDataGrid;
+use App\AdminModule\Forms\ReservationFormFactory;
 use App\Models\Database\EntityManager;
+use Nette\Application\UI\Form;
+use Ublaboo\DataGrid\DataGrid;
 
 /**
  * Reservation presenter
  */
 final class ReservationPresenter extends BasePresenter {
+
+	/**
+	 * @var ReservationFormFactory Reservation editor form factory
+	 * @inject
+	 */
+	public $formFactory;
+
+	/**
+	 * @var ReservationDataGrid Reservation manager data grid
+	 * @inject
+	 */
+	public $dataGrid;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -39,6 +55,30 @@ final class ReservationPresenter extends BasePresenter {
 	 */
 	public function __construct(EntityManager $manager) {
 		$this->manager = $manager;
+	}
+
+	/**
+	 * Renders reservation editor
+	 * @param int $id Reservation ID
+	 */
+	public function renderEdit(int $id): void {
+	}
+
+	/**
+	 * Creates a new reservation editor form
+	 * @return Form Reservation editor form
+	 */
+	protected function createComponentReservationForm(): Form {
+		return $this->formFactory->create($this);
+	}
+
+	/**
+	 * Creates a new reservation manager data grid
+	 * @param string $name Component name
+	 * @return DataGrid Reservation manager data grid
+	 */
+	protected function createComponentReservationGrid(string $name): DataGrid {
+		return $this->dataGrid->create($this, $name);
 	}
 
 }

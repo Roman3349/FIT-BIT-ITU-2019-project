@@ -1,4 +1,16 @@
 action: Akce
-all: Všechny
-no_item_found: Nebyl nalezen žádný záznam.
-reset_filter: Resetovat filtry
+all: všechny
+execute: Provést
+from: z
+group_actions: Hromadné akce
+here: zde
+hide_column: Skrýt sloupec
+choose: Vyberte
+items: Položky
+next: Další
+no_item_found_reset: Žádné položky nenalezeny. Filtr můžete vynulovat
+no_item_found: Žádné položky nenalezeny.
+per_page_submit: Změnit
+previous: Předchozí
+reset_filter: Resetovat filtr
+show_all_columns: Zobrazit všechny sloupce

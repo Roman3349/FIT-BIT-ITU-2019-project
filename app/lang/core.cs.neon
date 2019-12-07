@@ -1,5 +1,15 @@
 cart:
 	title: Košík
+	fromDate: Od
+	toDate: Do
+	delete: Odstranit
+	reserve: Rezervovat
+	firstName: Jméno
+	lastName: Příjmení
+	email: E-mail
+	messages:
+	    add: Kolo %name% bylo úspěšně přidáno do košíku.
+	    success: Rezervace č. %id% byla úspěšně vytvořena.
 
 contact:
 	title: Kontakt

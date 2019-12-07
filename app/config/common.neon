@@ -10,12 +10,12 @@ application:
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
-database:
-	dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
-	user: %database.user%
-	password: %database.password%
-	options:
-		lazy: yes
+mail:
+	smtp: true
+	host: romanondracek.cz
+	username: itu
+	password: Z8GGtgyK3CKsrJyh8sCt
+	secure: tls
 
 session:
 	expiration: 14 days
@@ -24,6 +24,7 @@ extensions:
 	forms.application: Contributte\Forms\DI\ApplicationFormFactoryExtension
 	translation: Contributte\Translation\DI\TranslationExtension
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	- Contributte\FormMultiplier\DI\MultiplierExtension
 
 console:
 	name: ITU
@@ -34,6 +35,9 @@ console:
 	lazy: true
 
 services:
+	authenticator: App\Models\Authenticator
+	cartManager: App\Models\CartManager
+	companyManager: App\Models\CompanyManager
 	router: App\CoreModule\Router\RouterFactory::createRouter
 	nette.latteFactory:
 		setup:

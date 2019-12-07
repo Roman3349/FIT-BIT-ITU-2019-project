@@ -21,8 +21,43 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\Forms\CartFormFactory;
+use Nette\Application\UI\Form;
+
 /**
- * Terms of service presenter
+ * Cart presenter
  */
 final class CartPresenter extends BasePresenter {
+
+	/**
+	 * @var CartFormFactory Cart form factory
+	 * @inject
+	 */
+	public $formFactory;
+
+	/**
+	 * Deletes a bike from the cart
+	 * @param int $id Bike ID
+	 */
+	public function actionDelete(int $id): void {
+		$this->cartManager->remove($id);
+		$this->redirect('default');
+	}
+
+	/**
+	 * Renders the cart
+	 */
+	public function renderDefault(): void {
+		$this->template->cartContent = $this->cartManager->getContent();
+		$this->template->cartPrice = $this->cartManager->getPrice();
+	}
+
+	/**
+	 * Creates the cart form
+	 * @return Form Cart form
+	 */
+	protected function createComponentCartForm(): Form {
+		return $this->formFactory->create($this);
+	}
+
 }

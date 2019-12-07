@@ -20,37 +20,18 @@
 {block content}
 <div class="row">
   <div class="col-lg-3 col-sm-12 col-xl-2">
-        <div class='px-xl-0 px-lg-3 px-sm-5 pb-md-4 mx-auto mt-sm-5'>
-          <form>
-                <label for='validationDefault01'>Od:</label>
-                <input type='text' class='form-control' id='validationDefault01' value='1. 6. 2020' required>
-                
-                <label for='validationDefault02'>Do:</label>
-                <input type='text' class='form-control' id='validationDefault02' value='2. 6. 2020' required>
-                
-                <label for='validationDefault03'>Vaše výška:</label>
-                <input type='text' class='form-control' id='validationDefault03' value='170 cm'>
-                
-                <label for='validationDefault03'>Velikost kol:</label>
-                <input type='text' class='form-control' id='validationDefault03' value='27,5'>
-                
-                <label for='validationDefault04'>Velikost rámu:</label>
-                <input type='text' class='form-control' id='validationDefault04'>
-                
-                <label for='validationDefault05'>Typ užití:</label>
-                <input type='text' class='form-control' id='validationDefault05'>
-            <button class='btn btn-primary col-md-12 my-3 p-4 ' type='submit'>Vyhledat</button>
-          </form>
+        <div class='px-xl-0 px-lg-3 px-sm-5 pb-md-4 mx-auto sticky-top'>
+          {control filterForm}
         </div>
   </div>
-  <div class="container col-sm-12 col-lg-9 col-xl-10">
+  <div class="col-sm-12 col-lg-9 col-xl-10">
     <div class='card-deck-fluid text-center row'>
 	    <div n:foreach='$products as $product' class='card col-xl-3 col-lg-4 col-sm-6'>
-        <a class="align-middle" n:href=':Core:Product:show $product->getId()'>
+        <a class="align-middle" n:href='show $product->getId()'>
           <img src='{$product->getPicture()}' class='card-img-top' alt='{$product->getFullName()}'>
         </a>
 		    <div class='card-body'>
-			    <a n:href=':Core:Product:show $product->getId()'>
+			    <a n:href='show $product->getId()'>
             <h5 class='card-title'>
               {$product->getFullName()}
             </h5>
@@ -58,13 +39,12 @@
           <p class='card-text'>
             {include parameters.latte product => $product}
           </p>
-          <!--<a n:href=':Core:Product:show $product->getId()' class='btn btn-primary btn-lg btn-block p-3'>Zobrazit detail</a>-->
           <div class='row'>
           <h5 class='w-50 p-2 '><b class='text-primary text-center'>{$product->getPrice()} {_core.product.priceUnit}</b></h5>
           <div class='text-center w-50'>
-            <form action="" method="post">
-                <input type="hidden" id="productID" value='{$product->getId()}'>
-                <button type="submit" class='btn btn-primary btn-lg btn-block'>{_core.product.rent}</button>
+            <form n:name='cartAddForm'>
+                <input n:name='id' type='hidden' value='{$product->getId()}'/>
+                <input n:name='rent' type="submit" class='btn btn-primary btn-lg btn-block' value='{_core.product.rent}'/>
             </form>
           </div>
         </div>

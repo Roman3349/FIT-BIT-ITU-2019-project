@@ -22,3 +22,16 @@
 #map {
 	padding-top: 100%;
 }
+
+.table-cart tr td {
+	text-align: center;
+}
+
+.table-cart tr td {
+	vertical-align: middle;
+}
+
+.table-cart tr td {
+	height: 10em;
+	margin: auto 0;
+}
