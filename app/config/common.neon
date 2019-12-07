@@ -35,6 +35,9 @@ console:
 	lazy: true
 
 services:
+	authenticator: App\Models\Authenticator
+	cartManager: App\Models\CartManager
+	companyManager: App\Models\CompanyManager
 	router: App\CoreModule\Router\RouterFactory::createRouter
 	nette.latteFactory:
 		setup:

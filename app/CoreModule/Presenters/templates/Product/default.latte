@@ -43,14 +43,14 @@
           </form>
         </div>
   </div>
-  <div class="container col-sm-12 col-lg-9 col-xl-10">
+  <div class="col-sm-12 col-lg-9 col-xl-10">
     <div class='card-deck-fluid text-center row'>
 	    <div n:foreach='$products as $product' class='card col-xl-3 col-lg-4 col-sm-6'>
-        <a class="align-middle" n:href=':Core:Product:show $product->getId()'>
+        <a class="align-middle" n:href='show $product->getId()'>
           <img src='{$product->getPicture()}' class='card-img-top' alt='{$product->getFullName()}'>
         </a>
 		    <div class='card-body'>
-			    <a n:href=':Core:Product:show $product->getId()'>
+			    <a n:href='show $product->getId()'>
             <h5 class='card-title'>
               {$product->getFullName()}
             </h5>
@@ -58,7 +58,6 @@
           <p class='card-text'>
             {include parameters.latte product => $product}
           </p>
-          <!--<a n:href=':Core:Product:show $product->getId()' class='btn btn-primary btn-lg btn-block p-3'>Zobrazit detail</a>-->
           <div class='row'>
           <h5 class='w-50 p-2 '><b class='text-primary text-center'>{$product->getPrice()} {_core.product.priceUnit}</b></h5>
           <div class='text-center w-50'>

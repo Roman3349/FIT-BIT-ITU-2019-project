@@ -19,7 +19,7 @@
 
 declare(strict_types = 1);
 
-namespace App\CoreModule\Models;
+namespace App\Models;
 
 use App\Models\Database\EntityManager;
 use Nette\Security\AuthenticationException;

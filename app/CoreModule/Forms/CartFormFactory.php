@@ -21,15 +21,15 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Forms;
 
-use App\CoreModule\Presenters\ProductPresenter;
-use Contributte\Forms\Rendering\Bootstrap4VerticalRenderer;
+use App\CoreModule\Presenters\CartPresenter;
+use App\Models\CartManager;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
 
 /**
- * Product filter form factory
+ * Cart form factory
  */
-final class ProductFilterFormFactory {
+final class CartFormFactory {
 
 	use SmartObject;
 
@@ -39,31 +39,45 @@ final class ProductFilterFormFactory {
 	private $factory;
 
 	/**
-	 * @var ProductPresenter Product presenter
+	 * @var CartManager Cart manager
+	 */
+	private $manager;
+
+	/**
+	 * @var CartPresenter Cart presenter
 	 */
 	private $presenter;
 
 	/**
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
+	 * @param CartManager $manager Cart manager
 	 */
-	public function __construct(FormFactory $factory) {
+	public function __construct(FormFactory $factory, CartManager $manager) {
 		$this->factory = $factory;
+		$this->manager = $manager;
 	}
 
-	public function create(ProductPresenter $presenter): Form {
+	/**
+	 * Creates a new cart form
+	 * @param CartPresenter $presenter Cart presenter
+	 * @return Form Cart form
+	 */
+	public function create(CartPresenter $presenter): Form {
 		$this->presenter = $presenter;
-		$this->factory->setTranslationPrefix('core.product');
+		$this->factory->setTranslationPrefix('core.cart');
 		$form = $this->factory->create();
-		$form->addText('fromDate', 'fromDate')
+		$form->addText('from', 'fromDate')
 			->setHtmlType('date');
-		$form->addText('toDate', 'toDate')
+		$form->addText('to', 'toDate')
 			->setHtmlType('date');
-		$form->addSelect('usageType', 'usageType', ['XC', 'Trail']);
-		$form->addSelect('wheelSize', 'wheelSize', ['26"', '27,5"']);
-		$form->addSelect('frameSize', 'frameSize', ['17"', '19"']);
-		$form->addSubmit('filter', 'filter');
+		if (!$this->presenter->user->isLoggedIn()) {
+			$form->addText('firstName', 'firstName');
+			$form->addText('lastName', 'lastName');
+			$form->addEmail('email', 'email');
+		}
+		$form->setDefaults($this->manager->getDateRange());
+		$form->addSubmit('reserve', 'reserve');
 		return $form;
 	}
-
 }

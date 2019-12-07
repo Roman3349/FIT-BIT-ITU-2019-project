@@ -1,5 +1,9 @@
 cart:
 	title: Košík
+	fromDate: Od
+	toDate: Do
+	delete: Odstranit
+	reserve: Rezervovat
 
 contact:
 	title: Kontakt
