@@ -23,6 +23,10 @@ namespace App\CoreModule\Forms;
 
 use App\CoreModule\Presenters\CartPresenter;
 use App\Models\CartManager;
+use App\Models\Database\Entities\Reservation;
+use App\Models\Database\EntityManager;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
 
@@ -32,6 +36,11 @@ use Nette\SmartObject;
 final class CartFormFactory {
 
 	use SmartObject;
+
+	/**
+	 * @var EntityManager Entity manager
+	 */
+	private $entityManager;
 
 	/**
 	 * @var FormFactory Generic form factory
@@ -52,10 +61,12 @@ final class CartFormFactory {
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
 	 * @param CartManager $manager Cart manager
+	 * @param EntityManager $entityManager Entity manager
 	 */
-	public function __construct(FormFactory $factory, CartManager $manager) {
+	public function __construct(FormFactory $factory, CartManager $manager, EntityManager $entityManager) {
 		$this->factory = $factory;
 		$this->manager = $manager;
+		$this->entityManager = $entityManager;
 	}
 
 	/**
@@ -78,6 +89,29 @@ final class CartFormFactory {
 		}
 		$form->setDefaults($this->manager->getDateRange());
 		$form->addSubmit('reserve', 'reserve');
+		$form->onSubmit[] = [$this, 'reserve'];
 		return $form;
+	}
+
+	/**
+	 * Creates a new reservation
+	 * @param Form $form Cart form
+	 */
+	public function reserve(Form $form): void {
+		$values = $form->getValues();
+		$creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
+		$bikes = [];
+		foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
+			$bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));
+		}
+		$bikes = new ArrayCollection($bikes);
+		$fromDate = new DateTime($values->from);
+		$toDate = new DateTime($values->to);
+		$reservation = new Reservation($creator, $creator, $fromDate, $toDate, $bikes, Reservation::STATE_RESERVATION);
+		$this->entityManager->persist($reservation);
+		$this->entityManager->flush();
+		$this->manager->clear();
+		$message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => $reservation->getId()]);
+		$this->presenter->flashSuccess($message);
 	}
 }

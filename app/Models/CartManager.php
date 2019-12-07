@@ -23,6 +23,7 @@ namespace App\Models;
 
 use App\Models\Database\Entities\Bike;
 use App\Models\Database\EntityManager;
+use DateTime;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\SmartObject;
@@ -60,11 +61,26 @@ final class CartManager {
 		$this->manager = $manager;
 	}
 
+	/**
+	 * Adds the bike into the cart
+	 * @param int $id Bike ID
+	 */
 	public function add(int $id): void {
 		$bike = $this->manager->getBikeRepository()->find($id);;
 		$this->cart->offsetSet(strval($bike->getId()), $bike->getPrice());
 	}
 
+	/**
+	 * Clears the cart
+	 */
+	public function clear(): void {
+		$this->cart->remove();
+	}
+
+	/**
+	 * Returns the cart content
+	 * @return array<string,string> Cart content
+	 */
 	public function getContent(): array {
 		$cart = [];
 		foreach ($this->cart as $id => $price) {
@@ -73,6 +89,10 @@ final class CartManager {
 		return $cart;
 	}
 
+	/**
+	 * Returns the cart price
+	 * @return int Cart price
+	 */
 	public function getPrice(): int {
 		$sum = 0;
 		foreach ($this->cart as $price) {
@@ -81,6 +101,10 @@ final class CartManager {
 		return $sum;
 	}
 
+	/**
+	 * Returns the date range
+	 * @return array<string,string> Date range
+	 */
 	public function getDateRange(): array {
 		return [
 			'from' => $this->dateRange->offsetGet('from'),
@@ -88,7 +112,12 @@ final class CartManager {
 		];
 	}
 
-	public function setDateRange(?\DateTime $from = null, ?\DateTime $to = null): void {
+	/**
+	 * Sets the date range
+	 * @param DateTime|null $from From date
+	 * @param DateTime|null $to To date
+	 */
+	public function setDateRange(?DateTime $from = null, ?DateTime $to = null): void {
 		if ($from === null || $to === null) {
 			return;
 		}
@@ -96,6 +125,10 @@ final class CartManager {
 		$this->dateRange->offsetSet('to', $to->format('Y-m-d'));
 	}
 
+	/**
+	 * Removes the bike from the cart
+	 * @param int $id Bike ID
+	 */
 	public function remove(int $id): void {
 		$this->cart->offsetUnset(strval($id));
 	}
