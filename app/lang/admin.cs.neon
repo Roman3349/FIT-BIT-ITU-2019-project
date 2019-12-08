@@ -20,8 +20,8 @@ bike:
 		Carbon: Karbon
 	wheelSize: Velikost kol
 	frameSize: Velikost rámu
-	forkTravel: Zdvih vidlice
-	shockTravel: Zdvih tlumiče
+	forkTravel: 'Zdvih vidlice (mm)'
+	shockTravel: 'Zdvih tlumiče (mm)'
 	speeds: Počet rychlostí
 	price: Cena
 	add: Přidat
@@ -30,7 +30,7 @@ bike:
 		manufacturer: Prosím vyberte výrobce kola.
 		name: Prosím zadejte jméno kola.
 		usage: Prosím vyberte použití kola.
-		picture: Prosím vyberte obrázek kola za galerie.
+		picture: Prosím vyberte obrázek kola z galerie.
 		frameMaterial: Prosím vyberte materiál rámu.
 		frameSize: Prosím zadajte velikost rámu.
 		wheelSize: Prosím zadejte velikost kol.
@@ -41,18 +41,30 @@ bike:
 		successEdit: Kolo %name% bylo úspěšně uloženo.
 
 company:
-    title: Správa půjčovny
-    name: Jméno půjčovny
-    address:
-        title: Adresa
-        street: Ulice
-        zip: PSČ
-        city: Město
-    gps: Mapa
-    contacts: Kontakty
-    email: Email
-    telephone: Telefonní číslo
-    save: Uložit
+	title: Správa půjčovny
+	name: Jméno půjčovny
+	address:
+		title: Adresa
+		street: Ulice
+		zip: PSČ
+		city: Město
+	gps: Mapa
+	contacts: Kontakty
+	email: Email
+	telephone: Telefonní číslo
+	save: Uložit
+	messages:
+		name: Prosím zadejte jméno půjčovny.
+		address:
+			street: 'Prosím zadejte ulici, kde sídlí půjčovna.'
+			city: 'Prosím zadejte město, ve kterém sídlí půjčovna.'
+			zip: 'Prosím zadejte PSČ.'
+		gps: 'Prosím vyberte sídlo půjčovny v mapě.'
+		email: Prosím zadejte kontaktní email.
+		telephone: Prosím zadejte kontaktní telefonní číslo.
+
+customer:
+	title: Zákaznická sekce
 
 dashboard:
 	title: Přehled
@@ -69,6 +81,7 @@ manufacturer:
 	add: Přidat
 	save: Uložit
 	messages:
+		name: Prosím zadejte jméno výrobce.
 		confirmDelete: Opravdu chcete smazat výrobce %s?
 		successDelete: Výrobce %name% byl úspěšně odstraněn.
 		successEdit: Výrobce %name% byl úspěšně uložen.
@@ -99,6 +112,8 @@ reservation:
 		customer: Prosím vyberte zákazníka.
 		fromDate: Prosím zadejte počáteční datum rezervace.
 		toDate: Prosím zadejte koncové datum rezervace.
+		bike: Prosím vyberte rezervované kolo.
+		state: Prosím vyberte stav rezervace.
 		confirmDelete: Opravdu chcete smazat rezervaci %s?
 		successDelete: Rezervace %id% byla úspěšně odstraněna.
 		successEdit: Rezervace %id% byla úspěšně uložena.
