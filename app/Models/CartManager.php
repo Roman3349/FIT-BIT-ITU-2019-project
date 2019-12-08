@@ -21,8 +21,8 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Models\Database\Entities\Bike;
 use App\Models\Database\EntityManager;
+use DateInterval;
 use DateTime;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
@@ -106,10 +106,19 @@ final class CartManager {
 	 * @return array<string,string> Date range
 	 */
 	public function getDateRange(): array {
-		return [
-			'from' => $this->dateRange->offsetGet('from'),
-			'to' => $this->dateRange->offsetGet('to'),
-		];
+		$today = new DateTime();
+		$array = [];
+		if ($this->dateRange->offsetExists('from')) {
+			$array['from'] = $this->dateRange->offsetGet('from');
+		} else {
+			$array['from'] = $today->format('Y-m-d');
+		}
+		if ($this->dateRange->offsetExists('to')) {
+			$array['to'] = $this->dateRange->offsetGet('to');
+		} else {
+			$array['to'] = (new DateTime($array['from']))->add(new DateInterval('P1D'))->format('Y-m-d');
+		}
+		return $array;
 	}
 
 	/**
