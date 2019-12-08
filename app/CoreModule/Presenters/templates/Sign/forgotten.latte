@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{_core.sign.in.title}{/block}
+{block title}Zapomenuté heslo{/block}
 
 {block content}
 
@@ -25,8 +25,11 @@
 	</header>
 	<div class='row'>
 		<div class="col-md-12 col-lg-6 p-5">
-            {control signInForm}
-            <a class='text-secondary mt-3' n:href=':Core:Sign:forgotten'>Zapomenuté heslo</a>
+        <div class='mb-4'>
+        <h2 class='pb-2'>Zapomněli jste heslo?</h2>
+        <input type="email" class="form-control my-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Váš email">
+        <button class='btn btn-primary btn-lg px-3 my-2 float-right'>Odeslat</button>
+        </div>
 		</div>
     
     <!--pro male obrazovky-->
@@ -36,8 +39,7 @@
 
     <!--pro velke obrazovky-->
     <div class="col-lg-6 w-50 text-center d-none d-lg-block" style="border-left: 1px solid #333">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lacus velit, feugiat vehicula ex vulputate, dapibus sagittis turpis. Nullam at quam volutpat, convallis mi eu, interdum nisl. Mauris in dui ante. Nullam pulvinar leo a nulla accumsan dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt purus in lectus fringilla sagittis vitae in nisi. Aliquam et tortor dolor. Aliquam semper quam sed ante aliquet, eu posuere nibh convallis. Phasellus vitae lacinia enim. Vestibulum cursus vitae metus eu feugiat. Ut nisi sapien, rhoncus sed eros ac, malesuada consequat leo. Cras vel rhoncus dolor. Suspendisse non diam ante. Maecenas velit erat, scelerisque malesuada mi quis, lobortis rutrum enim.</p>
-			<a class="btn btn-primary btn-lg mt-3" n:href=':Core:Sign:up'>{_core.sign.up.title}</a>
+      <p><br><br><br>Pokud jste zapomněli heslo, stačí když nám zde zadáte Váš email a my Vám na něj zašleme heslo nové. Z bezpečnostních důvodů Vám však nemůžeme sdělit, zda zadaný email je správný.</p>
 		</div>
 	</div>
 </div>
