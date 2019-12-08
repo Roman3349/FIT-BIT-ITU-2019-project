@@ -28,6 +28,7 @@ use App\Models\Database\EntityManager;
 use Contributte\Translation\Wrappers\NotTranslate;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
+use Nette\Utils\Html;
 
 /**
  * Bike manager form factory
@@ -90,8 +91,10 @@ final class BikeFormFactory {
 			->setRequired('messages.frameSize');
 		$form->addText('wheelSize', 'wheelSize')
 			->setRequired('messages.wheelSize');
-		$form->addInteger('forkTravel', 'forkTravel');
-		$form->addInteger('shockTravel', 'shockTravel');
+		$form->addInteger('forkTravel', 'forkTravel')
+			->setDefaultValue(0);
+		$form->addInteger('shockTravel', 'shockTravel')
+			->setDefaultValue(0);
 		$form->addText('speeds', 'speeds')
 			->setRequired('messages.speeds');
 		$form->addInteger('price', 'price')

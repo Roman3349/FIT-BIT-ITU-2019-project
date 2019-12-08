@@ -19,59 +19,71 @@
 
 {block content}
 
-<div class="row">
-<div class="col-lg-4 col-md-6 col-sm-6">
-	<div class="info-box bg-primary">
-		<span class="info-box-icon"><i class="far fa-calendar-plus"></i></span>
-		<div class="info-box-content">
-			<span class="info-box-text">Nové rezervace</span>
-			<span class="info-box-number">{$reservationCount}</span>
-		</div>
-	</div>
-</div>
-<div class="col-lg-4 col-md-6 col-sm-6">
-	<div class="info-box bg-success">
-		<span class="info-box-icon"><i class="far fa-calendar-check"></i></span>
-		<div class="info-box-content">
-			<span class="info-box-text">Počet rezervací</span>
-			<span class="info-box-number">{$totalCount}</span>
-		</div>
-	</div>
-</div>
-<div class="col-lg-4 col-md-6 col-sm-6">
-	<div class="info-box bg-danger">
-		<span class="info-box-icon"><i class="far fa-calendar-times"></i></span>
-		<div class="info-box-content">
-			<span class="info-box-text">Počet zmeškaných vrácení</span>
-			<span class="info-box-number">{$delayedCount}</span>
-		</div>
-	</div>
-</div>
-	<div class="col-lg-4 col-md-6 col-sm-6">
-		<div class="info-box bg-success">
-			<span class="info-box-icon"><i class="fas fa-angle-double-up"></i></span>
-			<div class="info-box-content">
-				<span class="info-box-text">Dnes k vyzvednutí</span>
-				<span class="info-box-number">{$pickupCount}</span>
+<div class='row'>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='Reservation:default, "reservationGrid-filter[state][0]" => 0'>
+			<div class='info-box bg-primary'>
+				<span class='info-box-icon'><i class='far fa-calendar-plus'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Nové rezervace</span>
+					<span class='info-box-number'>{$reservationCount}</span>
+				</div>
 			</div>
-		</div>
+		</a>
 	</div>
-	<div class="col-lg-4 col-md-6 col-sm-6">
-		<div class="info-box bg-success">
-			<span class="info-box-icon"><i class="fas fa-angle-double-down"></i></span>
-			<div class="info-box-content">
-				<span class="info-box-text">Dnes k navrácení</span>
-				<span class="info-box-number">{$returnCount}</span>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='Reservation:default'>
+			<div class='info-box bg-success'>
+				<span class='info-box-icon'><i class='far fa-calendar-check'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Počet rezervací</span>
+					<span class='info-box-number'>{$totalCount}</span>
+				</div>
 			</div>
-		</div>
+		</a>
 	</div>
-	<div class="col-lg-4 col-md-6 col-sm-6">
-		<div class="info-box bg-success">
-			<span class="info-box-icon"><i class="far fa-user"></i></span>
-			<div class="info-box-content">
-				<span class="info-box-text">Počet uživatelů</span>
-				<span class="info-box-number">{$userCount}</span>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='Reservation:default, "reservationGrid-filter[state][0]" => 4, "reservationGrid-filter[state][1]" => 2, "reservationGrid-filter[toDate][to]" => date("Y-m-d")'>
+			<div class='info-box bg-danger'>
+				<span class='info-box-icon'><i class='far fa-calendar-times'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Počet zmeškaných vrácení</span>
+					<span class='info-box-number'>{$delayedCount}</span>
+				</div>
 			</div>
-		</div>
+		</a>
+	</div>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='Reservation:default, "reservationGrid-filter[state][0]" => 0, "reservationGrid-filter[fromDate][from]" => date("Y-m-d"), "reservationGrid-filter[fromDate][to]" => date("Y-m-d")'>
+			<div class='info-box bg-success'>
+				<span class='info-box-icon'><i class='fas fa-angle-double-up'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Dnes k vyzvednutí</span>
+					<span class='info-box-number'>{$pickupCount}</span>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='Reservation:default, "reservationGrid-filter[state][0]" => 2, "reservationGrid-filter[toDate][from]" => date("Y-m-d"), "reservationGrid-filter[toDate][to]" => date("Y-m-d")'>
+			<div class='info-box bg-success'>
+				<span class='info-box-icon'><i class='fas fa-angle-double-down'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Dnes k navrácení</span>
+					<span class='info-box-number'>{$returnCount}</span>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class='col-lg-4 col-md-6 col-sm-6'>
+		<a n:href='User:default'>
+			<div class='info-box bg-success'>
+				<span class='info-box-icon'><i class='far fa-user'></i></span>
+				<div class='info-box-content'>
+					<span class='info-box-text'>Počet uživatelů</span>
+					<span class='info-box-number'>{$userCount}</span>
+				</div>
+			</div>
+		</a>
 	</div>
 </div>

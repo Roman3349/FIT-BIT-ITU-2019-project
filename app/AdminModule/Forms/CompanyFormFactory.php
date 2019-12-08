@@ -65,12 +65,16 @@ final class CompanyFormFactory {
 		$this->factory->setTranslationPrefix('admin.company');
 		$form = $this->factory->create();
 		$form->addGroup();
-		$form->addText('name', 'name');
+		$form->addText('name', 'name')
+			->setRequired('messages.name');
 		$form->addGroup('address.title');
 		$address = $form->addContainer('address');
-		$address->addText('street', 'address.street');
-		$address->addText('zip', 'address.zip');
-		$address->addText('city', 'address.city');
+		$address->addText('street', 'address.street')
+			->setRequired('messages.address.street');
+		$address->addText('zip', 'address.zip')
+			->setRequired('messages.address.zip');
+		$address->addText('city', 'address.city')
+			->setRequired('messages.address.city');
 		$form['gps'] = new GPSPicker('gps', null);
 		$form['gps']->setSettings([
 				'mapId' => 'gps',
@@ -84,16 +88,26 @@ final class CompanyFormFactory {
 				],
 				'defaultZoom' => 12,
 				'controls' => true,
-			]);
+			])
+			->setRequired('messages.gps');
 		$form->addGroup('contacts');
-		$form->addEmail('email', 'email');
+		$form->addEmail('email', 'email')
+			->setRequired('messages.email');
 		$form->addText('telephone', 'telephone')
-			->setHtmlType('tel');
+			->setHtmlType('tel')
+			->setRequired('messages.telephone');
 		$form->setDefaults($this->manager->get());
 		$form->addProtection();
 		$form->addSubmit('save', 'save');
 		$form->onSubmit[] = [$this, 'save'];
 		return $form;
+	}
+
+	public function save(Form $form): void {
+		$values = $form->getValues();
+		$this->manager->set($values);
+		$this->presenter->flashSuccess('admin.company.messages.success');
+		$this->presenter->redirect('Homepage:default');
 	}
 
 }
