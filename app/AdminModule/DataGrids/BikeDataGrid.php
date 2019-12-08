@@ -96,7 +96,7 @@ final class BikeDataGrid {
 			->setClass('btn btn-xs btn-danger ajax')
 			->setConfirmation(new StringConfirmation('admin.bike.messages.confirmDelete', 'fullName'));
 		$grid->addToolbarButton('add', 'admin.actions.add')
-			->setClass('btn btn-xs btn-success');
+			->setClass('btn btn-success');
 		return $grid;
 	}
 

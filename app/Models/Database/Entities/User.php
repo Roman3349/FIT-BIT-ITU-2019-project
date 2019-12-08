@@ -192,6 +192,14 @@ class User {
 		$this->email = $email;
 	}
 
+    /**
+     * Set the password hash
+     * @return string Password hash
+     */
+    public function setPassword(string $hash){
+        $this->hash = $hash;
+    }
+
 	/**
 	 * Sets the first name
 	 * @param string $firstName First name

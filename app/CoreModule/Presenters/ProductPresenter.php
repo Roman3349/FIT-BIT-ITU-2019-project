@@ -63,10 +63,35 @@ final class ProductPresenter extends BasePresenter {
 		$this->manager = $manager;
 	}
 
-	public function renderDefault(): void {
-		$this->template->products = $this->manager->getBikeRepository()->findAll();
+	/**
+	 * Returns bikes
+	 * @param array|null $filters Filters
+	 * @return Bike[] Bikes
+	 */
+	public function getBikes(?array $filters): array {
+		$bikeRepository = $this->manager->getBikeRepository();
+		if ($filters === null) {
+			return $bikeRepository->findAll();
+		}
+		$filters = array_filter($filters, function($value) {
+			return !is_null($value) && $value !== [];
+		});
+		return $bikeRepository->findBy($filters);
 	}
 
+	/**
+	 * Renders a list of bikes
+	 */
+	public function renderDefault(): void {
+		if (!isset($this->template->products)) {
+			$this->template->products = $this->getBikes(null);
+		}
+	}
+
+	/**
+	 * Renders the bike detail
+	 * @param int $id Bike ID
+	 */
 	public function renderShow(int $id): void {
 		$this->template->product = $this->manager->getBikeRepository()->find($id);
 	}

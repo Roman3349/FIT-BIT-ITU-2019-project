@@ -17,6 +17,19 @@ cart:
 		lastName: Prosím zadejte Vaše příjmení.
 		email: Prosím zadejte Váš email.
 
+account:
+	title: Editace profilu
+	firstName: Jméno
+	lastName: Příjmení
+	email: E-mail
+	password: Nové heslo
+	save: Uložit
+	messages:
+		successEdit: Profil byl úspěšně aktualizován.
+		firstName: Prosím zadejte Vaše jméno.
+		lastName: Prosím zadejte Vaše příjmení.
+		email: Prosím zadejte Váš email.
+
 assistant:
 	weight: Váha
 	height: Výška
@@ -50,7 +63,7 @@ sign:
 			remember: Zůstat přihlášen
 			send: Přihlásit se
 			messages:
-				email: Prosím zadejte Vaše e-mail.
+				email: Prosím zadejte Váš e-mail.
 				password: Prosím zadejte Vaše heslo.
 				success: Byl jste úspěšně přihlášen.
 				failure: Zadané jméno nebo heslo je nesprávné.
@@ -71,6 +84,14 @@ sign:
 				email: Prosím zadejte Váš email.
 				password: Prosím zadejte Vaše heslo.
 				success: Byl jste úspěšně zaregistrován.
+	reset:
+		title: Zapomenuté heslo
+		form:
+			email: E-mail
+			send: Odeslat
+			messages:
+				email: Prosím zadejte Váš e-mail.
+				success: 'Pokud účet s daným emailem existuje, byl na něj odeslán odkaz pro obnovu hesla.'
 terms:
 	title: Obchodní podmínky
 

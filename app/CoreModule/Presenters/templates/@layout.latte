@@ -30,7 +30,9 @@
 </head>
 <body>
   <nav class='navbar navbar-expand-lg navbar-light bg-white'>
-    <a class='navbar-brand' n:href=':Core:Product:default'><img src="/img/logo.svg" alt="Logo" style="width: 25%; height: auto;"></a>
+    <a class='navbar-brand' n:href=':Core:Product:default'>
+	    <img src="/img/logo.svg" alt="Logo" style="width: 25%; height: auto;">
+    </a>
     <button class='navbar-toggler' type='button' data-toggle='collapse'
 	    data-target='#navbar' aria-controls='navbar' aria-expanded='false'
       aria-label='Toggle navigation'>
@@ -62,6 +64,7 @@
         </button>
         <div class='dropdown-menu'>
           <a class='dropdown-item' n:if='!$user->isInRole("customer")' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+          <a class='dropdown-item' n:href=':Core:Account:default'>{_core.account.title}</a>
             <div class='dropdown-divider'></div>
             <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
           </div>

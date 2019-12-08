@@ -96,7 +96,8 @@ final class ReservationFormFactory {
 		$form->addSelect('state', 'state')
 			->setItems($this->listStates())
 			->setPrompt('messages.state')
-			->setRequired('messages.state');
+			->setRequired('messages.state')
+			->setDefaultValue(Reservation::STATE_RESERVATION);
 		$form->addProtection();
 		$form->onSubmit[] = [$this, 'save'];
 		if ($this->presenter->getAction() === 'edit') {
@@ -168,6 +169,7 @@ final class ReservationFormFactory {
 			Reservation::STATE_CANCELLED => 'states.cancelled',
 			Reservation::STATE_ONGOING => 'states.ongoing',
 			Reservation::STATE_RETURNED => 'states.returned',
+			Reservation::STATE_DELAYED => 'states.delayed',
 		];
 	}
 
