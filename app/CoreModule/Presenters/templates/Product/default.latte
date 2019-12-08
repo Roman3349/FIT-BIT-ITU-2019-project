@@ -22,6 +22,9 @@
   <div class="col-lg-3 col-sm-12 col-xl-2">
         <div class='px-lg-3 px-sm-5 pb-md-4 mx-auto sticky-top'>
           {control filterForm}
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">
+            Assistent
+        </button>
         </div>
   </div>
   <div class="col-sm-12 col-lg-9 col-xl-10">
@@ -41,7 +44,7 @@
           </p>
           <div class='row'>
           <h5 class='w-50 p-2 '><b class='text-primary text-center'>{$product->getPrice()} {_core.product.priceUnit}</b></h5>
-          <div class='text-center w-50'>
+          <div class='text-center w-50 align-bottom'>
             <form n:name='cartAddForm'>
                 <input n:name='id' type='hidden' value='{$product->getId()}'/>
                 <input n:name='rent' type="submit" class='btn btn-primary btn-lg btn-block' value='{_core.product.rent}'/>
@@ -51,4 +54,30 @@
 	    </div>
     </div>
   </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <label for="height">Height</label><br>
+                    <input type="number" name="height" id="height" placeholder="Your height">cm<br>
+                    <label for="height">Weight</label><br>
+                    <input type="number" name="weight" id="weight" placeholder="Your weight">kg<br>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-secondary" >Close</button>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Sent</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

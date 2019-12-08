@@ -34,7 +34,7 @@
 		<tbody>
 		<tr n:foreach='$cartContent as $bike'>
 			<td>
-                <img src='{$bike->getPicture()}' class="img-fluid" style="height: 10em;" alt='{$bike->getFullName()}'>
+                <img src='{$bike->getPicture()}' class="img-fluid" style="height: 7em;" alt='{$bike->getFullName()}'>
             </td>
 			<td>
 				<a n:href='Product:show $bike->getId()'>
@@ -51,7 +51,7 @@
 		</tr>
 		<tr>
 			<th colspan='2'></th>
-			<th>{$cartPrice}</th>
+			<th>{$cartPrice} Kč</th>
 			<th></th>
 		</tr>
 		</tbody>
