@@ -95,7 +95,15 @@ final class SignUpFormFactory {
 	public function signUp(Form $form): void {
 		$values = $form->getValues();
 		$hash = $this->passwordManager->hash($values->password);
-		$user = new User($values->firstName, $values->lastName, $values->email, $hash);
+		$user = $this->entityManager->getUserRepository()->findOneByEmail($values->email);
+		if ($user !== null && $user->getHash() === '') {
+			$user->setFirstName($values->firstName);
+			$user->setLastName($values->lastName);
+			$user->setHash($hash);
+			$user->setState(User::STATE_FRESH);
+		} else {
+			$user = new User($values->firstName, $values->lastName, $values->email, $hash);
+		}
 		$this->entityManager->persist($user);
 		$this->entityManager->flush();
 		$this->presenter->flashSuccess('core.sign.up.messages.success');

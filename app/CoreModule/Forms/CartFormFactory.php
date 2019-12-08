@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,11 +24,13 @@ namespace App\CoreModule\Forms;
 use App\CoreModule\Presenters\CartPresenter;
 use App\Models\CartManager;
 use App\Models\Database\Entities\Reservation;
+use App\Models\Database\Entities\User;
 use App\Models\Database\EntityManager;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
+use Nette\Utils\Html;
 
 /**
  * Cart form factory
@@ -83,11 +85,22 @@ final class CartFormFactory {
 		$form->addText('to', 'toDate')
 			->setHtmlType('date');
 		if (!$this->presenter->user->isLoggedIn()) {
-			$form->addText('firstName', 'firstName');
-			$form->addText('lastName', 'lastName');
-			$form->addEmail('email', 'email');
-		}
+			$form->addText('firstName', 'firstName')
+                ->setRequired('messages.firstName');
+            $form->addText('lastName', 'lastName')
+                ->setRequired('messages.lastName');
+            $form->addEmail('email', 'email')
+                ->setRequired('messages.email');
+        }
 		$form->setDefaults($this->manager->getDateRange());
+		$translator = $this->presenter->translator;
+		$termsAgreement = Html::el('p')->setHtml(
+			$translator->translate('core.cart.termsAgreement') . ' ' .
+			Html::el('a')->href('/terms/')
+				->setText($translator->translate('core.cart.terms'))
+		);
+		$form->addCheckbox('termsAgreement', $termsAgreement)
+			->setRequired('messages.terms');
 		$form->addSubmit('reserve', 'reserve');
 		$form->onSubmit[] = [$this, 'reserve'];
 		return $form;
@@ -99,7 +112,16 @@ final class CartFormFactory {
 	 */
 	public function reserve(Form $form): void {
 		$values = $form->getValues();
-		$creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
+		if ($this->presenter->user->isLoggedIn()) {
+			$creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
+		} else {
+			$creator = $this->entityManager->getUserRepository()->findOneByEmail($values->email);
+			if ($creator === null) {
+				$creator = new User($values->firstName, $values->lastName, $values->email, '', User::ROLE_CUSTOMER, User::STATE_BLOCKED);
+				$this->entityManager->persist($creator);
+				$this->entityManager->flush();
+			}
+		}
 		$bikes = [];
 		foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
 			$bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));

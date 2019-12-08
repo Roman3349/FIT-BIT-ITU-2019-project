@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,9 +29,9 @@ use Nette\Application\UI\Form;
 use Nette\SmartObject;
 
 /**
- * Product filter form factory
+ * Product assistant form factory
  */
-final class ProductFilterFormFactory {
+final class ProductAssistantFormFactory {
 
 	use SmartObject;
 
@@ -61,64 +61,20 @@ final class ProductFilterFormFactory {
 	}
 
 	/**
-	 * Creates a new product filter form
+	 * Creates a new product assistant form
 	 * @param ProductPresenter $presenter Product presenter
-	 * @return Form Product filter form
+	 * @return Form Product assistant form
 	 */
 	public function create(ProductPresenter $presenter): Form {
 		$this->presenter = $presenter;
-		$this->factory->setTranslationPrefix('core.product');
+		$this->factory->setTranslationPrefix('core.assistant');
 		$form = $this->factory->create();
-		$form->addText('fromDate', 'fromDate')
-			->setHtmlType('date');
-		$form->addText('toDate', 'toDate')
-			->setHtmlType('date');
-		$form->addCheckboxList('usageType', 'usageType', $this->listUsages());
-		$form->addCheckboxList('wheelSize', 'wheelSize', $this->listWheelSizes());
-		$form->addCheckboxList('frameSize', 'frameSize', $this->listFrameSizes());
+		$form->addText('height', 'height')
+			->setHtmlType('number');
+		$form->addText('weight', 'weight')
+			->setHtmlType('number');
 		$form->addSubmit('filter', 'filter')
 			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4');
-		return $form;
+        return $form;
 	}
-
-	/**
-	 * Lists frame sizes
-	 * @return array<string,string> Frame sizes
-	 */
-	private function listFrameSizes(): array {
-		$array = [];
-		$sizes = $this->entityManager->getBikeRepository()->createQueryBuilder('b')
-			->select('b.frameSize')->getQuery()->getArrayResult();
-		foreach ($sizes as $size) {
-			$array[$size['frameSize']] = new NotTranslate($size['frameSize']);
-		}
-		return $array;
-	}
-
-	/**
-	 * Lists wheel sizes
-	 * @return array<string,string> Wheel sizes
-	 */
-	private function listWheelSizes(): array {
-		$array = [];
-		$sizes = $this->entityManager->getBikeRepository()->createQueryBuilder('b')
-			->select('b.wheelSize')->getQuery()->getArrayResult();
-		foreach ($sizes as $size) {
-			$array[$size['wheelSize']] = new NotTranslate($size['wheelSize']);
-		}
-		return $array;
-	}
-
-	/**
-	 * Lists bike usages
-	 * @return array<int,string> Bike usages
-	 */
-	private function listUsages(): array {
-		$array = [];
-		foreach ($this->entityManager->getBikeUsageRepository()->findAll() as $usage) {
-			$array[$usage->getId()] = new NotTranslate($usage->getName());
-		}
-		return $array;
-	}
-
 }

@@ -150,11 +150,7 @@ final class ReservationFormFactory {
 		/**
 		 * @var User[] $users Users
 		 */
-		$users = $this->manager->getUserRepository()
-			->createQueryBuilder('u')
-			->where('u.state = :state')
-			->setParameter('state', User::STATE_ACTIVATED)
-			->getQuery()->execute();
+		$users = $this->manager->getUserRepository()->findAll();
 		foreach ($users as $user) {
 			$name = $user->getFullName() . ' (' . $user->getEmail() . ')';
 			$array[$user->getId()] = new NotTranslate($name);

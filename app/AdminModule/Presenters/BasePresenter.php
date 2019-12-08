@@ -23,6 +23,7 @@ namespace App\AdminModule\Presenters;
 
 use App\CoreModule\Presenters\BasePresenter as CorePresenter;
 use App\CoreModule\Traits\TPresenterFlashMessage;
+use App\Models\Database\Entities\User;
 use Nette\Security\IUserStorage;
 
 /**
@@ -42,6 +43,9 @@ abstract class BasePresenter extends CorePresenter {
 				$this->flashInfo('core.sign.out.inactivity');
 			}
 			$this->redirect(':Core:Sign:In', ['backlink' => $this->storeRequest()]);
+		}
+		if ($this->user->isInRole(User::ROLE_CUSTOMER)) {
+			$this->redirect(':Core:Product:default');
 		}
 		parent::checkRequirements($element);
 	}

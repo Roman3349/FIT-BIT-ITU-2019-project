@@ -1,5 +1,5 @@
 {*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,15 +28,15 @@
     {/block}
 </head>
 <body>
-  <nav class='navbar navbar-expand-lg navbar-light'>
-	  <a class='navbar-brand' n:href=':Core:Product:default'><img src="/img/logo.svg" alt="Logo" style="width: 25%; height: auto;"></a>
-	  <button class='navbar-toggler' type='button' data-toggle='collapse'
+  <nav class='navbar navbar-expand-lg navbar-light bg-white'>
+    <a class='navbar-brand' n:href=':Core:Product:default'><img src="/img/logo.svg" alt="Logo" style="width: 25%; height: auto;"></a>
+    <button class='navbar-toggler' type='button' data-toggle='collapse'
 	    data-target='#navbar' aria-controls='navbar' aria-expanded='false'
       aria-label='Toggle navigation'>
       <span class='navbar-toggler-icon'></span>
 	  </button>
     <div class='collapse navbar-collapse' id='navbar'>
-      <ul class='navbar-nav ml-auto mt-2 mt-lg-0 my-2 my-lg-0'>
+      <ul class='navbar-nav ml-auto mt-2 my-2'>
         <li class='nav-item'>
           <a class='nav-link' n:href=':Core:Product:default'>{_core.products.title}</a>
         </li>
@@ -60,7 +60,7 @@
           {$user->identity->name}
         </button>
         <div class='dropdown-menu'>
-          <a class='dropdown-item' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+          <a class='dropdown-item' n:if='!$user->isInRole("customer")' n:href=':Admin:Homepage:default'>{_admin.title}</a>
             <div class='dropdown-divider'></div>
             <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
           </div>
@@ -82,7 +82,7 @@
 	<footer class='pt-4 my-md-5 pt-md-5 border-top container-fluid'>
 		<div class='row'>
 			<div class='col-md-6 col-sm-12 text-center'>
-				<h5><img src="/img/logo.svg" alt="Logo" style="width: 40%; height: auto;"></h5>
+				<h5><img src="/img/logo.svg" alt="Logo" style="width: 31%; height: auto;"></h5>
 				<small class='d-block mb-3 text-muted'>&copy; 2019</small>
 			</div>
 			<div class='col-md-6 col-sm-12 text-center'>
