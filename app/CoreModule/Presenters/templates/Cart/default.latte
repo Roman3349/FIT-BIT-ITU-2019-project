@@ -56,7 +56,7 @@
 		</tr>
 		</tbody>
 	</table>
-  <div class='row' [hidden]="!cartContent || cartContent.length === 0">
+  <div n:if='$cartContent != []' class='row'>
     <div class='col-12 col-lg-7 pb-5'>
       <div class='alert alert-secondary text-left pb-5 mx-3'>
         {control cartForm}
