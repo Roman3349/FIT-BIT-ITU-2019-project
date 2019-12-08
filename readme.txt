@@ -8,7 +8,7 @@ Půjčovna sportovního vybavení
 
 Pokud již nemáte stažené zdrojové kódy, tak je můžete stáhnout pomocí příkazu níže.
 
-```bash
+```
 git clone --depth 1 https://gitlab.com/Roman3349/itu.git
 ```
 
@@ -16,7 +16,7 @@ git clone --depth 1 https://gitlab.com/Roman3349/itu.git
 
 Pro instalaci potřebných závislotí je potřeba stáhnout správce balíčků Composer. A to uděláte pomocí příkazů, které nalezenete níže.
 
-```bash
+```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
@@ -27,7 +27,7 @@ php -r "unlink('composer-setup.php');"
 
 Pomocí příkazu níže stáhnete potřebné závislosti.
 
-```bash
+```
 php composer.phar install --no-dev --optimize-autoloader
 ```
 
@@ -35,7 +35,7 @@ php composer.phar install --no-dev --optimize-autoloader
 
 V souboru `app/config/common.neon` upravte nastavení databáze:
 
-```yaml
+```
 parameters:
 	database:
 		host: DATABÁZOVÝ_SERVER
@@ -48,7 +48,7 @@ parameters:
 
 Databázi inicializujete pomocí dvou příkazů, které naleznete níže a které se vás budou ptát, zda chcete provést změny. A tyto hlášení potvrdíte stisknutím kláves `y` a `Enter`.
 
-```bash
+```
 ./bin/console migrations:migrate
 ./bin/console doctrine:fixtures:load
 ```
@@ -57,7 +57,7 @@ Databázi inicializujete pomocí dvou příkazů, které naleznete níže a kter
 
 Pokud aplikaci chcete pouze vyzkoušet na svém počítači, tak nejjednodušší způsob spuštění webserveru je pomocí příkazu
 
-```bash
+```
 php -S [::]:8080 -t www/
 ```
 a poté v prohlížeči navštivte stránku http://localhost:8080.
