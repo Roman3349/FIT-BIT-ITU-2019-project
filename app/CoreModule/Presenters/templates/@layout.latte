@@ -25,6 +25,7 @@
 	<title>{ifset title}{include title|stripHtml} | {/ifset}{$company->getName()}</title>
     {block scripts}
 	    <script n:nonce src='/dist/core.bundle.js'></script>
+	    <script n:nonce src='https://cdn.rawgit.com/contributte/live-form-validation/v1.8.1/live-form-validation.js'></script>
     {/block}
 </head>
 <body>
