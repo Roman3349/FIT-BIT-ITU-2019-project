@@ -20,10 +20,12 @@
 {block content}
 <div class="row">
   <div class="col-lg-3 col-sm-12 col-xl-2">
-        <div class='px-lg-3 px-sm-5 pb-md-4 mx-auto sticky-top'>
-          {control filterForm}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Asistent</button>
-        </div>
+    <div class='px-lg-3 px-sm-5 pb-md-4 mx-auto sticky-top'>
+      {control filterForm}
+      <div class='text-center pb-4'>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#ModalCenter"><b>Pomožte mi s výběrem</b></button>
+      </div>
+    </div>
   </div>
   <div class="col-sm-12 col-lg-9 col-xl-10">
     <div class='card-deck-fluid text-center row'>
@@ -59,13 +61,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Asistent výběru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form>
                 <div class="modal-body">
+                    <p>Pomůžeme Vám s výběrem kola, které k Vám bude nejlépe pasovat. Informace, které nám sde sdělíte si samozřejmě nikam neukládáme.</p>
                     {control assistantForm}
                 </div>
             </form>
