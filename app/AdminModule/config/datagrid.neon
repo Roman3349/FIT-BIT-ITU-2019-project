@@ -1,5 +1,6 @@
 services:
 	- App\AdminModule\DataGrids\BikeDataGrid
+	- App\AdminModule\DataGrids\GalleryDataGrid
 	- App\AdminModule\DataGrids\ManufacturerDataGrid
 	- App\AdminModule\DataGrids\ReservationDataGrid
 	- App\AdminModule\DataGrids\UserDataGrid

@@ -29,7 +29,8 @@
 		"nettrine/orm": "^0.4",
 		"occ2/nette-mapy-cz": "^1.1",
 		"tracy/tracy": "^2.7",
-		"ublaboo/datagrid": "^6.2"
+		"ublaboo/datagrid": "^6.2",
+		"ramsey/uuid": "^3.9"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3"

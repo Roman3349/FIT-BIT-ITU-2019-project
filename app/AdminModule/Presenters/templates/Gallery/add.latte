@@ -15,7 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *}
 
-{block title}{_admin.gallery.title}{/block}
+{block title}{_admin.gallery.addTitle}{/block}
 
 {block content}
-{control galleryGrid}
+<div class='card'>
+	<div class='card-body'>
+        {control galleryForm}
+	</div>
+</div>

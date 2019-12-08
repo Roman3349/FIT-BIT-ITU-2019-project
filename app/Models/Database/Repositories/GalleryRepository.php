@@ -1,4 +1,6 @@
-{*
+<?php
+
+/*
  * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -13,9 +15,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *}
+ */
 
-{block title}{_admin.gallery.title}{/block}
+declare(strict_types = 1);
 
-{block content}
-{control galleryGrid}
+namespace App\Models\Database\Repositories;
+
+use Doctrine\ORM\EntityRepository;
+
+/**
+ * Gallery repository
+ */
+class GalleryRepository extends EntityRepository {
+
+}
