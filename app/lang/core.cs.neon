@@ -33,6 +33,7 @@ account:
 assistant:
 	weight: Váha
 	height: Výška
+	travelTo: Budu jezdit po
 	filter: Vyhledat
 
 contact:
