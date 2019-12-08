@@ -21,6 +21,7 @@ declare(strict_types = 1);
 
 namespace App\CoreModule\Forms;
 
+use Nette\Security\Passwords;
 use App\CoreModule\Presenters\AccountPresenter;
 use App\Models\Database\EntityManager;
 use App\Models\Database\Entities\User;
@@ -50,6 +51,11 @@ final class AccountFormFactory {
 	private $presenter;
 
     /**
+     * @var Passwords Password manager
+     */
+    private $passwords;
+
+    /**
      * @var int|null User ID
      */
     private $id;
@@ -59,10 +65,11 @@ final class AccountFormFactory {
 	 * @param FormFactory $factory Generic form factory
 	 * @param EntityManager $entityManager Entity manager
 	 */
-	public function __construct(FormFactory $factory, EntityManager $entityManager) {
+	public function __construct(FormFactory $factory, EntityManager $entityManager, Passwords $passwords) {
 		$this->factory = $factory;
 		$this->entityManager = $entityManager;
-	}
+        $this->passwords = $passwords;
+    }
 
 	/**
 	 * Creates a new account form (edit profile)
@@ -123,7 +130,8 @@ final class AccountFormFactory {
             $user->setLastName($values->lastName);
             $user->setEmail($values->email);
             if ($values->password != null) {
-                $user->setPassword($values->password);
+                $hash = $this->passwords->hash($values->password);
+                $user->setPassword($hash);
             }
         }
         $this->entityManager->persist($user);
