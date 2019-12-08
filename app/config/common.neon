@@ -47,8 +47,8 @@ services:
 
 translation:
 	locales:
-		whitelist: [en, cs]
-		default: en
+		whitelist: [cs]
+		default: cs
 	dirs:
 		- %appDir%/lang
 
