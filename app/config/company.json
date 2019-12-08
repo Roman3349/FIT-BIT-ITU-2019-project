@@ -1,0 +1,15 @@
+{
+	"name": "Jméno půjčovny",
+	"logo": "/img/logo.svg",
+	"address": {
+		"street": "Ulice č.popisné",
+		"zip": "PSČ",
+		"city": "Město"
+	},
+	"gps": {
+		"latitude": 49.4949264,
+		"longitude": 16.6814939
+	},
+	"email": "itu@romanondracek.cz",
+	"telephone": "+420 123 456 789"
+}

@@ -21,52 +21,25 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use Nette\Utils\FileSystem;
+use Nette\Utils\Json;
+
 /**
  * Company manager
  */
 final class CompanyManager {
 
-	/**+
-	 * @var string Company logo
-	 */
-	private $logo = 'Logo půjčovny';
-
-	/**
-	 * @var string Company name
-	 */
-	private $name = 'Jméno půjčovny';
-
-	/**
-	 * @var string Company address
-	 */
-	private $address = 'Ulice č. popisné' . PHP_EOL . 'PSČ Město';
-
-	/**
-	 * @var string Company telephone
-	 */
-	private $telephone = '+420 123 456 789';
-
-	/**
-	 * @var string Company e-mail
-	 */
-	private $email = 'info@example.com';
-
-	/**
-	 * @var float Company latitude
-	 */
-	private $latitude = 49.4949264;
-
-	/**
-	 * @var float Company longitude
-	 */
-	private $longitude = 16.6814939;
+	public function get(): \stdClass {
+		return Json::decode(FileSystem::read(__DIR__ . '/../config/company.json'));
+	}
 
 	/**
 	 * Returns the company address
 	 * @return string Company address
 	 */
 	public function getAddress(): string {
-		return $this->address;
+		$address = $this->get()->address;
+		return $address->street . PHP_EOL . $address->zip . ' ' . $address->city;
 	}
 
 	/**
@@ -74,7 +47,7 @@ final class CompanyManager {
 	 * @return string Company e-mail
 	 */
 	public function getEmail(): string {
-		return $this->email;
+		return $this->get()->email;
 	}
 
 	/**
@@ -82,7 +55,7 @@ final class CompanyManager {
 	 * @return float Company latitude
 	 */
 	public function getLatitude(): float {
-		return $this->latitude;
+		return $this->get()->gps->latitude;
 	}
 
 	/**
@@ -90,7 +63,7 @@ final class CompanyManager {
 	 * @return float Company longitude
 	 */
 	public function getLongitude(): float {
-		return $this->longitude;
+		return $this->get()->gps->longitude;
 	}
 
 	/**
@@ -98,7 +71,7 @@ final class CompanyManager {
 	 * @return string Company logo
 	 */
 	public function getLogo(): string {
-		return $this->logo;
+		return $this->get()->logo;
 	}
 
 	/**
@@ -106,7 +79,7 @@ final class CompanyManager {
 	 * @return string Company name
 	 */
 	public function getName(): string {
-		return $this->name;
+		return $this->get()->name;
 	}
 
 	/**
@@ -114,7 +87,7 @@ final class CompanyManager {
 	 * @return string Company telephone number
 	 */
 	public function getTelephone(): string {
-		return $this->telephone;
+		return $this->get()->telephone;
 	}
 
 }
