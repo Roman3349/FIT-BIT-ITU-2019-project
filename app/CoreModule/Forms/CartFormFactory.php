@@ -93,7 +93,7 @@ final class CartFormFactory {
 		$form->setDefaults($this->manager->getDateRange());
         $form->addCheckbox('termsAgreement', 'termsAgreement')
             ->setRequired('messages.terms');
-        $form->addSubmit('reserve', 'reserve');
+        $form->addSubmit('reserve', 'reserve')->setHtmlAttribute('class', 'btn btn-primary float-right');
 		$form->onSuccess[] = [$this, 'reserve'];
 		return $form;
 	}
