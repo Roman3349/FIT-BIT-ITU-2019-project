@@ -1,5 +1,5 @@
 {*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>,Matěj Sojka <xsojka04@stud.fit.vutbr.cz> - Bootstrap + uprava html
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,16 +37,9 @@
           {include parameters.latte}
         </div>
         <div class="col-sm-12 col-lg-6">
+          
           <form n:name='cartAddForm'>
-            <div class='form-group'>
-              <label n:name='from' class='col-form-label'>{_core.cart.fromDate}</label>
-              <input n:name='from' type='date' class='form-control'>
-            </div>
-            <div class='form-group'>
-              <label n:name='to' class='col-form-label'>{_core.cart.toDate}</label>
-              <input n:name='to' type='date' class='form-control'>
-            </div>
-            <input n:name='id' type='hidden' value='{$product->getId()}'/>
+            <div class='form-group py-5'>
             <input n:name='rent' type='submit' class='btn btn-primary btn-lg btn-block' value='{_core.product.rent} ({$product->getPrice()} {_core.product.priceUnit})'/>
           </form>
         </div>
