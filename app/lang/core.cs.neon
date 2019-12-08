@@ -1,25 +1,25 @@
 cart:
-	title: Košík
-	fromDate: Od
-	toDate: Do
-	delete: Odstranit
-	reserve: Rezervovat
-	firstName: Jméno
-	lastName: Příjmení
-	email: E-mail
-	termsAgreement: Odesláním formuláře souhlasím s obchodními podmínkami.
-	messages:
-        add: Kolo %name% bylo úspěšně přidáno do košíku.
-        success: Rezervace č. %id% byla úspěšně vytvořena.
-        terms: Pro rezervaci zboží je potřeba souhlasit s obchodními podmínkami.
-        firstName: Prosím zadejte Vaše jméno.
-        lastName: Prosím zadejte Vaše příjmení.
-        email: Prosím zadejte Váš email.
+  title: Košík
+  fromDate: Od
+  toDate: Do
+  delete: Odstranit
+  reserve: Rezervovat
+  firstName: Jméno
+  lastName: Příjmení
+  email: E-mail
+  termsAgreement: Odesláním formuláře souhlasím s obchodními podmínkami.
+  messages:
+    add: Kolo %name% bylo úspěšně přidáno do košíku.
+    success: Rezervace č. %id% byla úspěšně vytvořena.
+    terms: Pro rezervaci zboží je potřeba souhlasit s obchodními podmínkami.
+    firstName: Prosím zadejte Vaše jméno.
+    lastName: Prosím zadejte Vaše příjmení.
+    email: Prosím zadejte Váš email.
 
 assistant:
-    weight: Váha
-    height: Výška
-    filter: Vyhledat
+  weight: Váha
+  height: Výška
+  filter: Vyhledat
 
 contact:
 	title: Kontakt
