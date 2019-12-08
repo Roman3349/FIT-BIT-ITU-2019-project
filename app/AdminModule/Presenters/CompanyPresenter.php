@@ -21,33 +21,26 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenters;
 
-use App\CoreModule\Presenters\BasePresenter as CorePresenter;
-use App\CoreModule\Traits\TPresenterFlashMessage;
-use App\Models\Database\Entities\User;
-use Nette\Security\IUserStorage;
+use App\AdminModule\Forms\CompanyFormFactory;
+use Nette\Application\UI\Form;
 
 /**
- * Administration base presenter
+ * Company presenter
  */
-abstract class BasePresenter extends CorePresenter {
-
-	use TPresenterFlashMessage;
+final class CompanyPresenter extends BasePresenter {
 
 	/**
-	 * Checks requirements
-	 * @param mixed $element Element
+	 * @var CompanyFormFactory Company manager form factory
+	 * @inject
 	 */
-	public function checkRequirements($element): void {
-		if (!$this->user->isLoggedIn()) {
-			if ($this->user->getLogoutReason() === IUserStorage::INACTIVITY) {
-				$this->flashInfo('core.sign.out.inactivity');
-			}
-			$this->redirect(':Core:Sign:In', ['backlink' => $this->storeRequest()]);
-		}
-		if ($this->user->isInRole(User::ROLE_CUSTOMER)) {
-			$this->redirect(':Core:Product:default');
-		}
-		parent::checkRequirements($element);
+	public $formFactory;
+
+	/**
+	 * Creates a new company manager form
+	 * @return Form Company manager form
+	 */
+	protected function createComponentCompanyForm(): Form {
+		return $this->formFactory->create($this);
 	}
 
 }

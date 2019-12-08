@@ -24,6 +24,7 @@ extensions:
 	forms.application: Contributte\Forms\DI\ApplicationFormFactoryExtension
 	translation: Contributte\Translation\DI\TranslationExtension
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	mapycz: MapyCZ\DI\GPSPickerExtension
 	- Contributte\FormMultiplier\DI\MultiplierExtension
 
 console:

@@ -24,11 +24,13 @@ namespace App\CoreModule\Forms;
 use App\CoreModule\Presenters\CartPresenter;
 use App\Models\CartManager;
 use App\Models\Database\Entities\Reservation;
+use App\Models\Database\Entities\User;
 use App\Models\Database\EntityManager;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
+use Nette\Utils\Html;
 
 /**
  * Cart form factory
@@ -91,10 +93,16 @@ final class CartFormFactory {
                 ->setRequired('messages.email');
         }
 		$form->setDefaults($this->manager->getDateRange());
-        $form->addCheckbox('termsAgreement', 'termsAgreement')
-            ->setRequired('messages.terms');
-        $form->addSubmit('reserve', 'reserve')->setHtmlAttribute('class', 'btn btn-primary float-right');
-		$form->onSuccess[] = [$this, 'reserve'];
+		$translator = $this->presenter->translator;
+		$termsAgreement = Html::el('p')->setHtml(
+			$translator->translate('core.cart.termsAgreement') . ' ' .
+			Html::el('a')->href('/terms/')
+				->setText($translator->translate('core.cart.terms'))
+		);
+		$form->addCheckbox('termsAgreement', $termsAgreement)
+			->setRequired('messages.terms');
+		$form->addSubmit('reserve', 'reserve')->setHtmlAttribute('class', 'btn btn-primary float-right');;
+		$form->onSubmit[] = [$this, 'reserve'];
 		return $form;
 	}
 
@@ -104,25 +112,28 @@ final class CartFormFactory {
 	 */
 	public function reserve(Form $form): void {
 		$values = $form->getValues();
-        if ($this->presenter->user->isLoggedIn()) {
-            $creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
-            $bikes = [];
-            foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
-                $bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));
-            }
-            $bikes = new ArrayCollection($bikes);
-            $fromDate = new DateTime($values->from);
-            $toDate = new DateTime($values->to);
-            $reservation = new Reservation($creator, $creator, $fromDate, $toDate, $bikes, Reservation::STATE_RESERVATION);
-            $this->entityManager->persist($reservation);
-            $this->entityManager->flush();
-            $this->manager->clear();
-            $message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => $reservation->getId()]);
-        }
-        else
-        {
-            $message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => 0]);
-        }
+		if ($this->presenter->user->isLoggedIn()) {
+			$creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
+		} else {
+			$creator = $this->entityManager->getUserRepository()->findOneByEmail($values->email);
+			if ($creator === null) {
+				$creator = new User($values->firstName, $values->lastName, $values->email, '', User::ROLE_CUSTOMER, User::STATE_BLOCKED);
+				$this->entityManager->persist($creator);
+				$this->entityManager->flush();
+			}
+		}
+		$bikes = [];
+		foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
+			$bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));
+		}
+		$bikes = new ArrayCollection($bikes);
+		$fromDate = new DateTime($values->from);
+		$toDate = new DateTime($values->to);
+		$reservation = new Reservation($creator, $creator, $fromDate, $toDate, $bikes, Reservation::STATE_RESERVATION);
+		$this->entityManager->persist($reservation);
+		$this->entityManager->flush();
+		$this->manager->clear();
+		$message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => $reservation->getId()]);
 		$this->presenter->flashSuccess($message);
 	}
 }

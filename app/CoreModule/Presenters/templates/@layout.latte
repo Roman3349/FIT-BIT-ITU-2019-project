@@ -25,6 +25,7 @@
 	<title>{ifset title}{include title|stripHtml} | {/ifset}{$company->getName()}</title>
     {block scripts}
 	    <script n:nonce src='/dist/core.bundle.js'></script>
+	    <script n:nonce src='https://cdn.rawgit.com/contributte/live-form-validation/v1.8.1/live-form-validation.js'></script>
     {/block}
 </head>
 <body>
@@ -60,7 +61,7 @@
           {$user->identity->name}
         </button>
         <div class='dropdown-menu'>
-          <a class='dropdown-item' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+          <a class='dropdown-item' n:if='!$user->isInRole("customer")' n:href=':Admin:Homepage:default'>{_admin.title}</a>
             <div class='dropdown-divider'></div>
             <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
           </div>
