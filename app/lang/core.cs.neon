@@ -7,7 +7,7 @@ cart:
 	firstName: Jméno
 	lastName: Příjmení
 	email: E-mail
-	termsAgreement: Odesláním formuláře souhlasím s <a href="/terms/">obchodními podmínkami</a>
+	termsAgreement: Odesláním formuláře souhlasím s obchodními podmínkami
 	messages:
 	    add: Kolo %name% bylo úspěšně přidáno do košíku.
 	    success: Rezervace č. %id% byla úspěšně vytvořena.
