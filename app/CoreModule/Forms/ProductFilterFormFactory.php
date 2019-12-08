@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -125,6 +125,21 @@ final class ProductFilterFormFactory {
 		$dateRange = $this->cartManager->getDateRange();
 		$array['fromDate'] = $dateRange['from'];
 		$array['toDate'] = $dateRange['to'];
+		//$request = $this->presenter->getHttpRequest();
+		//$request->getQuery('')
+		if ((!empty($_GET["height"]))||(!empty($_GET["weight"]))||(!empty($_GET["travelTo"]))) {
+		    $array['usage'][1] = true;
+            $array['usage'][3] = true;
+            if ($_GET["height"] < 150) {
+                $array['frameSize'] = '17"';
+            }
+            elseif ($_GET["height"] > 180) {
+                $array['frameSize'] = '21"';
+            }
+            else {
+                $array['frameSize'] = '19"';
+            }
+        }
 		return $array;
 	}
 
