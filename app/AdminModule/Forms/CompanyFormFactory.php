@@ -103,4 +103,11 @@ final class CompanyFormFactory {
 		return $form;
 	}
 
+	public function save(Form $form): void {
+		$values = $form->getValues();
+		$this->manager->set($values);
+		$this->presenter->flashSuccess('admin.company.messages.success');
+		$this->presenter->redirect('Homepage:default');
+	}
+
 }

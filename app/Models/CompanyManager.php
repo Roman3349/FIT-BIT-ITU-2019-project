@@ -23,14 +23,26 @@ namespace App\Models;
 
 use Nette\Utils\FileSystem;
 use Nette\Utils\Json;
+use Nette\Utils\JsonException;
+use stdClass;
 
 /**
  * Company manager
  */
 final class CompanyManager {
 
-	public function get(): \stdClass {
-		return Json::decode(FileSystem::read(__DIR__ . '/../config/company.json'));
+	/**
+	 * File name
+	 */
+	private const FILE_NAME = __DIR__ . '/../config/company.json';
+
+	/**
+	 * Returns the company information
+	 * @return stdClass Company information
+	 * @throws JsonException
+	 */
+	public function get(): stdClass {
+		return Json::decode(FileSystem::read(self::FILE_NAME));
 	}
 
 	/**
@@ -88,6 +100,15 @@ final class CompanyManager {
 	 */
 	public function getTelephone(): string {
 		return $this->get()->telephone;
+	}
+
+	/**
+	 * Sets the company information
+	 * @param stdClass $info Company information
+	 * @throws JsonException
+	 */
+	public function set(stdClass $info): void {
+		FileSystem::write(self::FILE_NAME, Json::encode($info, Json::PRETTY));
 	}
 
 }

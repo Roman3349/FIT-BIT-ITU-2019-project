@@ -62,6 +62,7 @@ company:
 		gps: 'Prosím vyberte sídlo půjčovny v mapě.'
 		email: Prosím zadejte kontaktní email.
 		telephone: Prosím zadejte kontaktní telefonní číslo.
+		success: Informace o půjčovně byly úspěšně uloženy.
 
 customer:
 	title: Zákaznická sekce
