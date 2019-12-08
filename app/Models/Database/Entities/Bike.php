@@ -60,10 +60,11 @@ class Bike {
 	private $usage;
 
 	/**
-	 * @var string Bike picture
-	 * @ORM\Column(type="string", length=255, nullable=FALSE, unique=FALSE)
+	 * @var string Bike gallery
+	 * @ORM\ManyToOne(targetEntity="Gallery")
+	 * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
 	 */
-	private $picture;
+	private $gallery;
 
 	/**
 	 * @var string Frame material
@@ -112,7 +113,7 @@ class Bike {
 	 * @param Manufacturer $manufacturer Manufacturer
 	 * @param string $name Model name
 	 * @param BikeUsage $usage Bike usage
-	 * @param string $picture Picture
+	 * @param Gallery $gallery Gallery
 	 * @param string $frameMaterial Frame material
 	 * @param string $frameSize Frame size
 	 * @param string $wheelSize Wheel size
@@ -121,11 +122,11 @@ class Bike {
 	 * @param string $speeds Speeds
 	 * @param int $price Bike rent price
 	 */
-	public function __construct(Manufacturer $manufacturer, string $name, BikeUsage $usage, string $picture, string $frameMaterial, string $frameSize, string $wheelSize, int $forkTravel, int $shockTravel, string $speeds, int $price) {
+	public function __construct(Manufacturer $manufacturer, string $name, BikeUsage $usage, Gallery $gallery, string $frameMaterial, string $frameSize, string $wheelSize, int $forkTravel, int $shockTravel, string $speeds, int $price) {
 		$this->manufacturer = $manufacturer;
 		$this->name = $name;
 		$this->usage = $usage;
-		$this->picture = $picture;
+		$this->gallery = $gallery;
 		$this->frameMaterial = $frameMaterial;
 		$this->frameSize = $frameSize;
 		$this->wheelSize = $wheelSize;
@@ -183,12 +184,16 @@ class Bike {
 		return $this->usage->getName();
 	}
 
-	/**
-	 * Returns the bike picture
-	 * @return string Bike picture
-	 */
 	public function getPicture(): string {
-		return $this->picture;
+		return $this->gallery->getUrl();
+	}
+
+	/**
+	 * Returns the bike gallery
+	 * @return Gallery Bike gallery
+	 */
+	public function getGallery(): Gallery {
+		return $this->gallery;
 	}
 
 	/**
@@ -272,11 +277,11 @@ class Bike {
 	}
 
 	/**
-	 * Sets the bike picture
-	 * @param string $picture Bike picture
+	 * Sets the bike gallery
+	 * @param Gallery $gallery Bike gallery
 	 */
-	public function setPicture(string $picture): void {
-		$this->picture = $picture;
+	public function setGallery(Gallery $gallery): void {
+		$this->gallery = $gallery;
 	}
 
 	/**

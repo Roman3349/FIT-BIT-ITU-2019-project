@@ -81,8 +81,9 @@ final class BikeFormFactory {
 			->setItems($this->listUsages())
 			->setPrompt('messages.usage')
 			->setRequired('messages.usage');
-		$form->addText('picture', 'picture')
-			->setRequired('messages.picture');
+		$form->addSelect('gallery', 'gallery')
+			->setItems($this->listGalleries())
+			->setRequired('messages.gallery');
 		$form->addSelect('frameMaterial', 'frameMaterial')
 			->setItems($this->listFrameMaterials())
 			->setPrompt('messages.frameMaterial')
@@ -126,6 +127,21 @@ final class BikeFormFactory {
 	}
 
 	/**
+	 * Lists all available galleries
+	 * @return array<string,string> Available galleries
+	 */
+	private function listGalleries(): array {
+		$array = [];
+		$galleries = $this->manager->getGalleryRepository()
+			->createQueryBuilder('g')->select('g.name')
+			->getQuery()->getArrayResult();
+		foreach ($galleries as $key => $value) {
+			$array[$value['name']] = new NotTranslate($value['name']);
+		}
+		return $array;
+	}
+
+	/**
 	 * Lists all available manufacturers
 	 * @return array<string,string> Available manufacturers
 	 */
@@ -164,7 +180,7 @@ final class BikeFormFactory {
 			'manufacturer' => $bike->getManufacturerName(),
 			'name' => $bike->getName(),
 			'usage' => $bike->getUsageName(),
-			'picture' => $bike->getPicture(),
+			'picture' => $bike->getGallery(),
 			'frameMaterial' => $bike->getFrameMaterial(),
 			'frameSize' => $bike->getFrameSize(),
 			'wheelSize' => $bike->getWheelSize(),

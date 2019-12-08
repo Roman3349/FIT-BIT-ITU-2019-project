@@ -23,11 +23,13 @@ namespace App\Models\Database;
 
 use App\Models\Database\Entities\Bike;
 use App\Models\Database\Entities\BikeUsage;
+use App\Models\Database\Entities\Gallery;
 use App\Models\Database\Entities\Manufacturer;
 use App\Models\Database\Entities\Reservation;
 use App\Models\Database\Entities\User;
 use App\Models\Database\Repositories\BikeRepository;
 use App\Models\Database\Repositories\BikeUsageRepository;
+use App\Models\Database\Repositories\GalleryRepository;
 use App\Models\Database\Repositories\ManufacturerRepository;
 use App\Models\Database\Repositories\ReservationRepository;
 use App\Models\Database\Repositories\UserRepository;
@@ -51,6 +53,14 @@ trait TRepositories {
 	 */
 	public function getBikeUsageRepository(): BikeUsageRepository {
 		return $this->getRepository(BikeUsage::class);
+	}
+
+	/**
+	 * Returns the gallery repository
+	 * @return GalleryRepository Gallery repository
+	 */
+	public function getGalleryRepository(): GalleryRepository {
+		return $this->getRepository(Gallery::class);
 	}
 
 	/**

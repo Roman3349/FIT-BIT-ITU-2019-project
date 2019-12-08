@@ -2,5 +2,6 @@ services:
 	- App\AdminModule\Forms\BikeFormFactory
 	- App\AdminModule\Forms\CompanyFormFactory
 	- App\AdminModule\Forms\ManufacturerFormFactory
+	- App\AdminModule\Forms\GalleryFormFactory
 	- App\AdminModule\Forms\ReservationFormFactory
 	- App\AdminModule\Forms\UserFormFactory

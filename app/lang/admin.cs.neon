@@ -13,7 +13,7 @@ bike:
 	manufacturer: Výrobce
 	name: Jméno
 	usage: Použití
-	picture: Obrázek
+	gallery: Galerie
 	frameMaterial: Materiál rámu
 	frameMaterials:
 		Al: Hliník
@@ -30,7 +30,7 @@ bike:
 		manufacturer: Prosím vyberte výrobce kola.
 		name: Prosím zadejte jméno kola.
 		usage: Prosím vyberte použití kola.
-		picture: Prosím vyberte obrázek kola z galerie.
+		gallery: Prosím vyberte obrázek kola z galerie.
 		frameMaterial: Prosím vyberte materiál rámu.
 		frameSize: Prosím zadajte velikost rámu.
 		wheelSize: Prosím zadejte velikost kol.
@@ -75,6 +75,21 @@ dashboard:
 
 gallery:
 	title: Správa galerií
+	addTitle: Přidání galerie
+	editTitle: Úprava galerie
+	id: ID
+	name: Jméno galerie
+	image: Obrázek
+	add: Přidat
+	save: Uložit
+	messages:
+		name: Prosím zadejte jméno galerie.
+		image: Prosím nahrejte obrázek.
+		imageFormat: Byl nahrán nepodporovaný typ obrázku.
+		confirmDelete: Opravdu chcete smazat galerii %s?
+		successDelete: Galerie %name% byla úspěšně odstraněna.
+		successEdit: Galerie %name% byla úspěšně uložena.
+		failureDuplicate: Galerie %name% již existuje.
 
 manufacturer:
 	title: Správa výrobců
