@@ -92,13 +92,16 @@ final class BikeFormFactory {
 		$form->addText('wheelSize', 'wheelSize')
 			->setRequired('messages.wheelSize');
 		$form->addInteger('forkTravel', 'forkTravel')
-			->setDefaultValue(0);
+			->setDefaultValue(0)
+			->addRule($form::RANGE, 'messages.forkTravelRange', [0, 200]);
 		$form->addInteger('shockTravel', 'shockTravel')
-			->setDefaultValue(0);
+			->setDefaultValue(0)
+			->addRule($form::RANGE, 'messages.shockTravelRange', [0, 200]);
 		$form->addText('speeds', 'speeds')
 			->setRequired('messages.speeds');
 		$form->addInteger('price', 'price')
-			->setRequired('messages.price');
+			->setRequired('messages.price')
+			->addRule(Form::MIN, 'messages.priceRange', 0);
 		$form->addProtection();
 		$id = $this->presenter->getParameter('id');
 		if ($this->presenter->getAction() === 'edit') {

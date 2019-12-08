@@ -34,8 +34,11 @@ bike:
 		frameMaterial: Prosím vyberte materiál rámu.
 		frameSize: Prosím zadajte velikost rámu.
 		wheelSize: Prosím zadejte velikost kol.
+		forkTravelRange: Zdvih vidlice musí být v rozmezí %d až %d mm.
+		shockTravelRange: Zdvih tlumiče musí být v rozmezí %d až %d mm.
 		speeds: Prosím zdadejte počet rychlostí.
 		price: Prosím zadejte cenu.
+		priceRange: Cena musí být větší než %d Kč.
 		confirmDelete: Opravdu chcete smazat kolo %s?
 		successDelete: Kolo %fullName% bylo úspěšně odstraněno.
 		successEdit: Kolo %name% bylo úspěšně uloženo.
