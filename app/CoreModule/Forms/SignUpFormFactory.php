@@ -106,7 +106,7 @@ final class SignUpFormFactory {
 		}
 		$this->entityManager->persist($user);
 		$this->entityManager->flush();
-		$this->presenter->flashSuccess('core.sign.up.messages.success');
+		$this->presenter->flashSuccess('core.sign.up.form.messages.success');
 		$this->presenter->redirect(':Core:Product:default');
 	}
 
