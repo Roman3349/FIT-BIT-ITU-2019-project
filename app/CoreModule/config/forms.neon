@@ -7,3 +7,4 @@ services:
     - App\CoreModule\Forms\ProductAssistantFormFactory
     - App\CoreModule\Forms\SignInFormFactory
     - App\CoreModule\Forms\SignUpFormFactory
+    - App\CoreModule\Forms\SignResetFormFactory

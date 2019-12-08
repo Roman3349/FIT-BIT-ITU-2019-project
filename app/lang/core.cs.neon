@@ -62,7 +62,7 @@ sign:
 			remember: Zůstat přihlášen
 			send: Přihlásit se
 			messages:
-				email: Prosím zadejte Vaše e-mail.
+				email: Prosím zadejte Váš e-mail.
 				password: Prosím zadejte Vaše heslo.
 				success: Byl jste úspěšně přihlášen.
 				failure: Zadané jméno nebo heslo je nesprávné.
@@ -83,6 +83,14 @@ sign:
 				email: Prosím zadejte Váš email.
 				password: Prosím zadejte Vaše heslo.
 				success: Byl jste úspěšně zaregistrován.
+	reset:
+		title: Zapomenuté heslo
+		form:
+			email: E-mail
+			send: Odeslat
+			messages:
+				email: Prosím zadejte Váš e-mail.
+				success: Pokuď účet s daným emailem existuje, byl na něj odeslán odkaz na obnovu hesla.
 terms:
 	title: Obchodní podmínky
 

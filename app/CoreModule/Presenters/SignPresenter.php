@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Forms\SignInFormFactory;
 use App\CoreModule\Forms\SignUpFormFactory;
+use App\CoreModule\Forms\SignResetFormFactory;
 use App\CoreModule\Traits\TPresenterFlashMessage;
 use Nette\Application\UI\Form;
 
@@ -50,6 +51,12 @@ final class SignPresenter extends BasePresenter {
 	 * @inject
 	 */
 	public $signUpFactory;
+
+    /**
+     * @var SignResetFormFactory Sign up form factory
+     * @inject
+     */
+    public $signResetFactory;
 
 	/**
 	 * Signs user out
@@ -79,4 +86,11 @@ final class SignPresenter extends BasePresenter {
 		return $this->signUpFactory->create($this);
 	}
 
+    /**
+     * Creates the reset password form
+     * @return Form Reset password form
+     */
+    protected function createComponentSignResetForm(): Form {
+        return $this->signResetFactory->create($this);
+    }
 }
