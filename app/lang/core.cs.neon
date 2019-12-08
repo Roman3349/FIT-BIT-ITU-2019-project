@@ -23,6 +23,7 @@ account:
 	lastName: Příjmení
 	email: E-mail
 	password: Nové heslo
+	save: Uložit
 	messages:
 		successEdit: Profil byl úspěšně aktualizován.
 		firstName: Prosím zadejte Vaše jméno.

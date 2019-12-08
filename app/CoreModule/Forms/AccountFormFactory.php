@@ -78,10 +78,10 @@ final class AccountFormFactory {
 	 */
 	public function create(AccountPresenter $presenter): Form {
         $this->presenter = $presenter;
+		$this->factory->setTranslationPrefix('core.account');
         $form = $this->factory->create();
         if ($this->presenter->user->isLoggedIn()) {
             $customer = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
-            $this->factory->setTranslationPrefix('core.account');
             $form->addText('firstName', 'firstName')
                 ->setRequired('messages.firstName');
             $form->addText('lastName', 'lastName')

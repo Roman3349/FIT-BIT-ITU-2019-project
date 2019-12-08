@@ -42,18 +42,10 @@ final class AccountPresenter extends BasePresenter {
 
     /**
      * Constructor
-     * @param EntityManager $manager Entity manager
+     * @param EntityManager $entityManager Entity manager
      */
     public function __construct(EntityManager $entityManager) {
         $this->entityManager = $entityManager;
-    }
-
-    /**
-     * Renders user editor
-     * @param int $id User ID
-     */
-    public function renderEdit(int $id): void {
-        $this->template->id = $id;
     }
 
     /**
