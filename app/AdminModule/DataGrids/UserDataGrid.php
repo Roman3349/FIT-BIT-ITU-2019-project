@@ -118,7 +118,7 @@ final class UserDataGrid {
 			->setClass('btn btn-xs btn-danger ajax')
 			->setConfirmation(new StringConfirmation('admin.user.messages.confirmDelete', 'email'));
 		$grid->addToolbarButton('add', 'admin.actions.add')
-			->setClass('btn btn-xs btn-success');
+			->setClass('btn btn-success');
 		return $grid;
 	}
 

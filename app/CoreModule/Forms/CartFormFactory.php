@@ -101,7 +101,7 @@ final class CartFormFactory {
 		);
 		$form->addCheckbox('termsAgreement', $termsAgreement)
 			->setRequired('messages.terms');
-		$form->addSubmit('reserve', 'reserve');
+		$form->addSubmit('reserve', 'reserve')->setHtmlAttribute('class', 'btn btn-primary float-right');;
 		$form->onSubmit[] = [$this, 'reserve'];
 		return $form;
 	}
