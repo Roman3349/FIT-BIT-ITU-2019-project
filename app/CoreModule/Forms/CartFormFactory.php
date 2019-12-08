@@ -101,19 +101,25 @@ final class CartFormFactory {
 	 */
 	public function reserve(Form $form): void {
 		$values = $form->getValues();
-		$creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
-		$bikes = [];
-		foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
-			$bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));
-		}
-		$bikes = new ArrayCollection($bikes);
-		$fromDate = new DateTime($values->from);
-		$toDate = new DateTime($values->to);
-		$reservation = new Reservation($creator, $creator, $fromDate, $toDate, $bikes, Reservation::STATE_RESERVATION);
-		$this->entityManager->persist($reservation);
-		$this->entityManager->flush();
-		$this->manager->clear();
-		$message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => $reservation->getId()]);
+        if ($this->presenter->user->isLoggedIn()) {
+            $creator = $this->entityManager->getUserRepository()->find($this->presenter->getUser()->getId());
+            $bikes = [];
+            foreach ($this->manager->getContent() as $bikeId => $bikePrice) {
+                $bikes[] = $this->entityManager->getBikeRepository()->find(intval($bikeId));
+            }
+            $bikes = new ArrayCollection($bikes);
+            $fromDate = new DateTime($values->from);
+            $toDate = new DateTime($values->to);
+            $reservation = new Reservation($creator, $creator, $fromDate, $toDate, $bikes, Reservation::STATE_RESERVATION);
+            $this->entityManager->persist($reservation);
+            $this->entityManager->flush();
+            $this->manager->clear();
+            $message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => $reservation->getId()]);
+        }
+        else
+        {
+            $message = $this->presenter->translator->translate('core.cart.messages.success', ['id' => 0]);
+        }
 		$this->presenter->flashSuccess($message);
 	}
 }
