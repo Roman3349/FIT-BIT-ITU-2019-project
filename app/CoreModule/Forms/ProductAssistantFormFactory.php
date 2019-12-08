@@ -74,9 +74,9 @@ final class ProductAssistantFormFactory {
 		$form->addText('weight', 'weight')
 			->setHtmlType('number');
 		$form->addSelect('travelTo','travelTo', [
-		    '1' => 'Horách',
-            '2' => 'Cyklostezkách',
-            '3' => 'Městě',
+		    '1' => new NotTranslate('Horách'),
+            '2' => new NotTranslate('Cyklostezkách'),
+            '3' => new NotTranslate('Městě'),
         ]);
 		$form->addSubmit('filter', 'filter')
 			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4');
