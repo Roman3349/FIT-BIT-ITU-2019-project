@@ -22,6 +22,7 @@ declare(strict_types = 1);
 namespace App\CoreModule\Forms;
 
 use App\CoreModule\Presenters\ProductPresenter;
+use App\Models\CartManager;
 use App\Models\Database\EntityManager;
 use Contributte\Forms\Rendering\Bootstrap4VerticalRenderer;
 use Contributte\Translation\Wrappers\NotTranslate;
@@ -34,6 +35,11 @@ use Nette\SmartObject;
 final class ProductFilterFormFactory {
 
 	use SmartObject;
+
+	/**
+	 * @var CartManager Cart manager
+	 */
+	private $cartManager;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -54,10 +60,12 @@ final class ProductFilterFormFactory {
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
 	 * @param EntityManager $entityManager Entity manager
+	 * @param CartManager $cartManager Cart manager
 	 */
-	public function __construct(FormFactory $factory, EntityManager $entityManager) {
+	public function __construct(FormFactory $factory, EntityManager $entityManager, CartManager $cartManager) {
 		$this->factory = $factory;
 		$this->entityManager = $entityManager;
+		$this->cartManager = $cartManager;
 	}
 
 	/**
@@ -76,9 +84,32 @@ final class ProductFilterFormFactory {
 		$form->addCheckboxList('usageType', 'usageType', $this->listUsages());
 		$form->addCheckboxList('wheelSize', 'wheelSize', $this->listWheelSizes());
 		$form->addCheckboxList('frameSize', 'frameSize', $this->listFrameSizes());
+		$form->setDefaults($this->load());
 		$form->addSubmit('filter', 'filter')
 			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4');
+		$form->onSubmit[] = [$this, 'filter'];
 		return $form;
+	}
+
+	/**
+	 * Filters the products
+	 * @param Form $form Product filter form
+	 */
+	public function filter(Form $form): void {
+		$values = $form->getValues();
+		$this->cartManager->setDateRange($values->fromDate, $values->toDate);
+	}
+
+	/**
+	 * Loads data into the form
+	 * @return array<string,string> Data for the form
+	 */
+	private function load(): array {
+		$array = [];
+		$dateRange = $this->cartManager->getDateRange();
+		$array['fromDate'] = $dateRange['from'];
+		$array['toDate'] = $dateRange['to'];
+		return $array;
 	}
 
 	/**
