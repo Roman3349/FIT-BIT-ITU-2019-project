@@ -9,7 +9,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU General Public License for more details.mess
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -22,9 +22,7 @@
   <div class="col-lg-3 col-sm-12 col-xl-2">
         <div class='px-lg-3 px-sm-5 pb-md-4 mx-auto sticky-top'>
           {control filterForm}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">
-            Assistent
-        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">Asistent</button>
         </div>
   </div>
   <div class="col-sm-12 col-lg-9 col-xl-10">
@@ -68,14 +66,7 @@
             </div>
             <form>
                 <div class="modal-body">
-                    <label for="height">Height</label><br>
-                    <input type="number" name="height" id="height" placeholder="Your height">cm<br>
-                    <label for="height">Weight</label><br>
-                    <input type="number" name="weight" id="weight" placeholder="Your weight">kg<br>
-                </div>
-                <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-secondary" >Close</button>-->
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Sent</button>
+                    {control assistantForm}
                 </div>
             </form>
         </div>

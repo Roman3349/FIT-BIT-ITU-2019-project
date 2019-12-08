@@ -88,7 +88,9 @@ final class CartFormFactory {
 			$form->addEmail('email', 'email');
 		}
 		$form->setDefaults($this->manager->getDateRange());
-		$form->addSubmit('reserve', 'reserve');
+        $form->addCheckbox('termsAgreement', 'termsAgreement')
+            ->setRequired('messages.terms');
+        $form->addSubmit('reserve', 'reserve');
 		$form->onSubmit[] = [$this, 'reserve'];
 		return $form;
 	}

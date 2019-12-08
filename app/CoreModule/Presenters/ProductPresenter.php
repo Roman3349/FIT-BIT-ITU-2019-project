@@ -23,6 +23,7 @@ namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Forms\CartAddFormFactory;
 use App\CoreModule\Forms\ProductFilterFormFactory;
+use App\CoreModule\Forms\ProductAssistantFormFactory;
 use App\Models\Database\EntityManager;
 use Nette\Application\UI\Form;
 
@@ -42,6 +43,12 @@ final class ProductPresenter extends BasePresenter {
 	 * @inject
 	 */
 	public $filterFactory;
+
+    /**
+     * @var ProductAssistantFormFactory Product assistent form factory
+     * @inject
+     */
+    public $assistantFactory;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -79,4 +86,12 @@ final class ProductPresenter extends BasePresenter {
 	protected function createComponentFilterForm(): Form {
 		return $this->filterFactory->create($this);
 	}
+
+    /**
+     * Creates the assistant form
+     * @return Form Assistant form
+     */
+    protected function createComponentAssistantForm(): Form {
+        return $this->assistantFactory->create($this);
+    }
 }
