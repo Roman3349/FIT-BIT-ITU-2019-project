@@ -91,7 +91,7 @@ sign:
 			send: Odeslat
 			messages:
 				email: Prosím zadejte Váš e-mail.
-				success: Pokuď účet s daným emailem existuje, byl na něj odeslán odkaz na obnovu hesla.
+				success: 'Pokud účet s daným emailem existuje, byl na něj odeslán odkaz pro obnovu hesla.'
 terms:
 	title: Obchodní podmínky
 
