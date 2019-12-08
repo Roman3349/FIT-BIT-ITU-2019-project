@@ -62,6 +62,7 @@
         </button>
         <div class='dropdown-menu'>
           <a class='dropdown-item' n:if='!$user->isInRole("customer")' n:href=':Admin:Homepage:default'>{_admin.title}</a>
+          <a class='dropdown-item' n:href=':Core:Account:default'>{_core.Account.title}</a>
             <div class='dropdown-divider'></div>
             <a class='dropdown-item' n:href=':Core:Sign:out'>{_core.sign.out.title}</a>
           </div>

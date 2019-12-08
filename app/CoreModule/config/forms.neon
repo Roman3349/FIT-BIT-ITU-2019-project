@@ -1,4 +1,5 @@
 services:
+    - App\CoreModule\Forms\AccountFormFactory
     - App\CoreModule\Forms\CartAddFormFactory
     - App\CoreModule\Forms\CartFormFactory
     - App\CoreModule\Forms\FormFactory

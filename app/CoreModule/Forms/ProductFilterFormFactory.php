@@ -22,11 +22,14 @@ declare(strict_types = 1);
 namespace App\CoreModule\Forms;
 
 use App\CoreModule\Presenters\ProductPresenter;
+use App\Models\CartManager;
 use App\Models\Database\EntityManager;
 use Contributte\Forms\Rendering\Bootstrap4VerticalRenderer;
 use Contributte\Translation\Wrappers\NotTranslate;
+use DateTime;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
+use Throwable;
 
 /**
  * Product filter form factory
@@ -34,6 +37,11 @@ use Nette\SmartObject;
 final class ProductFilterFormFactory {
 
 	use SmartObject;
+
+	/**
+	 * @var CartManager Cart manager
+	 */
+	private $cartManager;
 
 	/**
 	 * @var EntityManager Entity manager
@@ -54,10 +62,12 @@ final class ProductFilterFormFactory {
 	 * Constructor
 	 * @param FormFactory $factory Generic form factory
 	 * @param EntityManager $entityManager Entity manager
+	 * @param CartManager $cartManager Cart manager
 	 */
-	public function __construct(FormFactory $factory, EntityManager $entityManager) {
+	public function __construct(FormFactory $factory, EntityManager $entityManager, CartManager $cartManager) {
 		$this->factory = $factory;
 		$this->entityManager = $entityManager;
+		$this->cartManager = $cartManager;
 	}
 
 	/**
@@ -73,12 +83,49 @@ final class ProductFilterFormFactory {
 			->setHtmlType('date');
 		$form->addText('toDate', 'toDate')
 			->setHtmlType('date');
-		$form->addCheckboxList('usageType', 'usageType', $this->listUsages());
+		$form->addCheckboxList('usage', 'usageType', $this->listUsages());
 		$form->addCheckboxList('wheelSize', 'wheelSize', $this->listWheelSizes());
 		$form->addCheckboxList('frameSize', 'frameSize', $this->listFrameSizes());
+		$form->setDefaults($this->load());
 		$form->addSubmit('filter', 'filter')
-			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4');
+			->setHtmlAttribute('class', 'btn btn-primary col-md-12 my-3 p-4 ajax');
+		$form->onSubmit[] = [$this, 'filter'];
 		return $form;
+	}
+
+	/**
+	 * Filters the products
+	 * @param Form $form Product filter form
+	 */
+	public function filter(Form $form): void {
+		$values = $form->getValues('array');
+		$dateRange = $this->cartManager->getDateRange();
+		try {
+			$fromDate = new DateTime($values['fromDate']);
+		} catch (Throwable $e) {
+			$fromDate = $dateRange['from'];
+		}
+		try {
+			$toDate = new DateTime($values['toDate']);
+		} catch (Throwable $e) {
+			$toDate = $dateRange['to'];
+		}
+		unset($values['fromDate'], $values['toDate']);
+		$this->cartManager->setDateRange($fromDate, $toDate);
+		$this->presenter->template->products = $this->presenter->getBikes($values);
+		$this->presenter->redrawControl('bikes');
+	}
+
+	/**
+	 * Loads data into the form
+	 * @return array<string,string> Data for the form
+	 */
+	private function load(): array {
+		$array = [];
+		$dateRange = $this->cartManager->getDateRange();
+		$array['fromDate'] = $dateRange['from'];
+		$array['toDate'] = $dateRange['to'];
+		return $array;
 	}
 
 	/**
