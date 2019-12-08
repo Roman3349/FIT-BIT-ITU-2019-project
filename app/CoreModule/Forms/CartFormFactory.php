@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>
+ * Copyright (C) 2019 Roman Ondráček <xondra58@stud.fit.vutbr.cz>, Karel Fiedler <xfiedl04@stud.fit.vutbr.cz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,15 +83,18 @@ final class CartFormFactory {
 		$form->addText('to', 'toDate')
 			->setHtmlType('date');
 		if (!$this->presenter->user->isLoggedIn()) {
-			$form->addText('firstName', 'firstName');
-			$form->addText('lastName', 'lastName');
-			$form->addEmail('email', 'email');
-		}
+			$form->addText('firstName', 'firstName')
+                ->setRequired('messages.firstName');
+            $form->addText('lastName', 'lastName')
+                ->setRequired('messages.lastName');
+            $form->addEmail('email', 'email')
+                ->setRequired('messages.email');
+        }
 		$form->setDefaults($this->manager->getDateRange());
         $form->addCheckbox('termsAgreement', 'termsAgreement')
             ->setRequired('messages.terms');
         $form->addSubmit('reserve', 'reserve');
-		$form->onSubmit[] = [$this, 'reserve'];
+		$form->onSuccess[] = [$this, 'reserve'];
 		return $form;
 	}
 
