@@ -114,7 +114,7 @@ final class ReservationDataGrid {
 			->setClass('btn btn-xs btn-danger ajax')
 			->setConfirmation(new StringConfirmation($prefix . 'messages.confirmDelete', 'id'));
 		$grid->addToolbarButton('add', 'admin.actions.add')
-			->setClass('btn btn-xs btn-success');
+			->setClass('btn btn-success');
 		return $grid;
 	}
 
