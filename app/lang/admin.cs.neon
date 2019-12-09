@@ -52,6 +52,15 @@ company:
 		zip: PSČ
 		city: Město
 	gps: Mapa
+	openingHours:
+		title: Otevírací doba
+		monday: Pondělí
+		tuesday: Úterý
+		wednesday: Středa
+		thursday: Čtvrtek
+		friday: Pátek
+		saturday: Sobota
+		sunday: Neděle
 	contacts: Kontakty
 	email: Email
 	telephone: Telefonní číslo

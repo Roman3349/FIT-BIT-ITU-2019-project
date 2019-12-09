@@ -35,20 +35,36 @@
             {control map}
 		</div>
 		<div class='col-md-12 col-lg-6 py-5'>
-      <!--<div class='d-none d-lg-block text-center'><br><br><br></div>   -->
-            {$company->getName()}<br>
-            {$company->getAddress()|breaklines}<br>
-			tel.: {$company->getTelephone()}<br>
-			e-mail: <a href="mailto:{$company->getEmail()}" target="_blank">{$company->getEmail()}</a><br><br>
-      <div class='alert alert-secondary text-left pb-5 mx-3'>
-        <div class='mb-4'>
-        <h2 class='pb-2'>Máte dotaz?</h2>
-        <input type="email" class="form-control my-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Váš email">
-        <input type="text" class="form-control my-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vaše jméno">
-        <textarea class="form-control my-2" rows='5' placeholder='Zde nám sdělte Váš dotaz'></textarea>
-        <button class='btn btn-primary btn-lg px-3 my-2 float-right'>Odeslat</button>
-        </div>
-      </div>
+			<p>
+                {$company->getName()}<br>
+                {$company->getAddress()|breaklines}<br>
+				tel.: {$company->getTelephone()}<br>
+				e-mail: <a href="mailto:{$company->getEmail()}" target="_blank">
+                    {$company->getEmail()}
+				</a>
+			</p>
+			<p>
+			<h2>{_core.contact.openingHours.title}</h2>
+            {foreach $company->getOpeningHours() as $day => $hours}
+	            <span n:if="$hours !== ''">{_$day}: {$hours}<br></span>
+            {/foreach}
+			</p>
+			<div class='alert alert-secondary text-left mt-3 pb-5 mx-3'>
+				<div class='mb-4'>
+					<h2 class='pb-2'>Máte dotaz?</h2>
+					<input type="email" class="form-control my-2"
+					       id="exampleInputEmail1" aria-describedby="emailHelp"
+					       placeholder="Váš email">
+					<input type="text" class="form-control my-2"
+					       id="exampleInputEmail1" aria-describedby="emailHelp"
+					       placeholder="Vaše jméno">
+					<textarea class="form-control my-2" rows='5'
+					          placeholder='Zde nám sdělte Váš dotaz'></textarea>
+					<button class='btn btn-primary btn-lg px-3 my-2 float-right'>
+						Odeslat
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

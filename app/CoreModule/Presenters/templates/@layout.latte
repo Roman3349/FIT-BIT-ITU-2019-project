@@ -86,16 +86,22 @@
 	<footer class='pt-4 my-md-5 pt-md-5 border-top container-fluid'>
 		<div class='row'>
 			<div class='col-md-6 col-sm-12 text-center'>
-				<h5><img src="/img/logo.svg" alt="Logo" style="width: 31%; height: auto;"></h5>
-				<small class='d-block mb-3 text-muted'>&copy; 2019</small>
-			</div>
-			<div class='col-md-6 col-sm-12 text-center'>
 				<h5>{_core.contact.title}</h5>
 				<p class='text-muted'>
-          {$company->getName()}<br>
-          {$company->getAddress()|breaklines}<br>
+					{$company->getName()}<br>
+					{$company->getAddress()|breaklines}<br>
 					tel.: {$company->getTelephone()}<br>
-					e-mail: {$company->getEmail()}
+					e-mail: <a href="mailto:{$company->getEmail()}" target="_blank">
+						{$company->getEmail()}
+					</a>
+				</p>
+			</div>
+			<div class='col-md-6 col-sm-12 text-center'>
+				<h5>{_core.contact.openingHours.title}</h5>
+				<p class='text-muted'>
+					{foreach $company->getOpeningHours() as $day => $hours}
+						<span n:if="$hours !== ''">{_$day}: {$hours}<br></span>
+					{/foreach}
 				</p>
 			</div>
 		</div>

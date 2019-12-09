@@ -95,6 +95,21 @@ final class CompanyManager {
 	}
 
 	/**
+	 * Returns the opening hours
+	 * @return array<string,string> Opening hours
+	 * @throws JsonException
+	 */
+	public function getOpeningHours(): array {
+		$array = [];
+		$days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+		$info = $this->get();
+		foreach ($days as $day) {
+			$array['core.contact.openingHours.' . $day] = $info->openingHours->$day;
+		}
+		return $array;
+	}
+
+	/**
 	 * Returns the company telephone number
 	 * @return string Company telephone number
 	 */

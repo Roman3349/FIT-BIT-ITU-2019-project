@@ -1,15 +1,23 @@
 {
-	"name": "Jméno půjčovny",
-	"logo": "/img/logo.svg",
-	"address": {
-		"street": "Ulice č.popisné",
-		"zip": "PSČ",
-		"city": "Město"
-	},
-	"gps": {
-		"latitude": 49.4949264,
-		"longitude": 16.6814939
-	},
-	"email": "itu@romanondracek.cz",
-	"telephone": "+420 123 456 789"
+    "name": "Jméno půjčovny",
+    "address": {
+        "street": "Ulice č.popisné",
+        "zip": "PSČ",
+        "city": "Město"
+    },
+    "gps": {
+        "latitude": 49.4949264,
+        "longitude": 16.6814939
+    },
+    "openingHours": {
+        "monday": "8:00-16:00",
+        "tuesday": "8:00-16:00",
+        "wednesday": "8:00-16:00",
+        "thursday": "8:00-16:00",
+        "friday": "8:00-16:00",
+        "saturday": "9:00-11:00",
+        "sunday": "zavřeno"
+    },
+    "email": "itu@romanondracek.cz",
+    "telephone": "+420 123 456 789"
 }

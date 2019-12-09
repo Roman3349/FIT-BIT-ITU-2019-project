@@ -90,6 +90,12 @@ final class CompanyFormFactory {
 				'controls' => true,
 			])
 			->setRequired('messages.gps');
+		$form->addGroup('openingHours.title');
+		$days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+		$openingHours = $form->addContainer('openingHours');
+		foreach ($days as $day) {
+			$openingHours->addText($day, 'openingHours.' . $day);
+		}
 		$form->addGroup('contacts');
 		$form->addEmail('email', 'email')
 			->setRequired('messages.email');
